@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,57 +20,71 @@
          </image>
       </ImageView>
       <Pane prefHeight="550.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);" />
-      <Pane layoutX="57.0" layoutY="39.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="472.0" prefWidth="668.0" style="-fx-background-color: #ffffff; -fx-background-radius: 1.5em;">
+      <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="668.0" style="-fx-background-color: #ffffff; -fx-background-radius: 1.5em;">
          <children>
-            <Text fill="#2a468f" layoutX="28.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
-               <font>
-                  <Font name="Montserrat Light" size="37.0" />
-               </font>
-            </Text>
-            <TextField layoutX="175.0" layoutY="175.0" prefHeight="42.0" prefWidth="351.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
+            <JFXTextField labelFloat="true" layoutX="102.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-border-image-insets: edf;" unFocusColor="#2a468f">
                <font>
                   <Font name="Montserrat Regular" size="16.0" />
                </font>
-            </TextField>
-            <Text fill="#b1a7aa" layoutX="178.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+            </JFXTextField>
+            <JFXPasswordField labelFloat="true" layoutX="103.0" layoutY="246.0" prefHeight="42.0" prefWidth="351.0" promptText="Password" unFocusColor="#2a468f">
                <font>
-                  <Font name="Montserrat Regular" size="19.0" />
+                  <Font name="Montserrat Regular" size="16.0" />
                </font>
-            </Text>
-            <PasswordField layoutX="175.0" layoutY="272.0" prefHeight="42.0" prefWidth="359.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;" />
-            <Text fill="#b1a7aa" layoutX="178.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
-               <font>
-                  <Font name="Montserrat Regular" size="19.0" />
-               </font>
-            </Text>
-            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="292.0" layoutY="338.0" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: E24FB7; -fx-background-radius: 100;" text="Sign In" textFill="WHITE">
+            </JFXPasswordField>
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="219.0" layoutY="327.0" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 10;" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="Montserrat Regular" size="16.0" />
                </font>
                <graphic>
-                  <MaterialDesignIconView fill="#f2f2f2" glyphName="ARROW_RIGHT" size="18" />
+                  <MaterialDesignIconView fill="#f2f2f2" glyphName="LOGIN" size="18" />
                </graphic>
             </JFXButton>
-            <Pane layoutY="67.0" prefHeight="45.0" prefWidth="5.0" style="-fx-background-color: #2A468F;" />
-            <Polyline fill="#2a468f" layoutX="618.0" layoutY="377.0" points="50.0, -61.0, 50.0, 95.0, -178.0, 95.0, 50.0, -121.0" stroke="WHITE" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" />
-            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="563.0" layoutY="425.0" style="-fx-background-color: #2a468f;" text="About" textFill="WHITE">
-               <graphic>
-                  <MaterialDesignIconView fill="WHITE" glyphName="INFORMATION" size="25" />
-               </graphic>
+            <Polyline fill="#2a468f" layoutX="157.0" layoutY="90.0" points="90.0, -90.0, -157.0, -90.0, -157.0, 28.0, -157.0, 78.0" stroke="WHITE" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" />
+            <Text fill="WHITE" layoutX="18.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
                <font>
-                  <Font name="HelveticaNeueLTStd-Lt" size="16.0" />
+                  <Font name="Montserrat Light" size="30.0" />
                </font>
-            </JFXButton>
-            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="125.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+            </Text>
+            <Pane layoutX="1.0" layoutY="31.0" prefHeight="40.0" prefWidth="4.0" style="-fx-background-color: #fff;" />
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="52.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@user.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="124.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="51.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pass.png" />
                </image>
             </ImageView>
-         </children></Pane>
+            <Pane layoutX="500.0" layoutY="-27.0" prefHeight="489.0" prefWidth="207.0" style="-fx-background-color: #2a468f; -fx-background-radius: 10;">
+               <children>
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="64.0" layoutY="428.0" style="-fx-background-color: #2a468f;" text="About" textFill="WHITE">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="INFORMATION" size="25" />
+                     </graphic>
+                     <font>
+                        <Font name="Montserrat Light" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Text fill="#ebebeb" layoutX="52.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School" wrappingWidth="103.50002095103264">
+                     <font>
+                        <Font name="Pacifico Regular" size="34.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="19.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" wrappingWidth="181.0000062584877">
+                     <font>
+                        <Font name="Pacifico Regular" size="31.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="51.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="117.99999442975968">
+                     <font>
+                        <Font name="Pacifico Regular" size="31.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
