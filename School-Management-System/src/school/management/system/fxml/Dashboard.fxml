@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.calendarfx.view.YearMonthView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1099.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.DashboardController">
+   <children>
+      <HBox prefHeight="48.0" prefWidth="1099.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="48.0" prefWidth="188.0" styleClass="tophbar">
+               <children>
+                  <MaterialDesignIconView fill="#1e88e5" glyphName="FIRE" layoutX="30.0" layoutY="35.0" size="30" />
+                  <Text fill="WHITE" layoutX="66.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crew">
+                     <font>
+                        <Font name="Montserrat Regular" size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="44.0" prefWidth="100.0" styleClass="_tophbar" HBox.hgrow="ALWAYS">
+               <children>
+                  <Text fill="#626262" layoutX="20.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CHMS School Management System">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
+         </children>
+      </HBox>
+      <VBox layoutY="48.0" prefHeight="639.0" prefWidth="188.0" spacing="5.0" style="-fx-background-color: #343756;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" styleClass="active" text="Dashboard" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="#65657b" glyphName="SPEEDOMETER" size="24" styleClass="iconActive" text="" />
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </JFXButton>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Students" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="23.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#65657b" glyphName="CHILD" size="24" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Teachers" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="23.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView fill="#65657b" glyphName="BRIEFCASE" size="24" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Parents" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="34.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fill="#65657b" glyphName="HUMAN_MALE_FEMALE" size="24" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Calendar" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="23.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fill="#65657b" glyphName="CALENDAR_CLOCK" size="24" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Settings" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Emoji" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fill="#65657b" glyphName="SETTINGS" size="24" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" prefHeight="37.0" prefWidth="139.0" style="-fx-background-radius: 5;" styleClass="tophbar" text="Support" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
+               </graphic>
+               <VBox.margin>
+                  <Insets left="25.0" top="200.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets top="45.0" />
+         </padding>
+      </VBox>
+      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: #EEF2F1;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <HBox layoutX="32.0" layoutY="57.0" prefHeight="90.0" prefWidth="855.0" spacing="15.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="57.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="204.0" style="-fx-background-color: #FE8965; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="136.0" layoutY="72.0" size="55" text="" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Students">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #4CB5AB; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_MULTIPLE" layoutX="122.0" layoutY="77.0" size="74" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teachers">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #EF6291; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_MULTIPLE_PLUS" layoutX="123.0" layoutY="77.0" size="74" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parents">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #9575CB; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MONEY" layoutX="137.0" layoutY="69.0" size="55" />
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200,000">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Earnings">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </children></HBox>
+            <Text fill="#757272" layoutX="32.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font name="Titillium Web" size="23.0" />
+               </font>
+            </Text>
+            <GridPane layoutX="476.0" layoutY="170.0" prefHeight="455.0" prefWidth="412.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="170.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <YearMonthView showTodayButton="false" />
+               </children>
+            </GridPane>
+            <AnchorPane layoutX="32.0" layoutY="170.0" prefHeight="194.0" prefWidth="412.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="170.0">
+               <children>
+                  <OctIconView fill="#868686" glyphName="HISTORY" layoutX="10.0" layoutY="24.0" size="25" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="3.6875" />
+                  <Text fill="#868686" layoutX="39.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="News and Events" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="4.5410003662109375">
+                     <font>
+                        <Font name="Dosis-ExtraBold" size="17.0" />
+                     </font>
+                  </Text>
+                  <MaterialDesignIconView fill="#868686" glyphName="DOTS_VERTICAL" layoutX="399.0" layoutY="24.0" size="22" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.75" />
+                  <Separator layoutY="34.0" prefHeight="3.0" prefWidth="424.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <JFXButton contentDisplay="CENTER" layoutX="14.0" layoutY="46.0" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: F0506E;" text="News" />
+                  <JFXButton contentDisplay="CENTER" layoutX="14.0" layoutY="81.0" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: F0506E;" text="Events" />
+                  <JFXButton contentDisplay="CENTER" layoutX="14.0" layoutY="117.0" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: F0506E;" text="News" />
+                  <JFXButton contentDisplay="CENTER" layoutX="14.0" layoutY="153.0" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: F0506E;" text="Events" />
+                  <Label layoutX="88.0" layoutY="51.0" prefHeight="21.0" prefWidth="299.0" text="July 12th school admission is going on">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="88.0" layoutY="84.0" prefHeight="25.0" prefWidth="299.0" text="Graduation Ceremony on the 20th june">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="88.0" layoutY="120.0" prefHeight="21.0" prefWidth="299.0" text="Third term Examination coming soon">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="88.0" layoutY="155.0" prefHeight="21.0" prefWidth="299.0" text="PTA meeting coming up 15th August">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="32.0" layoutY="389.0" prefHeight="235.0" prefWidth="412.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="389.0">
+               <children>
+                  <OctIconView fill="#868686" glyphName="MORTAR_BOARD" layoutX="10.0" layoutY="24.0" size="29" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="3.6875" />
+                  <Text fill="#868686" layoutX="46.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Board" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="6.5410003662109375">
+                     <font>
+                        <Font name="Dosis-ExtraBold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutY="34.0" prefHeight="3.0" prefWidth="424.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Text fill="#95d8ef" layoutX="38.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teachers">
+                     <font>
+                        <Font name="Montserrat Medium" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#95d8ef" layoutX="274.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Students" AnchorPane.rightAnchor="59.76600646972656" AnchorPane.topAnchor="47.54400062561035">
+                     <font>
+                        <Font name="Montserrat Medium" size="17.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="39.0" layoutY="75.0" prefHeight="21.0" prefWidth="103.0" text="Mr Tobi Dada">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="94.0" prefHeight="21.0" prefWidth="103.0" text="Account">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="124.0" prefHeight="21.0" prefWidth="139.0" text="Mrs Adekunle WTF">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="143.0" prefHeight="21.0" prefWidth="103.0" text="English">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="178.0" prefHeight="21.0" prefWidth="139.0" text="Mr Daniel Odey">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="197.0" prefHeight="21.0" prefWidth="103.0" text="Unknown">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="80.0" prefHeight="21.0" prefWidth="103.0" text="Bisi Shakira" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="80.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="99.0" prefHeight="21.0" prefWidth="103.0" text="SS3" AnchorPane.rightAnchor="36.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="123.0" prefHeight="21.0" prefWidth="139.0" text="Dotun Isiaca" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="142.0" prefHeight="21.0" prefWidth="103.0" text="JSS2" AnchorPane.rightAnchor="36.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="171.0" prefHeight="21.0" prefWidth="139.0" text="Sade Butty" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="190.0" prefHeight="21.0" prefWidth="103.0" text="JSS3" AnchorPane.rightAnchor="36.0">
+                     <font>
+                        <Font name="Segoe UI Light" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
