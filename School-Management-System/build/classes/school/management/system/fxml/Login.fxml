@@ -77,17 +77,17 @@
                   <Font name="Montserrat Light" size="14.0" />
                </font>
             </JFXButton>
-            <Text fill="WHITE" layoutX="12.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="135.49999767541885">
+            <Text fill="WHITE" layoutX="10.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="135.49999767541885">
                <font>
                   <Font name="Dosis-Regular" size="34.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="12.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" wrappingWidth="182.0000069886446">
+            <Text fill="WHITE" layoutX="6.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" wrappingWidth="199.0000069886446">
                <font>
-                  <Font name="Dosis-Regular" size="36.0" />
+                  <Font size="33.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="14.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="103.49999767541885">
+            <Text fill="WHITE" layoutX="8.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="135.49999813735485">
                <font>
                   <Font name="Dosis-Regular" size="35.0" />
                </font>
