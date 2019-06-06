@@ -8,6 +8,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1099.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1099.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.DashboardController">
    <children>
       <HBox prefHeight="48.0" prefWidth="1099.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -141,8 +143,13 @@
             <Insets top="45.0" />
          </padding>
       </VBox>
-      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: #EEF2F1;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: #EEF2F1;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
+            <Text fill="#757272" layoutX="32.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font name="Titillium Web" size="23.0" />
+               </font>
+            </Text>
             <HBox layoutX="32.0" layoutY="57.0" prefHeight="90.0" prefWidth="855.0" spacing="15.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="57.0">
                <children>
                   <Pane prefHeight="100.0" prefWidth="204.0" style="-fx-background-color: #FE8965; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
@@ -206,11 +213,6 @@
                      </children>
                   </Pane>
                </children></HBox>
-            <Text fill="#757272" layoutX="32.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
-               <font>
-                  <Font name="Titillium Web" size="23.0" />
-               </font>
-            </Text>
             <GridPane layoutX="476.0" layoutY="170.0" prefHeight="455.0" prefWidth="412.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="170.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -339,6 +341,111 @@
                   </Label>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <TableView layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
+               <columns>
+                  <TableColumn editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Reg Number" />
+                  <TableColumn editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
+                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
+                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
+                  <TableColumn editable="false" prefWidth="77.5018310546875" text="Address" />
+                  <TableColumn editable="false" maxWidth="6000.0" prefWidth="75.0" text="Payment Status" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Text fill="#626262" layoutX="17.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Details">
+               <font>
+                  <Font name="Montserrat Regular" size="20.0" />
+               </font>
+            </Text>
+            <Pane layoutX="669.0" layoutY="163.0" prefHeight="445.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 20 5 0; -fx-border-color: #F3F3F3; -fx-border-width: 0 0 0 2;" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="163.0">
+               <children>
+                  <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;" />
+                  <Pane layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0" style="-fx-background-radius: 100; -fx-background-color: #B1A7AA;" />
+                  <Text fill="#51cbce" layoutX="46.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
+                     <font>
+                        <Font name="Montserrat Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paid Fully" textAlignment="CENTER" wrappingWidth="179.37600708007812">
+                     <font>
+                        <Font name="Montserrat Regular" size="18.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="23.0" layoutY="342.0" prefHeight="3.0" prefWidth="186.0" />
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="37.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="REFRESH" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="98.0" layoutY="389.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="PENCIL" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="159.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="TRASH_ALT" size="20" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <HBox layoutX="17.0" layoutY="56.0" prefHeight="83.0" prefWidth="652.0" spacing="15.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="204.0" style="-fx-background-color: #FE8965; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Males">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="153.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #4CB5AB; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Females">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="149.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #EF6291; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="11.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="10.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Students">
+                           <font>
+                              <Font name="Dosis-ExtraBold" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="116.0" layoutY="65.0" size="70" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="152.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>
