@@ -46,7 +46,7 @@
       </HBox>
       <VBox layoutY="48.0" prefHeight="639.0" prefWidth="188.0" spacing="5.0" style="-fx-background-color: #343756;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" styleClass="active" text="Dashboard" textFill="#65657b">
+            <JFXButton fx:id="dashboardBtn" graphicTextGap="11.0" onAction="#openDashboard" prefHeight="45.0" prefWidth="200.0" styleClass="active" text="Dashboard" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
@@ -60,7 +60,7 @@
                   <Insets right="10.0" />
                </padding>
             </JFXButton>
-            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Students" textFill="#65657b">
+            <JFXButton fx:id="studentBtn" graphicTextGap="11.0" onAction="#openStudent" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Students" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
@@ -143,7 +143,7 @@
             <Insets top="45.0" />
          </padding>
       </VBox>
-      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: #EEF2F1;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="dashboardPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: #EEF2F1;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <Text fill="#757272" layoutX="32.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
                <font>
@@ -343,7 +343,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="studentPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <TableView layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>

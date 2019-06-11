@@ -5,6 +5,7 @@
  */
 package school.management.system.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,22 +26,29 @@ import javafx.stage.Stage;
 public class DashboardController implements Initializable {
 
     @FXML
-    private AnchorPane dashboardPane;
+    private AnchorPane dashboardPane;        
+    @FXML
+    private AnchorPane studentPane;
+    @FXML
+    private JFXButton dashboardBtn;
+    @FXML
+    private JFXButton studentBtn;
     
- 
+    @FXML
+    private void openDashboard(ActionEvent event){
+//        dashboardBtn.set
+        dashboardPane.setVisible(true);
+        studentPane.setVisible(false);
+    }
+    
+    @FXML
+    private void openStudent(ActionEvent event){
+        studentPane.setVisible(true);
+        dashboardPane.setVisible(false);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    // @FXML
-    // private void logoutBtn(ActionEvent event) throws IOException {
-    //     Stage stage = (Stage) dashboardPane.getScene().getWindow();
-    //     stage.close();
-    //     Parent root = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
-    //     Scene scene = new Scene(root);
-    //     stage.setScene(scene);
-    //     stage.show();
-    // }
-    
 }

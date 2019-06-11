@@ -22,7 +22,6 @@ public class SchoolManagementSystem extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }
