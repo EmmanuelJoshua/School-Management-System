@@ -12,7 +12,8 @@ and open the template in the editor.
      
 }
 .sidebar{
-    -fx-background-color: #042954;
+    -fx-background-color:#042954;
+
 }
 .mainDash{
     -fx-background-color: #EEF2F1;
