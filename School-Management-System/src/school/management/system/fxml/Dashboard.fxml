@@ -5,6 +5,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.DashboardController">
    <children>
       <HBox prefHeight="48.0" prefWidth="1099.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -154,7 +155,7 @@
          <children>
             <ImageView fitHeight="594.0" fitWidth="1012.0" layoutY="45.0" opacity="0.7" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
                <image>
-                  <Image url="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/images/geronimo-giqueaux-1367646-unsplash.jpg" />
+                  <Image url="@../images/geronimo-giqueaux-1367646-unsplash.jpg" />
                </image>
             </ImageView>
             <Pane prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(265,219,56,0.2);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -163,7 +164,7 @@
                   <Font name="Titillium Web" size="23.0" />
                </font>
             </Text>
-            <HBox layoutX="14.0" layoutY="60.0" prefHeight="90.0" prefWidth="985.0" spacing="15.0" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="60.0">
+            <HBox layoutX="14.0" layoutY="60.0" prefHeight="90.0" prefWidth="985.0" spacing="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="60.0">
                <children>
                   <GridPane styleClass="allsubpane" HBox.hgrow="ALWAYS">
                     <columnConstraints>
@@ -300,7 +301,7 @@
                   </GridPane>
                </children>
             </HBox>
-            <AnchorPane layoutX="14.0" layoutY="164.0" prefHeight="462.0" prefWidth="328.0" style="-fx-background-radius: 10;" styleClass="notice" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="164.0">
+            <AnchorPane layoutX="14.0" layoutY="164.0" prefHeight="462.0" prefWidth="328.0" style="-fx-background-radius: 10;" styleClass="notice" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="164.0">
                <children>
                   <Text fill="#3c3c3c" layoutX="45.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notice Board">
                      <font>
@@ -335,7 +336,7 @@
                   <FontAwesomeIconView fill="#8d8a8a" glyphName="ELLIPSIS_H" layoutX="304.0" layoutY="32.0" size="18" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="357.0" layoutY="164.0" prefHeight="245.0" prefWidth="284.0" style="-fx-background-radius: 10;" styleClass="overlayPane" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="164.0">
+            <AnchorPane layoutX="357.0" layoutY="164.0" prefHeight="245.0" prefWidth="284.0" style="-fx-background-radius: 10;" styleClass="overlayPane" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="164.0">
                <children>
                   <OctIconView fill="#868686" glyphName="MORTAR_BOARD" layoutX="10.0" layoutY="24.0" size="29" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="3.6875" />
                   <Text fill="#868686" layoutX="46.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Board" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="6.5410003662109375">
@@ -424,7 +425,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <YearMonthView prefHeight="462.0" prefWidth="275.0" showTodayButton="false" styleClass="teacher" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" />
+                  <YearMonthView prefHeight="462.0" prefWidth="275.0" showTodayButton="false" styleClass="teacher" />
                </children>
             </GridPane>
          </children>
@@ -535,4 +536,8 @@
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/style.css" />
+      <URL value="@../css/style%20(2).css" />
+   </stylesheets>
 </AnchorPane>
