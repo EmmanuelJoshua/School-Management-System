@@ -43,6 +43,11 @@
                         <Font size="23.0" />
                      </font>
                   </Text>
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="903.0" layoutY="8.0" prefHeight="30.0" prefWidth="95.0" style="-fx-background-radius: 20;" styleClass="tophbar" text="Logout" textFill="WHITE">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="LOGOUT" size="18" />
+                     </graphic>
+                  </JFXButton>
                </children></Pane>
          </children>
       </HBox>
@@ -330,7 +335,7 @@
                   <FontAwesomeIconView fill="#8d8a8a" glyphName="ELLIPSIS_H" layoutX="304.0" layoutY="32.0" size="18" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="357.0" layoutY="164.0" prefHeight="245.0" prefWidth="284.0" style="-fx-background-radius: 10;" styleClass="overlayPane" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" AnchorPane.leftAnchor="357.0" AnchorPane.topAnchor="164.0">
+            <AnchorPane layoutX="357.0" layoutY="164.0" prefHeight="245.0" prefWidth="284.0" style="-fx-background-radius: 10;" styleClass="overlayPane" stylesheets="@../../../../../../../../../Videos/School-Management-System/src/school/management/system/css/style%20(2).css" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="164.0">
                <children>
                   <OctIconView fill="#868686" glyphName="MORTAR_BOARD" layoutX="10.0" layoutY="24.0" size="29" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="3.6875" />
                   <Text fill="#868686" layoutX="46.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Board" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="6.5410003662109375">
@@ -411,7 +416,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <GridPane layoutX="661.0" layoutY="163.0" prefHeight="462.0" prefWidth="337.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="661.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="163.0">
+            <GridPane layoutX="661.0" layoutY="163.0" prefHeight="462.0" prefWidth="337.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="163.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
