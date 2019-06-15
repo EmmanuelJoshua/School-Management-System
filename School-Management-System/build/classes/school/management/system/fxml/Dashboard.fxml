@@ -62,7 +62,7 @@
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
                <graphic>
-                  <MaterialDesignIconView fill="#65657b" glyphName="SPEEDOMETER" size="24" styleClass="iconActive" text="" />
+                  <MaterialDesignIconView fx:id="dashIcon" fill="#65657b" glyphName="SPEEDOMETER" size="24" styleClass="iconActive" text="" />
                </graphic>
                <opaqueInsets>
                   <Insets />
@@ -71,7 +71,7 @@
                   <Insets right="10.0" />
                </padding>
             </JFXButton>
-            <JFXButton fx:id="studentBtn" graphicTextGap="11.0" onAction="#openStudent" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Students" textFill="#65657b">
+            <JFXButton fx:id="studentBtn" graphicTextGap="11.0" onAction="#openStudent" prefHeight="45.0" prefWidth="200.0" text="Students" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
@@ -82,7 +82,7 @@
                   <Insets right="23.0" />
                </padding>
                <graphic>
-                  <FontAwesomeIconView fill="#65657b" glyphName="CHILD" size="24" text="" />
+                  <FontAwesomeIconView fx:id="stuIcon" fill="#65657b" glyphName="CHILD" size="24" text="" />
                </graphic>
             </JFXButton>
             <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Teachers" textFill="#65657b">

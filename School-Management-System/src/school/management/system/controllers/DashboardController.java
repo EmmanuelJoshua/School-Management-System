@@ -6,6 +6,8 @@
 package school.management.system.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,16 +35,27 @@ public class DashboardController implements Initializable {
     private JFXButton dashboardBtn;
     @FXML
     private JFXButton studentBtn;
+    @FXML
+    private FontAwesomeIconView stuIcon;
+    @FXML
+    private MaterialDesignIconView dashIcon;
     
     @FXML
     private void openDashboard(ActionEvent event){
-//        dashboardBtn.set
+        studentBtn.getStyleClass().remove(2);
+        stuIcon.getStyleClass().remove(2);
+        dashboardBtn.getStyleClass().add("active");
+        dashIcon.getStyleClass().add("iconActive");
         dashboardPane.setVisible(true);
         studentPane.setVisible(false);
     }
     
     @FXML
     private void openStudent(ActionEvent event){
+        dashboardBtn.getStyleClass().remove(2);
+        dashIcon.getStyleClass().remove(2);
+        studentBtn.getStyleClass().add("active");
+        stuIcon.getStyleClass().add("iconActive");
         studentPane.setVisible(true);
         dashboardPane.setVisible(false);
     }
