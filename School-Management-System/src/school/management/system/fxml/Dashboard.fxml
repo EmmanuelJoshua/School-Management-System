@@ -435,15 +435,15 @@
       </AnchorPane>
       <AnchorPane fx:id="studentPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <TableView layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
+            <TableView fx:id="adStudentTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>
-                  <TableColumn editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Reg Number" />
-                  <TableColumn editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
-                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
-                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
-                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
-                  <TableColumn editable="false" prefWidth="77.5018310546875" text="Address" />
-                  <TableColumn editable="false" maxWidth="6000.0" prefWidth="75.0" text="Payment Status" />
+                  <TableColumn fx:id="registrationNumber" editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Reg Number" />
+                  <TableColumn fx:id="fullName" editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
+                  <TableColumn fx:id="dob" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
+                  <TableColumn fx:id="gender" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                  <TableColumn fx:id="studentClass" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
+                  <TableColumn fx:id="residentialAddress" editable="false" prefWidth="77.5018310546875" text="Address" />
+                  <TableColumn fx:id="paymentStatus" editable="false" maxWidth="6000.0" prefWidth="75.0" text="Payment Status" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

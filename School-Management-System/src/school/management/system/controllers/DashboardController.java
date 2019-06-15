@@ -10,7 +10,14 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,15 +25,37 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import school.management.system.demoDatabase.Database;
+import school.management.system.tables.AdminStudentsTable;
 
 /**
  *
  * @author DELL
  */
 public class DashboardController implements Initializable {
-
+    Database da = new Database();
+    @FXML
+    private TableColumn<AdminStudentsTable, String> registrationNumber;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> fullName;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> dob;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> gender;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> studentClass;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> residentialAddress;
+    @FXML
+    private TableColumn<AdminStudentsTable, String> paymentStatus;
+    ObservableList<AdminStudentsTable> obs = FXCollections.observableArrayList();
+    @FXML
+    private TableView<AdminStudentsTable> adStudentTable;
     @FXML
     private AnchorPane dashboardPane;        
     @FXML
@@ -62,6 +91,25 @@ public class DashboardController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         try {
+            Connection con = da.getConnection();
+            ResultSet res = con.createStatement().executeQuery("Select * from Students.StudentDetails");
+
+            while (res.next()) {
+                obs.add(new AdminStudentsTable(res.getString("RegistrationNumber"), res.getString("FullName"),
+                res.getString("DOB"), res.getString("Gender"), res.getString("Class"),
+                res.getString("ResidentialAddress"), res.getString("PaymentStatus")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
+        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
+        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
+        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
+        adStudentTable.setItems(obs);
     }    
 }

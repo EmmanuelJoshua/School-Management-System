@@ -89,7 +89,7 @@
                   <Font name="Berlin Sans FB" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="62.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="108.59400540590286">
+            <Text fill="WHITE" layoutX="62.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="108.59400540590286">
                <font>
                   <Font name="Berlin Sans FB" size="36.0" />
                </font>
