@@ -74,9 +74,9 @@ public class LoginController implements Initializable {
 //            stage.setTitle("Home");
 //            stage.getIcons().add(0, img);
             stage.setScene(new Scene(parent));
-            stage.initOwner(((Stage) loginPane.getScene().getWindow()));
-            stage.initModality(Modality.WINDOW_MODAL);     
-            stage.setWidth(Double.MAX_VALUE);
+            stage.initOwner(((Stage) loginPane.getScene().getWindow())); 
+            stage.setMaximized(true);
+//            stage.setResizable(false);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
