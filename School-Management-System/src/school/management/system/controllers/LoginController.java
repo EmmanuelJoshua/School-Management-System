@@ -86,12 +86,12 @@ public class LoginController implements Initializable {
     private void signIn(ActionEvent event){
        if (username.getText().isEmpty() && password.getText().isEmpty()) {
             Notifications notify=Notifications.create()
-//                        .graphic(new ImageView(errorImg))
+                        .graphic(new ImageView(errorImg))
                         .title("ERROR")
                         .text("Username and Password Empty")
-//                        .position(Pos.TOP_CENTER)
+                        .position(Pos.TOP_CENTER)
                         .hideAfter(Duration.seconds(3));
-                notify.showConfirm();
+                notify.show();
         } else if (!userLogin(username.getText(), password.getText())) {
            Notifications notify=Notifications.create()
                         .graphic(new ImageView(errorImg))

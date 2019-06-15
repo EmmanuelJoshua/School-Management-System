@@ -12,11 +12,10 @@ and open the template in the editor.
      
 }
 .sidebar{
-    -fx-background-color:#042954;
-
+    -fx-background-color: #042954;
 }
 .mainDash{
-    -fx-background-color: #EEF2F1;
+    -fx-background-color: #f0f1f3;
 }
 
 .tophbar{
@@ -28,19 +27,24 @@ and open the template in the editor.
 .supportbtn{
     background-color: #042954;
 }
-.innernav{
-    -fx-background-color: #ffffff;
+.allsubpane{
+    -fx-background-color: rgba(255,255,255,0.8);
+    -fx-background-radius: 10;
 }
+.teacher{
+    -fx-background-color: rgba(86,176,167,0.7);
+    -fx-background-radius: 10;
+}
+.addstudent{
+    -fx-background-color: rgba(255,255,255,0.8);
+}
+.notice{
+    -fx-background-color: rgba(255,0,0,0.5);
+}
+.overlayPane{
+    -fx-background-color: rgba(255,255,255,0.9);
+}
+
 .panes_btn:hover{
     -fx-background-color: blue;
-}
-.iconActive{
-	-fx-fill: #13a8dc;
-}
-.active{
-	-fx-text-fill: #13a8dc;
-	-fx-border-color: #13A8DC;
-	-fx-background-color: #2D4D71;
-	-fx-background-radius: 0;
-	-fx-border-width: 0 0 0 4px;
 }

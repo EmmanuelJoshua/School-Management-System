@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Rectangle2D?>
@@ -14,20 +15,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.LoginController">
+<AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="497.0" prefWidth="781.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.LoginController">
     <children>
-      <ImageView fitHeight="550.0" fitWidth="781.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="457.0" fitWidth="781.0" layoutY="47.0">
          <image>
-            <Image url="@../images/gades-photography-540984-unsplash.jpg" />
+            <Image url="@../images/doug-linstedt-135670-unsplash.jpg" />
          </image>
          <viewport>
             <Rectangle2D minX="12.0" minY="12.0" width="12.0" />
          </viewport>
       </ImageView>
-      <Pane prefHeight="550.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="668.0" style="-fx-background-color: rgba(1,1,65,0.7); -fx-background-radius: 1.5em;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="64.0">
+      <Pane layoutY="47.0" prefHeight="457.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);" />
+      <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="668.0" style="-fx-background-color: rgba(1,1,65,0.7); -fx-background-radius: 1.5em;">
          <children>
-            <JFXTextField fx:id="userName" focusColor="WHITE" labelFloat="true" layoutX="102.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
+            <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" layoutX="102.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
                <font>
                   <Font name="Montserrat Regular" size="16.0" />
                </font>
@@ -37,7 +38,7 @@
                   <Font name="Montserrat Regular" size="16.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="219.0" layoutY="330.0" onAction="#signIn" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 18;" text="Sign In" textFill="WHITE">
+            <JFXButton fx:id="loginBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="219.0" layoutY="330.0" onAction="#signIn" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 18;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Montserrat Regular" size="16.0" />
                </font>
@@ -49,7 +50,7 @@
                </cursor>
             </JFXButton>
             <Polyline fill="#2a468f" layoutX="157.0" layoutY="90.0" points="90.0, -90.0, -157.0, -90.0, -157.0, 28.0, -157.0, 78.0" stroke="WHITE" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" />
-            <Text fill="WHITE" layoutX="18.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
+            <Text fill="WHITE" layoutX="18.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
                   <Font name="Montserrat Light" size="30.0" />
                </font>
@@ -65,29 +66,30 @@
                   <Image url="@../images/user.png" />
                </image>
             </ImageView>
+            <JFXProgressBar fx:id="progress" layoutX="178.0" layoutY="394.0" visible="false" />
          </children>
       </Pane>
-      <Pane layoutX="545.0" layoutY="28.0" maxWidth="250.0" prefHeight="489.0" prefWidth="207.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="28.0">
+      <Pane layoutX="545.0" layoutY="28.0" maxWidth="250.0" prefHeight="489.0" prefWidth="207.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;">
          <children>
             <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="54.0" layoutY="428.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="About us" textFill="WHITE">
                <graphic>
-                  <MaterialDesignIconView fill="WHITE" glyphName="INFORMATION" size="25" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="INFORMATION" size="22" />
                </graphic>
                <font>
                   <Font name="Montserrat Light" size="14.0" />
                </font>
             </JFXButton>
-            <Text fill="WHITE" layoutX="10.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="135.49999767541885">
+            <Text fill="WHITE" layoutX="52.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="103.49999767541885">
                <font>
                   <Font name="Dosis-Regular" size="34.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="6.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" wrappingWidth="199.0000069886446">
+            <Text fill="WHITE" layoutX="6.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" textAlignment="CENTER" wrappingWidth="199.0000069886446">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Dosis-Regular" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="8.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="135.49999813735485">
+            <Text fill="WHITE" layoutX="52.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="103.49999767541885">
                <font>
                   <Font name="Dosis-Regular" size="35.0" />
                </font>
