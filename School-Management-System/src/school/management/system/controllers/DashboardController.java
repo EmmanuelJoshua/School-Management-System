@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,6 +39,7 @@ import school.management.system.tables.AdminStudentsTable;
  * @author DELL
  */
 public class DashboardController implements Initializable {
+
     Database da = new Database();
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
@@ -57,7 +59,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView<AdminStudentsTable> adStudentTable;
     @FXML
-    private AnchorPane dashboardPane;        
+    private AnchorPane dashboardPane;
     @FXML
     private AnchorPane studentPane;
     @FXML
@@ -68,9 +70,9 @@ public class DashboardController implements Initializable {
     private FontAwesomeIconView stuIcon;
     @FXML
     private MaterialDesignIconView dashIcon;
-    
+
     @FXML
-    private void openDashboard(ActionEvent event){
+    private void openDashboard(ActionEvent event) {
         studentBtn.getStyleClass().remove(2);
         stuIcon.getStyleClass().remove(2);
         dashboardBtn.getStyleClass().add("active");
@@ -78,9 +80,9 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(true);
         studentPane.setVisible(false);
     }
-    
+
     @FXML
-    private void openStudent(ActionEvent event){
+    private void openStudent(ActionEvent event) {
         dashboardBtn.getStyleClass().remove(2);
         dashIcon.getStyleClass().remove(2);
         studentBtn.getStyleClass().add("active");
@@ -88,17 +90,18 @@ public class DashboardController implements Initializable {
         studentPane.setVisible(true);
         dashboardPane.setVisible(false);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         try {
+        try {
             Connection con = da.getConnection();
-            ResultSet res = con.createStatement().executeQuery("Select * from Students.StudentDetails");
+            ResultSet res = con.createStatement().executeQuery("SELECT RegistrationNumber,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,s.Class,ResidentialAddress,PaymentStatus FROM Students.StudentDetails s\n"
+                    + "INNER JOIN Students.PaymentDetails p ON p.StudentId=s.StudentId;");
 
             while (res.next()) {
                 obs.add(new AdminStudentsTable(res.getString("RegistrationNumber"), res.getString("FullName"),
-                res.getString("DOB"), res.getString("Gender"), res.getString("Class"),
-                res.getString("ResidentialAddress"), res.getString("PaymentStatus")));
+                        res.getString("DOB"), res.getString("Gender"), res.getString("Class"),
+                        res.getString("ResidentialAddress"), res.getString("PaymentStatus")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,5 +114,14 @@ public class DashboardController implements Initializable {
         residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
         paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
         adStudentTable.setItems(obs);
-    }    
+    }
+
+    @FXML
+    private void logOut(ActionEvent event) throws IOException {
+        Parent pane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
+        Scene s = new Scene(pane);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(s);
+        stage.show();
+    }
 }

@@ -45,7 +45,7 @@
                      </font>
                   </Text>
                </children></Pane>
-            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="95.0" style="-fx-background-radius: 5;" styleClass="tophbar" text="Logout" textFill="WHITE">
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#logOut" prefHeight="35.0" prefWidth="95.0" style="-fx-background-radius: 5;" styleClass="tophbar" text="Logout" textFill="WHITE">
                <graphic>
                   <MaterialDesignIconView fill="WHITE" glyphName="LOGOUT" size="18" />
                </graphic>
