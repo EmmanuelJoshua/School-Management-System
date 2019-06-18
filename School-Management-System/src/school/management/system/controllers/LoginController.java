@@ -9,27 +9,26 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -53,6 +52,8 @@ public class LoginController implements Initializable {
     private JFXPasswordField password;
     @FXML
     private AnchorPane loginPane;
+    @FXML
+    private Pane exitConfirmPane;
 
     private boolean userLogin(String username, String password) {
         return Validator.validate(username, password);
@@ -81,6 +82,24 @@ public class LoginController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    private void exitLogin(MouseEvent event){
+        exitConfirmPane.setVisible(true);
+         FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(exitConfirmPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+    
+    @FXML
+    private void minimiseLogin(MouseEvent event){
+        Stage stage = (Stage) loginPane.getScene().getWindow();
+        stage = (Stage) ((OctIconView) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
     
     @FXML
@@ -114,10 +133,26 @@ public class LoginController implements Initializable {
         }
     }
     
+     @FXML
+     private void exitYesAction(ActionEvent event){
+         System.exit(0);
+     }
      
+     @FXML
+     private void exitNoAction(ActionEvent event){
+         FadeTransition fade3 = new FadeTransition();
+        fade3.setDuration(Duration.millis(500));
+        fade3.setNode(exitConfirmPane);
+        fade3.setFromValue(1);
+        fade3.setToValue(0);
+        fade3.play();
+        fade3.setOnFinished((ActionEvent event1) -> {
+            exitConfirmPane.setVisible(false);
+        });
+     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
     }
 }

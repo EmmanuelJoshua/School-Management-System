@@ -5,11 +5,15 @@
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
@@ -17,7 +21,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="497.0" prefWidth="781.0" style="-fx-background-color: transparent;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.LoginController">
     <children>
-      <ImageView fitHeight="457.0" fitWidth="781.0" layoutY="47.0">
+      <ImageView fitHeight="487.0" fitWidth="781.0" layoutY="17.0">
          <image>
             <Image url="@../images/doug-linstedt-135670-unsplash.jpg" />
          </image>
@@ -25,7 +29,28 @@
             <Rectangle2D minX="12.0" minY="12.0" width="12.0" />
          </viewport>
       </ImageView>
-      <Pane layoutY="47.0" prefHeight="457.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);" />
+      <Pane layoutY="17.0" prefHeight="487.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);">
+         <children>
+            <HBox layoutX="-9.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: rgba(255,255,255,0.1);">
+               <children>
+                  <OctIconView fill="#e40707" glyphName="PRIMITIVE_DOT" onMousePressed="#exitLogin" size="25">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </OctIconView>
+                  <OctIconView fill="#ebd80d" glyphName="PRIMITIVE_DOT" layoutX="10.0" layoutY="28.0" size="25">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </OctIconView>
+                  <OctIconView fill="#09e85e" glyphName="PRIMITIVE_DOT" layoutX="21.0" layoutY="28.0" onMousePressed="#minimiseLogin" size="25">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </OctIconView>
+               </children>
+            </HBox>
+         </children></Pane>
       <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="668.0" style="-fx-background-color: rgba(1,1,65,0.7); -fx-background-radius: 1.5em;">
          <children>
             <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" layoutX="102.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
@@ -69,7 +94,7 @@
             <JFXProgressBar fx:id="progress" layoutX="178.0" layoutY="394.0" visible="false" />
          </children>
       </Pane>
-      <Pane layoutX="545.0" layoutY="28.0" maxWidth="250.0" prefHeight="489.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;">
+      <Pane layoutX="546.0" layoutY="6.0" maxWidth="250.0" prefHeight="511.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;">
          <children>
             <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="62.0" layoutY="428.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="About us" textFill="WHITE">
                <graphic>
@@ -94,6 +119,28 @@
                   <Font name="Berlin Sans FB" size="36.0" />
                </font>
             </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="exitConfirmPane" layoutY="16.0" prefHeight="487.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
+         <children>
+            <Pane layoutX="226.0" layoutY="188.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
+               <children>
+                  <Text fill="#2a468f" layoutX="19.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you want to exit?" textAlignment="CENTER" wrappingWidth="291.82763671875">
+                     <font>
+                        <Font name="Segoe UI Semilight" size="27.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="62.0" layoutY="58.0" prefHeight="3.0" prefWidth="207.0" />
+                  <JFXButton buttonType="RAISED" layoutX="53.0" layoutY="70.0" onAction="#exitYesAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="Yes" textFill="#e8e8e8">
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font></JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="198.0" layoutY="70.0" onAction="#exitNoAction" prefHeight="16.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="No" textFill="#e8e8e8">
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font></JFXButton>
+               </children>
+            </Pane>
          </children>
       </Pane>
     </children>
