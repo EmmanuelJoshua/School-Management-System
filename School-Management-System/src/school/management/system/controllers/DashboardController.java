@@ -22,15 +22,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
 
@@ -70,6 +69,9 @@ public class DashboardController implements Initializable {
     private FontAwesomeIconView stuIcon;
     @FXML
     private MaterialDesignIconView dashIcon;
+
+    @FXML
+    private AnchorPane mainDashPane;
 
     @FXML
     private void openDashboard(ActionEvent event) {
@@ -116,12 +118,22 @@ public class DashboardController implements Initializable {
         adStudentTable.setItems(obs);
     }
 
+    public void closeStage() {
+        ((Stage) mainDashPane.getScene().getWindow()).close();
+    }
+
     @FXML
     private void logOut(ActionEvent event) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
-        Scene s = new Scene(pane);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(s);
+        closeStage();
+        Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
+
+        Stage stage = new Stage(StageStyle.TRANSPARENT);
+
+        Scene scene = new Scene(parent);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        
+        stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
+        stage.setScene(scene);
         stage.show();
     }
 }
