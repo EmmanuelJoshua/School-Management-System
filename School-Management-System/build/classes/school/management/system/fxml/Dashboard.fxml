@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.calendarfx.view.YearMonthView?>
+<?import com.gn.GNAvatarView?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
@@ -45,12 +46,12 @@
                      </font>
                   </Text>
                </children></Pane>
-            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#logOut" prefHeight="35.0" prefWidth="95.0" style="-fx-background-radius: 5;" styleClass="tophbar" text="Logout" textFill="WHITE">
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#logOut" prefHeight="30.0" prefWidth="95.0" style="-fx-background-radius: 5;" styleClass="tophbar" text="Logout" textFill="WHITE">
                <graphic>
                   <MaterialDesignIconView fill="WHITE" glyphName="LOGOUT" size="18" />
                </graphic>
                <HBox.margin>
-                  <Insets right="8.0" top="6.0" />
+                  <Insets right="10.0" top="9.0" />
                </HBox.margin>
             </JFXButton>
          </children>
@@ -85,7 +86,7 @@
                   <FontAwesomeIconView fx:id="stuIcon" fill="#65657b" glyphName="CHILD" size="24" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Teachers" textFill="#65657b">
+            <JFXButton fx:id="staffBtn" graphicTextGap="11.0" onAction="#openStaff" prefHeight="45.0" prefWidth="200.0" text="Teachers" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
@@ -96,7 +97,7 @@
                   <Insets right="23.0" />
                </padding>
                <graphic>
-                  <FontAwesomeIconView fill="#65657b" glyphName="BRIEFCASE" size="24" text="" />
+                  <FontAwesomeIconView fx:id="staffIcon" fill="#65657b" glyphName="BRIEFCASE" size="24" text="" />
                </graphic>
             </JFXButton>
             <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Parents" textFill="#65657b">
@@ -156,7 +157,7 @@
       </VBox>
       <AnchorPane fx:id="dashboardPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <ImageView layoutY="45.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+            <ImageView fitHeight="639.0" fitWidth="1366.0" layoutY="45.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="-45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-354.0" AnchorPane.topAnchor="45.0">
                <image>
                   <Image url="@../images/geronimo-giqueaux-1367646-unsplash.jpg" />
                </image>
@@ -451,37 +452,43 @@
             </TableView>
             <Text fill="#626262" layoutX="17.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Details">
                <font>
-                  <Font name="Montserrat Regular" size="20.0" />
+                  <Font name="Segoe UI" size="20.0" />
                </font>
             </Text>
             <Pane layoutX="669.0" layoutY="163.0" prefHeight="445.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 20 5 0; -fx-border-color: #F3F3F3; -fx-border-width: 0 0 0 2;" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="163.0">
                <children>
-                  <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;" />
-                  <Pane layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0" style="-fx-background-radius: 100; -fx-background-color: #B1A7AA;" />
-                  <Text fill="#51cbce" layoutX="46.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
+                  <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;">
+                     <children>
+                        <GNAvatarView layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
+                           <image>
+                              <Image url="@../images/user%20(2).png" />
+                           </image>
+                        </GNAvatarView>
+                     </children></Pane>
+                  <Text fill="#51cbce" layoutX="51.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
                      <font>
-                        <Font name="Montserrat Bold" size="21.0" />
+                        <Font name="Segoe UI Semibold" size="23.0" />
                      </font>
                   </Text>
                   <Text fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paid Fully" textAlignment="CENTER" wrappingWidth="179.37600708007812">
                      <font>
-                        <Font name="Montserrat Regular" size="18.0" />
+                        <Font name="Segoe UI Semilight" size="19.0" />
                      </font>
                   </Text>
                   <Separator layoutX="23.0" layoutY="342.0" prefHeight="3.0" prefWidth="186.0" />
                   <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="37.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
                      <graphic>
-                        <FontAwesomeIconView glyphName="REFRESH" size="20" />
+                        <FontAwesomeIconView fill="#343756" glyphName="REFRESH" size="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="98.0" layoutY="389.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
                      <graphic>
-                        <MaterialDesignIconView glyphName="PENCIL" size="20" />
+                        <MaterialDesignIconView fill="#343756" glyphName="PENCIL" size="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="159.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
                      <graphic>
-                        <FontAwesomeIconView glyphName="TRASH_ALT" size="20" />
+                        <FontAwesomeIconView fill="#343756" glyphName="TRASH_ALT" size="20" />
                      </graphic>
                   </JFXButton>
                </children>
@@ -536,6 +543,144 @@
                   </Pane>
                </children>
             </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <TableView fx:id="adStudentTable1" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
+               <columns>
+                  <TableColumn fx:id="registrationNumber1" editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Teacher ID" />
+                  <TableColumn fx:id="fullName1" editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
+                  <TableColumn fx:id="dob1" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
+                  <TableColumn fx:id="gender1" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                  <TableColumn fx:id="studentClass1" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
+                  <TableColumn fx:id="residentialAddress1" editable="false" prefWidth="77.5018310546875" text="Address" />
+                  <TableColumn fx:id="paymentStatus1" editable="false" maxWidth="6000.0" prefWidth="75.0" text="Designation" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Text fill="#626262" layoutX="17.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Details">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Text>
+            <Pane layoutX="669.0" layoutY="163.0" prefHeight="445.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 20 5 0; -fx-border-color: #F3F3F3; -fx-border-width: 0 0 0 2;" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="163.0">
+               <children>
+                  <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;">
+                     <children>
+                        <GNAvatarView layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
+                           <image>
+                              <Image url="@../images/user%20(2).png" />
+                           </image>
+                        </GNAvatarView>
+                     </children></Pane>
+                  <Text fill="#51cbce" layoutX="54.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="23.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paid Fully" textAlignment="CENTER" wrappingWidth="179.37600708007812">
+                     <font>
+                        <Font name="Segoe UI Semilight" size="19.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="23.0" layoutY="342.0" prefHeight="3.0" prefWidth="186.0" />
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="37.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView fill="#343756" glyphName="REFRESH" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="98.0" layoutY="389.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <MaterialDesignIconView fill="#343756" glyphName="PENCIL" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="159.0" layoutY="389.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView fill="#343756" glyphName="TRASH_ALT" size="20" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <HBox layoutX="17.0" layoutY="56.0" prefHeight="83.0" prefWidth="652.0" spacing="15.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="204.0" style="-fx-background-color: #FE8965; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Males">
+                           <font>
+                              <Font name="Segoe UI Light" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="153.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #4CB5AB; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Females">
+                           <font>
+                              <Font name="Segoe UI Light" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="149.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #EF6291; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="11.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="10.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Teachers">
+                           <font>
+                              <Font name="Segoe UI Light" size="17.0" />
+                           </font>
+                        </Text>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="116.0" layoutY="65.0" size="70" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="152.0" layoutY="66.0" size="70" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="logoutPane" prefHeight="686.0" prefWidth="1200.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="400.0" layoutY="279.0" prefHeight="128.0" prefWidth="328.0" style="-fx-background-color: f9f9f9; -fx-background-radius: 15;" AnchorPane.bottomAnchor="279.0" AnchorPane.rightAnchor="472.0" AnchorPane.topAnchor="279.0">
+               <children>
+                  <JFXButton fx:id="logoutYes" buttonType="RAISED" layoutX="29.0" layoutY="76.0" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="Yes" textFill="#e8e8e8" AnchorPane.leftAnchor="29.0">
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="logoutNo" buttonType="RAISED" layoutX="214.0" layoutY="76.0" prefHeight="16.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="No" textFill="#e8e8e8" AnchorPane.rightAnchor="35.0">
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <AnchorPane layoutY="-1.0" prefHeight="64.0" prefWidth="328.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15 15 0 0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="18.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you want to Logout?" textAlignment="CENTER" wrappingWidth="291.82763671875" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.17236328125">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="27.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

@@ -16,9 +16,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
 
@@ -62,60 +65,171 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane studentPane;
     @FXML
+    private AnchorPane staffPane;
+    @FXML
     private JFXButton dashboardBtn;
     @FXML
     private JFXButton studentBtn;
     @FXML
+    private JFXButton staffBtn;
+    @FXML
     private FontAwesomeIconView stuIcon;
     @FXML
+    private FontAwesomeIconView staffIcon;
+    @FXML
     private MaterialDesignIconView dashIcon;
-
     @FXML
     private AnchorPane mainDashPane;
+    @FXML
+    private JFXButton logoutYes;
+    @FXML
+    private JFXButton logoutNo;
+    @FXML
+    private AnchorPane logoutPane;
 
     @FXML
     private void openDashboard(ActionEvent event) {
-        studentBtn.getStyleClass().remove(2);
-        stuIcon.getStyleClass().remove(2);
-        dashboardBtn.getStyleClass().add("active");
-        dashIcon.getStyleClass().add("iconActive");
-        dashboardPane.setVisible(true);
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            dashboardBtn.getStyleClass().add("active");
+            dashIcon.getStyleClass().add("iconActive");
+            dashboardPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(dashboardPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
         studentPane.setVisible(false);
+        staffPane.setVisible(false);
     }
 
     @FXML
     private void openStudent(ActionEvent event) {
-        dashboardBtn.getStyleClass().remove(2);
-        dashIcon.getStyleClass().remove(2);
-        studentBtn.getStyleClass().add("active");
-        stuIcon.getStyleClass().add("iconActive");
-        studentPane.setVisible(true);
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            studentBtn.getStyleClass().add("active");
+            stuIcon.getStyleClass().add("iconActive");
+            studentPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(studentPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
         dashboardPane.setVisible(false);
+        staffPane.setVisible(false);
+    }
+
+    @FXML
+    private void openStaff(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            staffBtn.getStyleClass().add("active");
+            staffIcon.getStyleClass().add("iconActive");
+            staffPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(staffPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            Connection con = da.getConnection();
-            ResultSet res = con.createStatement().executeQuery("SELECT RegistrationNumber,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,s.Class,ResidentialAddress,PaymentStatus FROM Students.StudentDetails s\n"
-                    + "INNER JOIN Students.PaymentDetails p ON p.StudentId=s.StudentId;");
-
-            while (res.next()) {
-                obs.add(new AdminStudentsTable(res.getString("RegistrationNumber"), res.getString("FullName"),
-                        res.getString("DOB"), res.getString("Gender"), res.getString("Class"),
-                        res.getString("ResidentialAddress"), res.getString("PaymentStatus")));
+//        try {
+//            Connection con = da.getConnection();
+//            ResultSet res = con.createStatement().executeQuery("SELECT RegistrationNumber,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,s.Class,ResidentialAddress,PaymentStatus FROM Students.StudentDetails s\n"
+//                    + "INNER JOIN Students.PaymentDetails p ON p.StudentId=s.StudentId;");
+//
+//            while (res.next()) {
+//                obs.add(new AdminStudentsTable(res.getString("RegistrationNumber"), res.getString("FullName"),
+//                        res.getString("DOB"), res.getString("Gender"), res.getString("Class"),
+//                        res.getString("ResidentialAddress"), res.getString("PaymentStatus")));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
+//        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+//        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+//        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+//        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
+//        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
+//        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
+//        adStudentTable.setItems(obs);
+        logoutYes.setOnAction((ActionEvent event1) -> {
+            try {
+                logOutAction();
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
-        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
-        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
-        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
-        adStudentTable.setItems(obs);
+        });
+        logoutNo.setOnAction((ActionEvent event2) -> {
+            FadeTransition fade3 = new FadeTransition();
+            fade3.setDuration(Duration.millis(500));
+            fade3.setNode(logoutPane);
+            fade3.setFromValue(1);
+            fade3.setToValue(0);
+            fade3.play();
+            fade3.setOnFinished((ActionEvent event1) -> {
+                logoutPane.setVisible(false);
+            });
+        });
     }
 
     public void closeStage() {
@@ -123,7 +237,17 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void logOut(ActionEvent event) throws IOException {
+    private void logOut(ActionEvent event) {
+        logoutPane.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(logoutPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    private void logOutAction() throws IOException {
         closeStage();
         Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
 
@@ -131,7 +255,7 @@ public class DashboardController implements Initializable {
 
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-        
+
         stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
         stage.setScene(scene);
         stage.show();

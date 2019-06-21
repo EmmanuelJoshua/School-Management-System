@@ -17,15 +17,15 @@ import javafx.stage.StageStyle;
  * @author DELL
  */
 public class SchoolManagementSystem extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
-        
+
         Scene scene = new Scene(root);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-        
+        stage.setTitle("Login | CHMS");
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
@@ -37,5 +37,5 @@ public class SchoolManagementSystem extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
