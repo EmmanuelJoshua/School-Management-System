@@ -120,7 +120,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="exitConfirmPane" layoutY="16.0" prefHeight="487.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
+      <Pane fx:id="exitConfirmPane" layoutY="25.0" prefHeight="478.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
          <children>
             <Pane layoutX="226.0" layoutY="190.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
                <children>

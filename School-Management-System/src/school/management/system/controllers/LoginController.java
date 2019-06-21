@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.octicons.OctIconView;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +28,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -39,7 +43,7 @@ import school.management.system.validation.Validator;
  *
  * @author DELL
  */
-public class LoginController implements Initializable {
+public class LoginController implements Initializable{
 
     Image errorImg = new Image("/school/management/system/images/cross.png");
     @FXML
@@ -54,6 +58,8 @@ public class LoginController implements Initializable {
     private AnchorPane loginPane;
     @FXML
     private Pane exitConfirmPane;
+    
+     
 
     private boolean userLogin(String username, String password) {
         return Validator.validate(username, password);
@@ -151,6 +157,32 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        //Enter Button Key event listener
+        loginPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
+           @Override
+           public void handle(KeyEvent event) {
+               if(event.getCode()== KeyCode.ENTER){
+                   closeStage();
+                   next();
+               }
+           }
+           
+       });
+        
+        //Enter Button Key event Listener
+//         username.setOnKeyPressed(new EventHandler<KeyEvent>(){
+//           @Override
+//           public void handle(KeyEvent event) {
+//               if(event.getCode()== KeyCode.ENTER){
+//                   closeStage();
+//                   next();
+//               }
+//           }
+//           
+//       });
     }
+    
+   
+      
+   
 }
