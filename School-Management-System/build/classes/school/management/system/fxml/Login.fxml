@@ -9,6 +9,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,21 +34,33 @@
          <children>
             <HBox layoutX="-9.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: rgba(255,255,255,0.1);">
                <children>
-                  <OctIconView fill="#e40707" glyphName="PRIMITIVE_DOT" onMousePressed="#exitLogin" size="25">
+                  <ButtonBar prefHeight="25.0" prefWidth="19.0">
+                     <buttons>
+                        <OctIconView accessibleRole="BUTTON" fill="#e40707" glyphName="PRIMITIVE_DOT" onMousePressed="#exitLogin" size="25" />
+                     </buttons>
+                     <tooltip>
+                        <Tooltip text="Close" />
+                     </tooltip>
                      <HBox.margin>
-                        <Insets left="15.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
-                  </OctIconView>
+                  </ButtonBar>
                   <OctIconView fill="#ebd80d" glyphName="PRIMITIVE_DOT" layoutX="10.0" layoutY="28.0" size="25">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
                   </OctIconView>
-                  <OctIconView fill="#09e85e" glyphName="PRIMITIVE_DOT" layoutX="21.0" layoutY="28.0" onMousePressed="#minimiseLogin" size="25">
+                  <ButtonBar>
                      <HBox.margin>
-                        <Insets left="15.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
-                  </OctIconView>
+                     <buttons>
+                        <OctIconView fill="#09e85e" glyphName="PRIMITIVE_DOT" onMousePressed="#minimiseLogin" size="25" />
+                     </buttons>
+                     <tooltip>
+                        <Tooltip text="Minimize" />
+                     </tooltip>
+                  </ButtonBar>
                </children>
             </HBox>
          </children></Pane>

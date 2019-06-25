@@ -86,6 +86,8 @@ public class DashboardController implements Initializable {
     private JFXButton logoutNo;
     @FXML
     private AnchorPane logoutPane;
+    @FXML
+    private AnchorPane addStudentPane;
 
     @FXML
     private void openDashboard(ActionEvent event) {
@@ -236,6 +238,30 @@ public class DashboardController implements Initializable {
         ((Stage) mainDashPane.getScene().getWindow()).close();
     }
 
+    @FXML
+    private void addStudent(ActionEvent event) {
+        addStudentPane.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addStudentPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    private void backFromAddStudent(){
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addStudentPane);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) ->{
+           addStudentPane.setVisible(false);
+        });
+    }
+    
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
