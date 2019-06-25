@@ -81,6 +81,7 @@ public class LoginController implements Initializable{
             stage.setScene(new Scene(parent));
             stage.initOwner(((Stage) loginPane.getScene().getWindow()));
             stage.setMinWidth(1200);
+            stage.setMinHeight(750);
             stage.setMaximized(true);
             stage.show();
         } catch (IOException ex) {
