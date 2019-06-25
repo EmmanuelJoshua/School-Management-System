@@ -58,6 +58,22 @@
       </HBox>
       <VBox layoutY="48.0" prefHeight="639.0" prefWidth="188.0" spacing="5.0" styleClass="sidebar" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
+            <GNAvatarView prefHeight="120.0" prefWidth="188.0" stroke="#5b5050" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <image>
+                  <Image url="@../images/gigi-hadid-1920x1080-beauty-4k-17582.jpg" />
+               </image>
+            </GNAvatarView>
+            <Text fill="#bf9393" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Admin">
+               <VBox.margin>
+                  <Insets bottom="7.0" left="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Montserrat Regular" size="15.0" />
+               </font>
+            </Text>
             <JFXButton fx:id="dashboardBtn" graphicTextGap="11.0" onAction="#openDashboard" prefHeight="45.0" prefWidth="200.0" styleClass="active" text="Dashboard" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
@@ -147,17 +163,17 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
                </graphic>
                <VBox.margin>
-                  <Insets left="25.0" top="200.0" />
+                  <Insets left="25.0" top="70.0" />
                </VBox.margin>
             </JFXButton>
          </children>
          <padding>
-            <Insets top="45.0" />
+            <Insets top="10.0" />
          </padding>
       </VBox>
       <AnchorPane fx:id="dashboardPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <ImageView fitHeight="639.0" fitWidth="1366.0" layoutY="45.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="-45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-354.0" AnchorPane.topAnchor="45.0">
+            <ImageView fitHeight="709.0" fitWidth="1366.0" layoutY="-1.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="-69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-354.0" AnchorPane.topAnchor="-1.0">
                <image>
                   <Image url="@../images/geronimo-giqueaux-1367646-unsplash.jpg" />
                </image>
