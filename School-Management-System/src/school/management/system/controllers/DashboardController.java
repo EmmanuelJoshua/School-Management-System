@@ -5,9 +5,11 @@
  */
 package school.management.system.controllers;
 
+import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -29,7 +31,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -88,7 +92,81 @@ public class DashboardController implements Initializable {
     private AnchorPane logoutPane;
     @FXML
     private AnchorPane addStudentPane;
+    @FXML
+    private JFXButton chooseStudBtn;
+    @FXML
+    private GNAvatarView avatarStudVew;
+    @FXML
+    private JFXButton chooseGuardbtn;
+    @FXML
+    private GNAvatarView avatarGuardView;
+    @FXML
+    private TableView<?> adStudentTable1;
+    @FXML
+    private TableColumn<?, ?> registrationNumber1;
+    @FXML
+    private TableColumn<?, ?> fullName1;
+    @FXML
+    private TableColumn<?, ?> dob1;
+    @FXML
+    private TableColumn<?, ?> gender1;
+    @FXML
+    private TableColumn<?, ?> studentClass1;
+    @FXML
+    private TableColumn<?, ?> residentialAddress1;
+    @FXML
+    private TableColumn<?, ?> paymentStatus1;
 
+    
+    @FXML
+    private void openStudbtn(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        //set title for filechooser
+        fileChooser.setTitle("Open Image");
+
+        //set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+
+        //show open file dialog
+        fileChooser.getInitialDirectory();
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        try {
+            String filePath = selectedFile.toURI().toString();
+            Image image = new Image(filePath);
+            avatarStudVew.setImage(image);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openGuardbtn(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        //set title for filechooser
+        fileChooser.setTitle("Open Image");
+
+        //set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+
+        //show open file dialog
+        fileChooser.getInitialDirectory();
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        try {
+            String filePath = selectedFile.toURI().toString();
+            Image image = new Image(filePath);
+            avatarGuardView.setImage(image);
+          
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     @FXML
     private void openDashboard(ActionEvent event) {
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {

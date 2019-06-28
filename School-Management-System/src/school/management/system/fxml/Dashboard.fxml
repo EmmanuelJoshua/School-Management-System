@@ -707,8 +707,8 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXButton layoutX="48.0" layoutY="234.0" style="-fx-background-color: gray;" text="Choose File" />
-                        <GNAvatarView layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
+                        <JFXButton fx:id="chooseStudBtn" layoutX="48.0" layoutY="234.0" onAction="#openStudbtn" style="-fx-background-color: gray;" text="Choose File" />
+                        <GNAvatarView fx:id="avatarStudVew" layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
@@ -718,8 +718,8 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXButton layoutX="56.0" layoutY="498.0" style="-fx-background-color: gray;" text="Choose File" />
-                        <GNAvatarView layoutX="21.0" layoutY="316.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
+                        <JFXButton fx:id="chooseGuardbtn" layoutX="56.0" layoutY="498.0" onAction="#openGuardbtn" style="-fx-background-color: gray;" text="Choose File" />
+                        <GNAvatarView fx:id="avatarGuardView" layoutX="21.0" layoutY="316.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
