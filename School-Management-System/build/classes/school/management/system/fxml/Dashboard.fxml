@@ -605,7 +605,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text fill="#575656" layoutX="44.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Section">
+                  <Text fill="#575656" layoutX="44.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -632,16 +632,16 @@
                      </font>
                   </Text>
                   <JFXTextField layoutX="250.0" layoutY="303.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
-                  <JFXComboBox layoutX="475.0" layoutY="229.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
-                  <JFXComboBox layoutX="45.0" layoutY="303.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
-                  <JFXComboBox layoutX="44.0" layoutY="234.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
+                  <JFXComboBox fx:id="selectClass" layoutX="475.0" layoutY="229.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
+                  <JFXComboBox fx:id="selectDepartment" layoutX="45.0" layoutY="303.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
+                  <JFXComboBox fx:id="selectGender" layoutX="44.0" layoutY="234.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
                   <JFXDatePicker defaultColor="#141961" layoutX="260.0" layoutY="234.0" promptText="dd/mm/yyyy" />
                   <Text fill="#575656" layoutX="473.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religion">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <JFXComboBox layoutX="469.0" layoutY="302.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
+                  <JFXComboBox fx:id="selectReligion" layoutX="469.0" layoutY="302.0" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" />
                   <Text fill="#575656" layoutX="55.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guidian Name">
                      <font>
                         <Font size="16.0" />
@@ -707,8 +707,8 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXButton layoutX="48.0" layoutY="234.0" style="-fx-background-color: gray;" text="Choose File" />
-                        <GNAvatarView layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
+                        <JFXButton fx:id="chooseStudBtn" layoutX="48.0" layoutY="234.0" onAction="#openStudbtn" style="-fx-background-color: gray;" text="Choose File" />
+                        <GNAvatarView fx:id="avatarStudVew" layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
@@ -718,15 +718,15 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXButton layoutX="56.0" layoutY="498.0" style="-fx-background-color: gray;" text="Choose File" />
-                        <GNAvatarView layoutX="21.0" layoutY="316.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
+                        <JFXButton fx:id="chooseGuardbtn" layoutX="56.0" layoutY="498.0" onAction="#openGuardbtn" style="-fx-background-color: gray;" text="Choose File" />
+                        <GNAvatarView fx:id="avatarGuardView" layoutX="21.0" layoutY="316.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
                         </GNAvatarView>
                      </children>
                   </Pane>
-                  <JFXButton layoutX="343.0" layoutY="32.0" onAction="#backFromAddStudent" style="-fx-background-color: gray;" />
+                  <JFXButton buttonType="RAISED" layoutX="343.0" layoutY="20.0" onAction="#backFromAddStudent" style="-fx-background-color: gray;" text="Back" />
                </children>
             </AnchorPane>
          </children>

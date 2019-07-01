@@ -7,6 +7,7 @@ package school.management.system.controllers;
 
 import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import java.io.File;
@@ -93,6 +94,14 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane addStudentPane;
     @FXML
+    private JFXComboBox selectGender;
+    @FXML
+    private JFXComboBox selectClass;
+    @FXML
+    private JFXComboBox selectDepartment;
+    @FXML
+    private JFXComboBox selectReligion;
+    @FXML
     private JFXButton chooseStudBtn;
     @FXML
     private GNAvatarView avatarStudVew;
@@ -117,7 +126,6 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<?, ?> paymentStatus1;
 
-    
     @FXML
     private void openStudbtn(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -160,13 +168,12 @@ public class DashboardController implements Initializable {
             String filePath = selectedFile.toURI().toString();
             Image image = new Image(filePath);
             avatarGuardView.setImage(image);
-          
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     private void openDashboard(ActionEvent event) {
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
@@ -268,9 +275,24 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
     }
+    public void populateComboBoxes(){
+        ObservableList genders = FXCollections.observableArrayList(
+        "Male","Female");
+        selectGender.setItems(genders);
+        ObservableList classes = FXCollections.observableArrayList(
+                "JSS1","JSS2","JSS3","SS1","SS2","SS3");
+        selectClass.setItems(classes);
+        ObservableList departments = FXCollections.observableArrayList(
+                "Science","Art","Commercial");
+        selectDepartment.setItems(departments);
+        ObservableList religions = FXCollections.observableArrayList(
+        "Christianity","Islamism","Others");
+        selectReligion.setItems(religions);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        populateComboBoxes();
 //        try {
 //            Connection con = da.getConnection();
 //            ResultSet res = con.createStatement().executeQuery("SELECT RegistrationNumber,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,s.Class,ResidentialAddress,PaymentStatus FROM Students.StudentDetails s\n"
@@ -328,18 +350,18 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void backFromAddStudent(){
+    private void backFromAddStudent() {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(addStudentPane);
         fade.setFromValue(1);
         fade.setToValue(0);
         fade.play();
-        fade.setOnFinished((ActionEvent event) ->{
-           addStudentPane.setVisible(false);
+        fade.setOnFinished((ActionEvent event) -> {
+            addStudentPane.setVisible(false);
         });
     }
-    
+
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
