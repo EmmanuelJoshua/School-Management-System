@@ -49,6 +49,7 @@ import school.management.system.tables.AdminStudentsTable;
 public class DashboardController implements Initializable {
 
     Database da = new Database();
+    private File mainFile;
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -105,7 +106,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton chooseStudBtn;
     @FXML
-    private GNAvatarView avatarStudVew;
+    private GNAvatarView avatarStudView;
     @FXML
     private JFXButton chooseGuardbtn;
     @FXML
@@ -135,17 +136,22 @@ public class DashboardController implements Initializable {
         fileChooser.setTitle("Open Image");
 
         //set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-
+        try {
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
         //show open file dialog
         fileChooser.getInitialDirectory();
         File selectedFile = fileChooser.showOpenDialog(null);
 
         try {
-            String filePath = selectedFile.toURI().toString();
-            Image image = new Image(filePath);
-            avatarStudVew.setImage(image);
-
+            if (selectedFile != null) {
+                String path = selectedFile.getPath();
+                selectedFile = new File(path);
+                Image image = new Image(selectedFile.toURI().toString());
+                avatarStudView.setImage(image);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -153,23 +159,28 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void openGuardbtn(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+               FileChooser fileChooser = new FileChooser();
 
         //set title for filechooser
         fileChooser.setTitle("Open Image");
 
         //set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-
+        try {
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
         //show open file dialog
         fileChooser.getInitialDirectory();
         File selectedFile = fileChooser.showOpenDialog(null);
 
         try {
-            String filePath = selectedFile.toURI().toString();
-            Image image = new Image(filePath);
-            avatarGuardView.setImage(image);
-
+            if (selectedFile != null) {
+                String path = selectedFile.getPath();
+                selectedFile = new File(path);
+                Image image = new Image(selectedFile.toURI().toString());
+                avatarGuardView.setImage(image);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -276,18 +287,19 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
     }
-    public void populateComboBoxes(){
+
+    public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
-        "Male","Female");
+                "Male", "Female");
         selectGender.setItems(genders);
         ObservableList classes = FXCollections.observableArrayList(
-                "JSS1","JSS2","JSS3","SS1","SS2","SS3");
+                "JSS1", "JSS2", "JSS3", "SS1", "SS2", "SS3");
         selectClass.setItems(classes);
         ObservableList departments = FXCollections.observableArrayList(
-                "Science","Art","Commercial");
+                "Science", "Art", "Commercial");
         selectDepartment.setItems(departments);
         ObservableList religions = FXCollections.observableArrayList(
-        "Christianity","Islamism","Others");
+                "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
     }
 
