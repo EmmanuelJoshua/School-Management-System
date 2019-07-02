@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -78,7 +79,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton staffBtn;
     @FXML
-    private FontAwesomeIconView stuIcon;
+    private OctIconView stuIcon;
     @FXML
     private FontAwesomeIconView staffIcon;
     @FXML
