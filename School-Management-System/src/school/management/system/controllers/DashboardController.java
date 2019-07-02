@@ -149,6 +149,7 @@ public class DashboardController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getPath();
                 selectedFile = new File(path);
+                mainFile = selectedFile;
                 Image image = new Image(selectedFile.toURI().toString());
                 avatarStudView.setImage(image);
             }
@@ -178,6 +179,7 @@ public class DashboardController implements Initializable {
             if (selectedFile != null) {
                 String path = selectedFile.getPath();
                 selectedFile = new File(path);
+                mainFile = selectedFile;
                 Image image = new Image(selectedFile.toURI().toString());
                 avatarGuardView.setImage(image);
             }
