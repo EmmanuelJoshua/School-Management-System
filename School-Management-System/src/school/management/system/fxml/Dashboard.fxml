@@ -17,6 +17,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -327,7 +328,7 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="studentPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="studentPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <TableView fx:id="adStudentTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>
@@ -343,7 +344,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Text fill="#626262" layoutX="17.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Details">
+            <Text fill="#626262" layoutX="17.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Details">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
@@ -395,54 +396,119 @@
                   </JFXButton>
                </children>
             </Pane>
-            <HBox layoutX="17.0" layoutY="56.0" prefHeight="83.0" prefWidth="652.0" spacing="15.0">
+            <HBox layoutX="14.0" layoutY="75.0" prefHeight="71.0" prefWidth="745.0" spacing="15.0" stylesheets="@../css/helpers.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="253.0">
                <children>
-                  <Pane prefHeight="100.0" prefWidth="204.0" style="-fx-background-color: #FE8965; -fx-background-radius: 10;" styleClass="elevator" HBox.hgrow="ALWAYS">
+                  <GridPane style="-fx-background-color: #fff; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
                      <children>
-                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="Males" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <font>
-                              <Font size="26.0" />
+                              <Font name="Segoe UI Semibold" size="17.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" />
+                           </GridPane.margin>
                         </Text>
-                        <Text fill="WHITE" layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Males">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
-                              <Font name="Dosis-ExtraBold" size="17.0" />
+                              <Font size="29.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" top="4.0" />
+                           </GridPane.margin>
                         </Text>
-                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="153.0" layoutY="66.0" size="70" />
+                        <FontAwesomeIconView fill="#938383" glyphName="MALE" size="60" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></FontAwesomeIconView>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #4CB5AB; -fx-background-radius: 10;" styleClass="elevator" HBox.hgrow="ALWAYS">
+                  </GridPane>
+                  <GridPane layoutX="10.0" layoutY="10.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
                      <children>
-                        <Text fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="Females" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <font>
-                              <Font size="26.0" />
+                              <Font name="Segoe UI Semibold" size="17.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" />
+                           </GridPane.margin>
                         </Text>
-                        <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Females">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
-                              <Font name="Dosis-ExtraBold" size="17.0" />
+                              <Font size="29.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" top="4.0" />
+                           </GridPane.margin>
                         </Text>
-                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="149.0" layoutY="66.0" size="70" />
+                        <FontAwesomeIconView fill="#938383" glyphName="FEMALE" size="60" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></FontAwesomeIconView>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="79.0" prefWidth="204.0" style="-fx-background-color: #EF6291; -fx-background-radius: 10;" styleClass="elevator" HBox.hgrow="ALWAYS">
+                  </GridPane>
+                  <GridPane layoutX="503.0" layoutY="10.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
                      <children>
-                        <Text fill="WHITE" layoutX="11.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Students" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <font>
-                              <Font size="26.0" />
+                              <Font name="Segoe UI Semibold" size="17.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" />
+                           </GridPane.margin>
                         </Text>
-                        <Text fill="WHITE" layoutX="10.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Students">
+                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
-                              <Font name="Dosis-ExtraBold" size="17.0" />
+                              <Font size="29.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="15.0" top="4.0" />
+                           </GridPane.margin>
                         </Text>
-                        <FontAwesomeIconView fill="WHITE" glyphName="MALE" layoutX="116.0" layoutY="65.0" size="70" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="FEMALE" layoutX="152.0" layoutY="66.0" size="70" />
+                        <MaterialDesignIconView fill="#938383" glyphName="HUMAN_MALE_FEMALE" size="60" wrappingWidth="55.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </MaterialDesignIconView>
                      </children>
-                  </Pane>
+                  </GridPane>
+               </children>
+            </HBox>
+            <HBox layoutX="770.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
+               <children>
+                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Montserrat ExtraLight" size="16.0" />
+                     </font>
+                  </TextField>
+                  <OctIconView fill="#9a8080" glyphName="SEARCH" size="27">
+                     <HBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </OctIconView>
                </children>
             </HBox>
             <AnchorPane fx:id="addStudentPane" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -821,10 +887,10 @@
                   <Insets right="34.0" />
                </padding>
                <graphic>
-                  <MaterialDesignIconView fill="#65657b" glyphName="HUMAN_MALE_FEMALE" size="24" text="" />
+                  <MaterialDesignIconView fill="#65657b" glyphName="HUMAN_MALE_FEMALE" size="27" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Calendar" textFill="#65657b">
+            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Payment" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Emoji" size="16.0" />
                </font>
@@ -835,7 +901,7 @@
                   <Insets right="23.0" />
                </padding>
                <graphic>
-                  <MaterialDesignIconView fill="#65657b" glyphName="CALENDAR_CLOCK" size="24" text="" />
+                  <FontAwesomeIconView fill="#65657b" glyphName="CREDIT_CARD_ALT" size="19" />
                </graphic>
             </JFXButton>
             <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Settings" textFill="#65657b">
