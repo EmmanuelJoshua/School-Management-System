@@ -14,19 +14,21 @@ import java.sql.SQLException;
  * @author JOYOUS
  */
 public class Database {
-    public static Connection getConnection() throws SQLException{
-        Connection connection =DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=CHMS;integratedSecurity=true");
-        if(connection != null){
-                System.out.println("Connected to database");
-            }else{
-            System.out.println("Not Connected");
-        }
-        return connection;
-         
+    Connection con;
+    public void dbConnect() throws ClassNotFoundException, SQLException{
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=CHMS;integratedSecurity=true";
+            con = DriverManager.getConnection(connectionUrl);
+            if (con != null) {
+                System.out.println("Connected");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
     }
-   
-   
-    public static void main(String[] args) throws SQLException {
-       getConnection();
+    public Connection getConnection(){
+        return con;
     }
+
 }
