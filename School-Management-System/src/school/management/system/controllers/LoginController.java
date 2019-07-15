@@ -59,7 +59,6 @@ public class LoginController implements Initializable{
     @FXML
     private Pane exitConfirmPane;
     
-     
 
     private boolean userLogin(String username, String password) {
         return Validator.validate(username, password);
@@ -169,6 +168,7 @@ public class LoginController implements Initializable{
            }
            
        });
+        
         
         //Enter Button Key event Listener
 //         username.setOnKeyPressed(new EventHandler<KeyEvent>(){
