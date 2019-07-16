@@ -18,31 +18,18 @@ import javafx.stage.StageStyle;
  * @author DELL
  */
 public class SchoolManagementSystem extends Application {
-    
-     private double xOffset = 0;
-    private double yOffset = 0;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/SplashScreen.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
 
         Scene scene = new Scene(root);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-        stage.setTitle("Login | CHMS");
+        stage.setTitle("CHMC");
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
-        
-        root.setOnMousePressed((MouseEvent event) -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        
-        root.setOnMouseDragged((MouseEvent event) -> {
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });
     }
 
     /**

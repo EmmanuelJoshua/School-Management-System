@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="splashscreen1.FXMLDocumentController">
+    <children>
+        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
+        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+    </children>
+</AnchorPane>-->
+
+<AnchorPane id="AnchorPane" fx:id="splashPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.SplashScreenController">
+   <children>
+      <ImageView fitHeight="350.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/shubham-sharan-Z-fq3wBVfMU-unsplash%20(1).jpg" />
+         </image>
+         <viewport>
+            <Rectangle2D height="350.0" minX="300.0" minY="300.0" width="550.0" />
+         </viewport>
+      </ImageView>
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" prefWidth="550.0">
+         <children>
+            <Label layoutX="57.0" layoutY="44.0" prefHeight="70.0" prefWidth="437.0" text="Captain of Host Model College" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black Italic" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="362.0" layoutY="92.0" text="Version 1.0" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="yearLabel" layoutX="480.0" layoutY="318.0" prefHeight="19.0" prefWidth="62.0" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="splashLayout" layoutY="266.0" prefHeight="56.0" prefWidth="550.0">
+               <children>
+                  <Label fx:id="textProgress" prefHeight="28.0" prefWidth="550.0" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="2.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <JFXProgressBar fx:id="jfxProgressBar" prefHeight="5.0" prefWidth="550.0" progress="0.4" stylesheets="@../css/jfx-bar.css" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+    
+</AnchorPane>

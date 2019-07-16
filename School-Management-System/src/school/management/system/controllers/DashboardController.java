@@ -158,34 +158,30 @@ public class DashboardController implements Initializable {
     private JFXTextField guardianPhone;
     @FXML
     private JFXTextField nationality;
-
-    
-
+    @FXML
     private Image image;
     @FXML
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
+    
     FileChooser fileChooser = new FileChooser();
      File selectedFile;
     @FXML
     private void openStudbtn(ActionEvent event) {
-        
-
         //set title for filechooser
         fileChooser.setTitle("Open Image");
-
+        
         //set extension filter
         try {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
+        
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
-
-       
 
         try {
             if (selectedFile != null) {
@@ -202,8 +198,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void openGuardbtn(ActionEvent event) {
-//               FileChooser fileChooser = new FileChooser();
-
         //set title for filechooser
         fileChooser.setTitle("Open Image");
 
@@ -213,6 +207,7 @@ public class DashboardController implements Initializable {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
+        
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
