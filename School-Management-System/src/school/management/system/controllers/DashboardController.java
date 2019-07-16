@@ -166,9 +166,11 @@ public class DashboardController implements Initializable {
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
+    FileChooser fileChooser = new FileChooser();
+     File selectedFile;
     @FXML
     private void openStudbtn(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+        
 
         //set title for filechooser
         fileChooser.setTitle("Open Image");
@@ -181,7 +183,9 @@ public class DashboardController implements Initializable {
         }
         //show open file dialog
         fileChooser.getInitialDirectory();
-        File selectedFile = fileChooser.showOpenDialog(null);
+        selectedFile = fileChooser.showOpenDialog(null);
+
+       
 
         try {
             if (selectedFile != null) {
@@ -198,7 +202,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void openGuardbtn(ActionEvent event) {
-               FileChooser fileChooser = new FileChooser();
+//               FileChooser fileChooser = new FileChooser();
 
         //set title for filechooser
         fileChooser.setTitle("Open Image");
@@ -211,7 +215,7 @@ public class DashboardController implements Initializable {
         }
         //show open file dialog
         fileChooser.getInitialDirectory();
-        File selectedFile = fileChooser.showOpenDialog(null);
+        selectedFile = fileChooser.showOpenDialog(null);
 
         try {
             if (selectedFile != null) {
@@ -485,6 +489,18 @@ public class DashboardController implements Initializable {
           while(re.next()){
               id=re.getInt("ClassId");
           }
+//                  selectedFile = fileChooser.showOpenDialog(null);
+
+          if (selectedFile == null) {
+//                String path = selectedFile.getPath();
+                File file = new File("src/user.png");
+                selectedFile = file;
+                guardianFile = selectedFile;
+                mainFile=selectedFile;
+                Image image = new Image(selectedFile.toURI().toString());
+                avatarStudView.setImage(image);
+                avatarGuardView.setImage(image);
+            }
         FileInputStream fis = new FileInputStream(mainFile);
         FileInputStream fis1 = new FileInputStream(guardianFile);
         PreparedStatement statement= da.getConnection().prepareStatement("insert into students.StudentDetails(StudentReg,FirstName,MiddleName,LastName,"
