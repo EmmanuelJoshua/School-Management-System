@@ -43,7 +43,7 @@ import school.management.system.validation.Validator;
  *
  * @author DELL
  */
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
     Image errorImg = new Image("/school/management/system/images/cross.png");
     @FXML
@@ -58,7 +58,6 @@ public class LoginController implements Initializable{
     private AnchorPane loginPane;
     @FXML
     private Pane exitConfirmPane;
-    
 
     private boolean userLogin(String username, String password) {
         return Validator.validate(username, password);
@@ -158,18 +157,17 @@ public class LoginController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Enter Button Key event listener
-        loginPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
-           @Override
-           public void handle(KeyEvent event) {
-               if(event.getCode()== KeyCode.ENTER){
-                   closeStage();
-                   next();
-               }
-           }
-           
-       });
-        
-        
+        loginPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    closeStage();
+                    next();
+                }
+            }
+
+        });
+
         //Enter Button Key event Listener
 //         username.setOnKeyPressed(new EventHandler<KeyEvent>(){
 //           @Override
@@ -182,8 +180,5 @@ public class LoginController implements Initializable{
 //           
 //       });
     }
-    
-   
-      
-   
+
 }

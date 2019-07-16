@@ -60,7 +60,7 @@ public class DashboardController implements Initializable {
 
     Database da = new Database();
     private File mainFile;
-        private File guardianFile;
+    private File guardianFile;
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -164,21 +164,22 @@ public class DashboardController implements Initializable {
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
-    
+
     FileChooser fileChooser = new FileChooser();
-     File selectedFile;
+    File selectedFile;
+
     @FXML
     private void openStudbtn(ActionEvent event) {
         //set title for filechooser
         fileChooser.setTitle("Open Image");
-        
+
         //set extension filter
         try {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-        
+
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
@@ -207,7 +208,7 @@ public class DashboardController implements Initializable {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-        
+
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
@@ -346,7 +347,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         populateComboBoxes();
 
-         try {
+        try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -372,18 +373,18 @@ public class DashboardController implements Initializable {
         residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
         paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
         adStudentTable.setItems(obs);
-        
+
         adStudentTable.setOnMouseClicked((event) -> {
             Connection con;
             try {
                 con = da.getConnection();
-                String id =adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
+                String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
                 PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
                 ps.setString(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     InputStream ips = rs.getBinaryStream(1);
-                    image = new Image(ips, stuImage.getHeight(),stuImage.getWidth(),true,true);
+                    image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
                     stuImage.setImage(image);
 //               }
 
@@ -400,7 +401,7 @@ public class DashboardController implements Initializable {
             }
 
         });
-        
+
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
                 logOutAction();
@@ -476,34 +477,34 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException {
-        
-         Statement sta =da.getConnection().createStatement();
-            String query = "Select ClassId From Students.Class WHERE ClassName ='"+selectClass.getValue().toString()+"'";
-          ResultSet re= sta.executeQuery(query);
-          int id=0;
-          while(re.next()){
-              id=re.getInt("ClassId");
-          }
+
+        Statement sta = da.getConnection().createStatement();
+        String query = "Select ClassId From Students.Class WHERE ClassName ='" + selectClass.getValue().toString() + "'";
+        ResultSet re = sta.executeQuery(query);
+        int id = 0;
+        while (re.next()) {
+            id = re.getInt("ClassId");
+        }
 //                  selectedFile = fileChooser.showOpenDialog(null);
 
-          if (selectedFile == null) {
+        if (selectedFile == null) {
 //                String path = selectedFile.getPath();
-                File file = new File("src/user.png");
-                selectedFile = file;
-                guardianFile = selectedFile;
-                mainFile=selectedFile;
-                Image image = new Image(selectedFile.toURI().toString());
-                avatarStudView.setImage(image);
-                avatarGuardView.setImage(image);
-            }
+            File file = new File("src/user.png");
+            selectedFile = file;
+            guardianFile = selectedFile;
+            mainFile = selectedFile;
+            Image image = new Image(selectedFile.toURI().toString());
+            avatarStudView.setImage(image);
+            avatarGuardView.setImage(image);
+        }
         FileInputStream fis = new FileInputStream(mainFile);
         FileInputStream fis1 = new FileInputStream(guardianFile);
-        PreparedStatement statement= da.getConnection().prepareStatement("insert into students.StudentDetails(StudentReg,FirstName,MiddleName,LastName,"
+        PreparedStatement statement = da.getConnection().prepareStatement("insert into students.StudentDetails(StudentReg,FirstName,MiddleName,LastName,"
                 + "DOB,Gender,Class,Department,Religion,"
                 + "GuardianName,GuardianPhone,GuardianAddress,GuardianEmail,Nationality,GuardianOccupation,StudentImage,GuardianImage)"
                 + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        
-        statement.setString(1,studentAdmissionNumber.getText());
+
+        statement.setString(1, studentAdmissionNumber.getText());
         statement.setString(2, studentFirstName.getText());
         statement.setString(3, studentMiddleName.getText());
         statement.setString(4, studentLastName.getText());
@@ -520,16 +521,15 @@ public class DashboardController implements Initializable {
         statement.setString(15, guardianOccupation.getText());
         statement.setBinaryStream(16, (InputStream) fis, (int) mainFile.length());
         statement.setBinaryStream(17, (InputStream) fis1, (int) guardianFile.length());
-        int s =statement.executeUpdate();
-            if (s > 0) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uploaded Successfully", ButtonType.OK);
-                alert.setTitle("Congrats");
-                alert.showAndWait();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Unsuccessful upload", ButtonType.OK);
-                alert.setTitle("Invalid");
-                alert.showAndWait();
-            }
-        
+        int s = statement.executeUpdate();
+        if (s > 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uploaded Successfully", ButtonType.OK);
+            alert.setTitle("Congrats");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Unsuccessful upload", ButtonType.OK);
+            alert.setTitle("Invalid");
+            alert.showAndWait();
+        }
     }
 }

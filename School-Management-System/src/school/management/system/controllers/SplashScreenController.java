@@ -128,7 +128,7 @@ public class SplashScreenController implements Initializable {
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     stage.show();
-                    
+
                     //dragable login stage
                     root.setOnMousePressed((MouseEvent event) -> {
                         xOffset = event.getSceneX();
