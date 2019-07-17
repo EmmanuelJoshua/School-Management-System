@@ -47,16 +47,22 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
+import org.controlsfx.control.Notifications;
 
 /**
  *
  * @author DELL
  */
 public class DashboardController implements Initializable {
+
+    public Image errorImg = new Image("/school/management/system/images/cross.png");
+    public Image successImg = new Image("/school/management/system/images/checked.png");
 
     Database da = new Database();
     private File mainFile;
@@ -123,11 +129,19 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXComboBox selectGender;
     @FXML
+    private JFXComboBox selectTeacherGender;
+    @FXML
     private JFXComboBox selectClass;
     @FXML
     private JFXComboBox selectDepartment;
     @FXML
     private JFXComboBox selectReligion;
+    @FXML
+    private JFXComboBox selectMaritalStatus;
+    @FXML
+    private JFXComboBox selectQualification;
+    @FXML
+    private JFXComboBox selectDesignation;
     @FXML
     private JFXButton chooseStudBtn;
     @FXML
@@ -178,7 +192,7 @@ public class DashboardController implements Initializable {
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
-    
+
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
 
@@ -255,7 +269,7 @@ public class DashboardController implements Initializable {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
 
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
@@ -269,7 +283,7 @@ public class DashboardController implements Initializable {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -305,7 +319,7 @@ public class DashboardController implements Initializable {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
 
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
@@ -319,7 +333,7 @@ public class DashboardController implements Initializable {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -355,7 +369,7 @@ public class DashboardController implements Initializable {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
 
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
@@ -369,7 +383,7 @@ public class DashboardController implements Initializable {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -389,10 +403,10 @@ public class DashboardController implements Initializable {
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
     }
-    
+
     @FXML
-    public void openSettings(ActionEvent event){
-         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+    public void openSettings(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
 
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
@@ -405,14 +419,14 @@ public class DashboardController implements Initializable {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
 
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
 
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
@@ -440,7 +454,6 @@ public class DashboardController implements Initializable {
         gradesPane.setVisible(false);
     }
 
-    
     @FXML
     void openGrade(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
@@ -456,14 +469,14 @@ public class DashboardController implements Initializable {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
 
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
 
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
@@ -490,11 +503,12 @@ public class DashboardController implements Initializable {
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
     }
-    
+
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
         selectGender.setItems(genders);
+        selectTeacherGender.setItems(genders);
         ObservableList classes = FXCollections.observableArrayList(
                 "JSS1", "JSS2", "JSS3", "SS1", "SS2", "SS3");
         selectClass.setItems(classes);
@@ -504,6 +518,15 @@ public class DashboardController implements Initializable {
         ObservableList religions = FXCollections.observableArrayList(
                 "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
+        ObservableList qualifications = FXCollections.observableArrayList(
+                "PHD", "BSC", "HND", "OND", "SSCE");
+        selectQualification.setItems(qualifications);
+        ObservableList maritalStats = FXCollections.observableArrayList(
+                "Married", "Single", "Divorced", "Seperated");
+        selectMaritalStatus.setItems(maritalStats);
+        ObservableList designation = FXCollections.observableArrayList(
+                "Teaching", "Non Teaching");
+        selectDesignation.setItems(designation);
     }
 
     @Override
@@ -564,7 +587,6 @@ public class DashboardController implements Initializable {
 //            }
 //
 //        });
-
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
                 logOutAction();
@@ -614,7 +636,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void addTeacher(ActionEvent event){
+    private void addTeacher(ActionEvent event) {
         addTeacherPane.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -623,9 +645,9 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
-    private void backFromAddTeacher(){
+    private void backFromAddTeacher() {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(addTeacherPane);
@@ -636,7 +658,7 @@ public class DashboardController implements Initializable {
             addTeacherPane.setVisible(false);
         });
     }
-    
+
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
@@ -710,13 +732,21 @@ public class DashboardController implements Initializable {
         statement.setBinaryStream(17, (InputStream) fis1, (int) guardianFile.length());
         int s = statement.executeUpdate();
         if (s > 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Uploaded Successfully", ButtonType.OK);
-            alert.setTitle("Congrats");
-            alert.showAndWait();
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(successImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Success")
+                    .text("Uploaded Succesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Unsuccessful upload", ButtonType.OK);
-            alert.setTitle("Invalid");
-            alert.showAndWait();
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Failed")
+                    .text("Uploaded Unsuccesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
         }
     }
 }
