@@ -85,17 +85,23 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane staffPane;
     @FXML
+    private AnchorPane settingsPane;
+    @FXML
     private JFXButton dashboardBtn;
     @FXML
     private JFXButton studentBtn;
     @FXML
     private JFXButton staffBtn;
     @FXML
+    private JFXButton settingBtn;
+    @FXML
     private OctIconView stuIcon;
     @FXML
     private FontAwesomeIconView staffIcon;
     @FXML
     private MaterialDesignIconView dashIcon;
+    @FXML
+    private MaterialDesignIconView settingsIcon;
     @FXML
     private AnchorPane mainDashPane;
     @FXML
@@ -106,6 +112,8 @@ public class DashboardController implements Initializable {
     private AnchorPane logoutPane;
     @FXML
     private AnchorPane addStudentPane;
+    @FXML
+    private AnchorPane addTeacherPane;
     @FXML
     private JFXComboBox selectGender;
     @FXML
@@ -241,6 +249,13 @@ public class DashboardController implements Initializable {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
+        
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
 
         if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
 
@@ -258,6 +273,7 @@ public class DashboardController implements Initializable {
 
         studentPane.setVisible(false);
         staffPane.setVisible(false);
+        settingsPane.setVisible(false);
     }
 
     @FXML
@@ -274,6 +290,13 @@ public class DashboardController implements Initializable {
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
+        }
+        
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
         }
 
         if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
@@ -292,6 +315,7 @@ public class DashboardController implements Initializable {
 
         dashboardPane.setVisible(false);
         staffPane.setVisible(false);
+        settingsPane.setVisible(false);
     }
 
     @FXML
@@ -308,6 +332,13 @@ public class DashboardController implements Initializable {
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+        
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
         }
 
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
@@ -326,6 +357,49 @@ public class DashboardController implements Initializable {
 
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
+        settingsPane.setVisible(false);
+    }
+    
+    @FXML
+    public void openSettings(ActionEvent event){
+         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+        
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().toString().contains("active") && settingsIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            settingBtn.getStyleClass().add("active");
+            settingsIcon.getStyleClass().add("iconActive");
+            settingsPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(settingsPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
+        staffPane.setVisible(false);
     }
 
     public void populateComboBoxes() {
@@ -347,60 +421,60 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         populateComboBoxes();
 
-        try {
-            da.dbConnect();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            Connection con = da.getConnection();
-            ResultSet res = con.createStatement().executeQuery("SELECT StudentReg,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,ClassName,GuardianAddress,PaymentStatus FROM Students.vwStudentsInfo;");
-            while (res.next()) {
-                obs.add(new AdminStudentsTable(res.getString("StudentReg"), res.getString("FullName"),
-                        res.getString("DOB"), res.getString("Gender"), res.getString("ClassName"),
-                        res.getString("GuardianAddress"), res.getString("PaymentStatus")));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
-        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
-        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
-        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
-        adStudentTable.setItems(obs);
-
-        adStudentTable.setOnMouseClicked((event) -> {
-            Connection con;
-            try {
-                con = da.getConnection();
-                String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
-                PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
-                ps.setString(1, id);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    InputStream ips = rs.getBinaryStream(1);
-                    image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
-                    stuImage.setImage(image);
-//               }
-
-                    if (stuImage.isVisible()) {
-                        System.out.println("dispplay image is visible");
-                    } else {
-                        System.out.println("Not visible");
-                    }
-
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        });
+//        try {
+//            da.dbConnect();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        try {
+//            Connection con = da.getConnection();
+//            ResultSet res = con.createStatement().executeQuery("SELECT StudentReg,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,ClassName,GuardianAddress,PaymentStatus FROM Students.vwStudentsInfo;");
+//            while (res.next()) {
+//                obs.add(new AdminStudentsTable(res.getString("StudentReg"), res.getString("FullName"),
+//                        res.getString("DOB"), res.getString("Gender"), res.getString("ClassName"),
+//                        res.getString("GuardianAddress"), res.getString("PaymentStatus")));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
+//        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+//        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+//        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+//        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
+//        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
+//        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
+//        adStudentTable.setItems(obs);
+//
+//        adStudentTable.setOnMouseClicked((event) -> {
+//            Connection con;
+//            try {
+//                con = da.getConnection();
+//                String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
+//                PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
+//                ps.setString(1, id);
+//                ResultSet rs = ps.executeQuery();
+//                if (rs.next()) {
+//                    InputStream ips = rs.getBinaryStream(1);
+//                    image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
+//                    stuImage.setImage(image);
+////               }
+//
+//                    if (stuImage.isVisible()) {
+//                        System.out.println("dispplay image is visible");
+//                    } else {
+//                        System.out.println("Not visible");
+//                    }
+//
+//                }
+//
+//            } catch (SQLException ex) {
+//                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        });
 
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
@@ -450,6 +524,30 @@ public class DashboardController implements Initializable {
         });
     }
 
+    @FXML
+    private void addTeacher(ActionEvent event){
+        addTeacherPane.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addTeacherPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+    
+    @FXML
+    private void backFromAddTeacher(){
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addTeacherPane);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            addTeacherPane.setVisible(false);
+        });
+    }
+    
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
