@@ -83,6 +83,8 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane studentPane;
     @FXML
+    private AnchorPane gradesPane;
+    @FXML
     private AnchorPane staffPane;
     @FXML
     private AnchorPane settingsPane;
@@ -91,9 +93,13 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton studentBtn;
     @FXML
+    private JFXButton gradeBtn;
+    @FXML
     private JFXButton staffBtn;
     @FXML
     private JFXButton settingBtn;
+    @FXML
+    private OctIconView gradeIcon;
     @FXML
     private OctIconView stuIcon;
     @FXML
@@ -172,7 +178,7 @@ public class DashboardController implements Initializable {
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
-
+    
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
 
@@ -257,6 +263,13 @@ public class DashboardController implements Initializable {
             settingsIcon.getStyleClass().remove(2);
         }
 
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+        
         if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -274,6 +287,7 @@ public class DashboardController implements Initializable {
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
+        gradesPane.setVisible(false);
     }
 
     @FXML
@@ -299,6 +313,13 @@ public class DashboardController implements Initializable {
             settingsIcon.getStyleClass().remove(2);
         }
 
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+        
         if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -316,6 +337,7 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
+        gradesPane.setVisible(false);
     }
 
     @FXML
@@ -341,6 +363,13 @@ public class DashboardController implements Initializable {
             settingsIcon.getStyleClass().remove(2);
         }
 
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+        
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -358,6 +387,7 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         settingsPane.setVisible(false);
+        gradesPane.setVisible(false);
     }
     
     @FXML
@@ -382,6 +412,13 @@ public class DashboardController implements Initializable {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
+        
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
 
         if (settingBtn.getStyleClass().toString().contains("active") && settingsIcon.getStyleClass().toString().contains("iconActive")) {
 
@@ -400,8 +437,60 @@ public class DashboardController implements Initializable {
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         staffPane.setVisible(false);
+        gradesPane.setVisible(false);
     }
 
+    
+    @FXML
+    void openGrade(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+        
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+        
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (gradeBtn.getStyleClass().toString().contains("active") && gradeIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            gradeBtn.getStyleClass().add("active");
+            gradeIcon.getStyleClass().add("iconActive");
+            gradesPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(gradesPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
+        staffPane.setVisible(false);
+        settingsPane.setVisible(false);
+    }
+    
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");

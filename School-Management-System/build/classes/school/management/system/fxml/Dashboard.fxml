@@ -48,7 +48,7 @@
             </Text>
             <HBox layoutX="14.0" layoutY="60.0" prefHeight="90.0" prefWidth="985.0" spacing="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="60.0">
                <children>
-                  <GridPane HBox.hgrow="ALWAYS">
+                  <GridPane styleClass="allsubpane" HBox.hgrow="ALWAYS">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -84,12 +84,8 @@
                            </GridPane.margin>
                         </Text>
                      </children>
-                     <styleClass>
-                        <String fx:value="allsubpane" />
-                        <String fx:value="elevator" />
-                     </styleClass>
                   </GridPane>
-                  <GridPane layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                  <GridPane layoutX="10.0" layoutY="10.0" styleClass="allsubpane" HBox.hgrow="ALWAYS">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -120,12 +116,8 @@
                            </GridPane.margin>
                         </FontAwesomeIconView>
                      </children>
-                     <styleClass>
-                        <String fx:value="allsubpane" />
-                        <String fx:value="elevator" />
-                     </styleClass>
                   </GridPane>
-                  <GridPane layoutX="503.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                  <GridPane layoutX="503.0" layoutY="10.0" styleClass="allsubpane" HBox.hgrow="ALWAYS">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -156,12 +148,8 @@
                            </GridPane.margin>
                         </MaterialDesignIconView>
                      </children>
-                     <styleClass>
-                        <String fx:value="allsubpane" />
-                        <String fx:value="elevator" />
-                     </styleClass>
                   </GridPane>
-                  <GridPane layoutX="668.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                  <GridPane layoutX="668.0" layoutY="10.0" styleClass="allsubpane" HBox.hgrow="ALWAYS">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -192,10 +180,6 @@
                            </GridPane.margin>
                         </FontAwesomeIconView>
                      </children>
-                     <styleClass>
-                        <String fx:value="allsubpane" />
-                        <String fx:value="elevator" />
-                     </styleClass>
                   </GridPane>
                </children>
             </HBox>
@@ -1075,6 +1059,30 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="gradesPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="48.0" prefWidth="985.0" style="-fx-background-radius: 5; -fx-background-color: #bf9393;" styleClass="elevator" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <Text fill="WHITE" layoutX="44.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grades">
+                     <font>
+                        <Font name="Segoe UI" size="19.0" />
+                     </font>
+                  </Text>
+                  <OctIconView fill="WHITE" glyphName="DIFF" layoutX="14.0" layoutY="30.0" size="22" />
+               </children>
+            </Pane>
+            <AnchorPane layoutX="14.0" layoutY="73.0" prefHeight="389.0" prefWidth="985.0" style="-fx-background-color: #fff; -fx-background-radius: 6;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="73.0">
+               <children>
+                  <Text fill="#b1a7aa" layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grading System">
+                     <font>
+                        <Font name="Segoe UI Semilight" size="21.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="14.0" layoutY="45.0" prefHeight="3.0" prefWidth="173.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="settingsPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="48.0" prefWidth="985.0" style="-fx-background-radius: 5; -fx-background-color: #bf9393;" styleClass="elevator" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
@@ -1157,7 +1165,7 @@
             </Text>
             <JFXButton fx:id="dashboardBtn" graphicTextGap="11.0" onAction="#openDashboard" prefHeight="45.0" prefWidth="200.0" styleClass="active" text="Dashboard" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Light" size="16.0" />
                </font>
                <graphic>
                   <MaterialDesignIconView fx:id="dashIcon" fill="#65657b" glyphName="VIEW_DASHBOARD" size="24" styleClass="iconActive" />
@@ -1171,7 +1179,7 @@
             </JFXButton>
             <JFXButton fx:id="studentBtn" graphicTextGap="11.0" onAction="#openStudent" prefHeight="45.0" prefWidth="200.0" text="Students" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Light" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
@@ -1185,7 +1193,7 @@
             </JFXButton>
             <JFXButton fx:id="staffBtn" graphicTextGap="11.0" onAction="#openStaff" prefHeight="45.0" prefWidth="200.0" text="Teachers" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Semilight" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
@@ -1199,41 +1207,41 @@
             </JFXButton>
             <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Parents" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Semilight" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
-                  <Insets right="34.0" />
+                  <Insets right="37.0" />
                </padding>
                <graphic>
                   <MaterialDesignIconView fill="#65657b" glyphName="HUMAN_MALE_FEMALE" size="27" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton graphicTextGap="11.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Grades" textFill="#65657b">
+            <JFXButton fx:id="gradeBtn" graphicTextGap="11.0" onAction="#openGrade" prefHeight="45.0" prefWidth="200.0" text="Grades" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Semilight" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
-                  <Insets right="36.0" />
+                  <Insets right="37.0" />
                </padding>
                <graphic>
-                  <FontAwesomeIconView fill="#65657b" glyphName="PLUS" size="19" />
+                  <OctIconView fx:id="gradeIcon" fill="#65657b" glyphName="DIFF" size="22" />
                </graphic>
             </JFXButton>
             <JFXButton graphicTextGap="11.0" layoutX="10.0" layoutY="376.0" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-border-width: 0 0 0 4px; -fx-background-radius: 0;" text="Payment" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Light" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
-                  <Insets right="23.0" />
+                  <Insets right="29.0" />
                </padding>
                <graphic>
                   <FontAwesomeIconView fill="#65657b" glyphName="CREDIT_CARD_ALT" size="19" />
@@ -1241,7 +1249,7 @@
             </JFXButton>
             <JFXButton fx:id="settingBtn" graphicTextGap="11.0" onAction="#openSettings" prefHeight="45.0" prefWidth="200.0" text="Settings" textFill="#65657b">
                <font>
-                  <Font name="Segoe UI Emoji" size="16.0" />
+                  <Font name="Segoe UI Semilight" size="16.0" />
                </font>
                <opaqueInsets>
                   <Insets />
