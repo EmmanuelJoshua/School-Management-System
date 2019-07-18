@@ -343,12 +343,12 @@
                            </image>
                         </GNAvatarView>
                      </children></Pane>
-                  <Text fill="#51cbce" layoutX="51.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
+                  <Text fx:id="studentName" fill="#51cbce" layoutX="51.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
-                        <Font name="Segoe UI Semibold" size="23.0" />
+                        <Font name="Segoe UI Semibold" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paid Fully" textAlignment="CENTER" wrappingWidth="179.37600708007812">
+                  <Text fx:id="studentPaymentStatus" fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="179.37600708007812">
                      <font>
                         <Font name="Segoe UI Semilight" size="19.0" />
                      </font>
@@ -694,17 +694,17 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <TableView fx:id="adStudentTable1" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
+            <TableView fx:id="teachersTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>
-                  <TableColumn fx:id="registrationNumber1" editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Teacher ID" />
-                  <TableColumn fx:id="fullName1" editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
-                  <TableColumn fx:id="dob1" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
-                  <TableColumn fx:id="gender1" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
-                  <TableColumn fx:id="studentClass1" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
-                  <TableColumn fx:id="residentialAddress1" editable="false" prefWidth="77.5018310546875" text="Address" />
-                  <TableColumn fx:id="paymentStatus1" editable="false" maxWidth="6000.0" prefWidth="75.0" text="Designation" />
+                  <TableColumn fx:id="teacherID" editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Teacher ID" />
+                  <TableColumn fx:id="teacherFullName" editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
+                  <TableColumn fx:id="teacherDob" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
+                  <TableColumn fx:id="teacherGender" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                  <TableColumn fx:id="teacherQualification" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Qualification" />
+                  <TableColumn fx:id="teacherAddress" editable="false" prefWidth="77.5018310546875" text="Address" />
+                  <TableColumn fx:id="teacherDesignation" editable="false" maxWidth="6000.0" prefWidth="75.0" text="Designation" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -719,20 +719,15 @@
                <children>
                   <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;">
                      <children>
-                        <GNAvatarView layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
+                        <GNAvatarView fx:id="teacherImage" layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
                         </GNAvatarView>
                      </children></Pane>
-                  <Text fill="#51cbce" layoutX="54.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Odey">
+                  <Text fx:id="teacherName" fill="#51cbce" layoutX="54.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
-                        <Font name="Segoe UI Semibold" size="23.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paid Fully" textAlignment="CENTER" wrappingWidth="179.37600708007812">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="19.0" />
+                        <Font name="Segoe UI Semibold" size="12.0" />
                      </font>
                   </Text>
                   <Separator layoutX="23.0" layoutY="342.0" prefHeight="3.0" prefWidth="186.0" />
@@ -870,7 +865,7 @@
                   </OctIconView>
                </children>
             </HBox>
-            <AnchorPane fx:id="addTeacherPane" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="addTeacherPane" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Text fill="#4d4c4c" layoutX="17.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Information">
                      <font>
@@ -878,7 +873,7 @@
                      </font>
                   </Text>
                   <Separator layoutX="18.0" layoutY="100.0" prefHeight="1.0" prefWidth="50.0" style="-fx-background-color: blue;" />
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="9.0" layoutX="17.0" layoutY="485.0" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Save" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="9.0" layoutX="17.0" layoutY="485.0" onAction="#saveEmployeeDetails" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Save" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -901,8 +896,8 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXButton fx:id="chooseStudBtn1" buttonType="RAISED" layoutX="54.0" layoutY="238.0" onAction="#openStudbtn" style="-fx-background-color: gray; -fx-background-radius: 5;" text="Choose File" textFill="WHITE" />
-                        <GNAvatarView fx:id="avatarStudView1" layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
+                        <JFXButton fx:id="chooseEmployeePhoto" buttonType="RAISED" layoutX="54.0" layoutY="238.0" onAction="#chooseEmployeeImage" style="-fx-background-color: gray; -fx-background-radius: 5;" text="Choose File" textFill="WHITE" />
+                        <GNAvatarView fx:id="avatarEmployeeView" layoutX="18.0" layoutY="48.0" prefHeight="153.0" prefWidth="163.0" strokeWidth="0.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
@@ -916,7 +911,7 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <Hyperlink layoutX="48.0" layoutY="7.0" onAction="#backFromAddTeacher" prefHeight="33.0" prefWidth="127.0" text="View Teacher" textFill="WHITE">
+                        <Hyperlink fx:id="viewTeacher" layoutX="48.0" layoutY="7.0" onAction="#backFromAddTeacher" prefHeight="33.0" prefWidth="127.0" text="View Teacher" textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -962,10 +957,10 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="1" />
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="employeeID" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="employeeFirstName" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="employeeLastName" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="employeeMiddleName" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Qualification" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
@@ -983,13 +978,13 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <JFXTextField fx:id="employeePhoneNumber" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Of Birth" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXDatePicker defaultColor="#141961" prefHeight="25.0" prefWidth="188.0" promptText="dd/mm/yyyy" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <JFXDatePicker fx:id="employeDOB" defaultColor="#141961" prefHeight="25.0" prefWidth="188.0" promptText="dd/mm/yyyy" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Marital Status" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
@@ -1001,31 +996,31 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="5" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <JFXTextField fx:id="employeeResidence" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <JFXTextField fx:id="employeeEmail" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationality" GridPane.rowIndex="6">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="7" />
+                        <JFXTextField fx:id="employeeNationality" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="7" />
                         <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Designaton" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
                         <JFXComboBox fx:id="selectDesignation" prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <JFXComboBox fx:id="employeeReligion" prefHeight="30.0" prefWidth="172.0" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>

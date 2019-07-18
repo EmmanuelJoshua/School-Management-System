@@ -50,10 +50,12 @@ import java.sql.Statement;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.image.ImageView;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
 import org.controlsfx.control.Notifications;
+import school.management.system.tables.TeachersTable;
 
 /**
  *
@@ -67,6 +69,7 @@ public class DashboardController implements Initializable {
     Database da = new Database();
     private File mainFile;
     private File guardianFile;
+    private File employeeFile;
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -82,6 +85,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<AdminStudentsTable, String> paymentStatus;
     ObservableList<AdminStudentsTable> obs = FXCollections.observableArrayList();
+    ObservableList<TeachersTable> obs1 = FXCollections.observableArrayList();
     @FXML
     private TableView<AdminStudentsTable> adStudentTable;
     @FXML
@@ -151,22 +155,6 @@ public class DashboardController implements Initializable {
     @FXML
     private GNAvatarView avatarGuardView;
     @FXML
-    private TableView<?> adStudentTable1;
-    @FXML
-    private TableColumn<?, ?> registrationNumber1;
-    @FXML
-    private TableColumn<?, ?> fullName1;
-    @FXML
-    private TableColumn<?, ?> dob1;
-    @FXML
-    private TableColumn<?, ?> gender1;
-    @FXML
-    private TableColumn<?, ?> studentClass1;
-    @FXML
-    private TableColumn<?, ?> residentialAddress1;
-    @FXML
-    private TableColumn<?, ?> paymentStatus1;
-    @FXML
     private GNAvatarView stuImage;
     @FXML
     private JFXTextField studentFirstName;
@@ -186,7 +174,6 @@ public class DashboardController implements Initializable {
     private JFXTextField guardianPhone;
     @FXML
     private JFXTextField nationality;
-    @FXML
     private Image image;
     @FXML
     private JFXDatePicker studentDateOfBirth;
@@ -195,6 +182,59 @@ public class DashboardController implements Initializable {
 
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
+    File selectedFile1;
+    @FXML
+    private TableView<TeachersTable> teachersTable;
+    @FXML
+    private TableColumn<TeachersTable,String> teacherID;
+    @FXML
+    private TableColumn<TeachersTable,String> teacherFullName;
+    @FXML
+    private TableColumn<TeachersTable, String> teacherDob;
+    @FXML
+    private TableColumn<TeachersTable, String> teacherGender;
+    @FXML
+    private TableColumn<TeachersTable, String> teacherQualification;
+    @FXML
+    private TableColumn<TeachersTable,String> teacherAddress;
+    @FXML
+    private TableColumn<TeachersTable,String> teacherDesignation;
+    @FXML
+    private FontAwesomeIconView staffIcon1;
+    @FXML
+    private JFXButton chooseEmployeePhoto;
+    @FXML
+    private GNAvatarView avatarEmployeeView;
+    @FXML
+    private JFXTextField employeeID;
+    @FXML
+    private JFXTextField employeeFirstName;
+    @FXML
+    private JFXTextField employeeLastName;
+    @FXML
+    private JFXTextField employeeMiddleName;
+    @FXML
+    private JFXTextField employeePhoneNumber;
+    @FXML
+    private JFXDatePicker employeDOB;
+    @FXML
+    private JFXComboBox employeeReligion;
+    @FXML
+    private JFXTextField employeeResidence;
+    @FXML
+    private JFXTextField employeeEmail;
+    @FXML
+    private JFXTextField employeeNationality;
+    @FXML
+    private GNAvatarView teacherImage;
+    @FXML
+    private Hyperlink viewTeacher;
+    @FXML
+    private Text studentName;
+    @FXML
+    private Text studentPaymentStatus;
+    @FXML
+    private Text teacherName;
 
     @FXML
     private void openStudbtn(ActionEvent event) {
@@ -518,6 +558,7 @@ public class DashboardController implements Initializable {
         ObservableList religions = FXCollections.observableArrayList(
                 "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
+            employeeReligion.setItems(religions);
         ObservableList qualifications = FXCollections.observableArrayList(
                 "PHD", "BSC", "HND", "OND", "SSCE");
         selectQualification.setItems(qualifications);
@@ -532,61 +573,9 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateComboBoxes();
-
-//        try {
-//            da.dbConnect();
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            Connection con = da.getConnection();
-//            ResultSet res = con.createStatement().executeQuery("SELECT StudentReg,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,ClassName,GuardianAddress,PaymentStatus FROM Students.vwStudentsInfo;");
-//            while (res.next()) {
-//                obs.add(new AdminStudentsTable(res.getString("StudentReg"), res.getString("FullName"),
-//                        res.getString("DOB"), res.getString("Gender"), res.getString("ClassName"),
-//                        res.getString("GuardianAddress"), res.getString("PaymentStatus")));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
-//        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-//        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-//        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-//        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
-//        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
-//        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
-//        adStudentTable.setItems(obs);
-//
-//        adStudentTable.setOnMouseClicked((event) -> {
-//            Connection con;
-//            try {
-//                con = da.getConnection();
-//                String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
-//                PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
-//                ps.setString(1, id);
-//                ResultSet rs = ps.executeQuery();
-//                if (rs.next()) {
-//                    InputStream ips = rs.getBinaryStream(1);
-//                    image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
-//                    stuImage.setImage(image);
-////               }
-//
-//                    if (stuImage.isVisible()) {
-//                        System.out.println("dispplay image is visible");
-//                    } else {
-//                        System.out.println("Not visible");
-//                    }
-//
-//                }
-//
-//            } catch (SQLException ex) {
-//                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        });
+        refreshStudentTable();
+        refreshStaffTable();
+       
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
                 logOutAction();
@@ -633,6 +622,7 @@ public class DashboardController implements Initializable {
         fade.setOnFinished((ActionEvent event) -> {
             addStudentPane.setVisible(false);
         });
+        
     }
 
     @FXML
@@ -694,8 +684,7 @@ public class DashboardController implements Initializable {
         while (re.next()) {
             id = re.getInt("ClassId");
         }
-//                  selectedFile = fileChooser.showOpenDialog(null);
-
+    
         if (selectedFile == null) {
 //                String path = selectedFile.getPath();
             File file = new File("src/user.png");
@@ -748,5 +737,209 @@ public class DashboardController implements Initializable {
                     .position(Pos.TOP_CENTER);
             notify.show();
         }
+        refreshStudentTable();
+    }
+    private void populateStudentTable(){
+         try {
+            da.dbConnect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection con = da.getConnection();
+            ResultSet res = con.createStatement().executeQuery("SELECT StudentReg,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,ClassName,GuardianAddress,PaymentStatus FROM Students.vwStudentsInfo;");
+            while (res.next()) {
+                obs.add(new AdminStudentsTable(res.getString("StudentReg"), res.getString("FullName"),
+                        res.getString("DOB"), res.getString("Gender"), res.getString("ClassName"),
+                        res.getString("GuardianAddress"), res.getString("PaymentStatus")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        registrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
+        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        studentClass.setCellValueFactory(new PropertyValueFactory<>("studentClass"));
+        residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
+        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
+        adStudentTable.setItems(obs);
+
+        adStudentTable.setOnMouseClicked((event) -> {
+            Connection con;
+            String name=adStudentTable.getSelectionModel().getSelectedItem().getFullName();
+            String stuPayment=adStudentTable.getSelectionModel().getSelectedItem().getPaymentStatus();
+            studentName.setText(name);
+            studentPaymentStatus.setText(stuPayment);
+            try {
+                con = da.getConnection();
+                String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
+                
+                PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
+                ps.setString(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    InputStream ips = rs.getBinaryStream(1);
+                    image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
+                    stuImage.setImage(image);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+    }
+
+    @FXML
+    private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
+        
+        if (selectedFile1 == null) {
+            File file = new File("src/user.png");
+            selectedFile1 = file;
+            employeeFile = selectedFile1;
+            Image image = new Image(selectedFile1.toURI().toString());
+            avatarEmployeeView.setImage(image);
+        }
+        FileInputStream fish = new FileInputStream(employeeFile);
+        PreparedStatement statement = da.getConnection().prepareStatement("insert into staffs.StaffDetails(EmployeeNo,FirstName,MiddleName,LastName,"
+                + "DOB,Gender,Nationality,maritalStatus,Phone,EmailAddress,ResidentialAddress,Religion,"
+                + "Qualifications,StaffDesignation,Image)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+        statement.setString(1, employeeID.getText());
+        statement.setString(2, employeeFirstName.getText());
+        statement.setString(3, employeeMiddleName.getText());
+        statement.setString(4, employeeLastName.getText());
+        statement.setString(5, employeDOB.getValue().toString());
+        statement.setString(6,selectTeacherGender.getValue().toString());
+        statement.setString(7, employeeNationality.getText());
+        statement.setString(8, selectMaritalStatus.getValue().toString());
+        statement.setString(9, employeePhoneNumber.getText());
+        statement.setString(10, employeeEmail.getText());
+        statement.setString(11, employeeResidence.getText());
+        statement.setString(12, employeeReligion.getValue().toString());
+        statement.setString(13, selectQualification.getValue().toString());
+        statement.setString(14, selectDesignation.getValue().toString());
+        statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
+       
+        int s = statement.executeUpdate();
+        if (s > 0) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(successImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Success")
+                    .text("Uploaded Succesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+        } else {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Failed")
+                    .text("Uploaded Unsuccesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+        }
+        refreshStaffTable();
+    }
+
+    @FXML
+    private void chooseEmployeeImage(ActionEvent event) {
+         fileChooser.setTitle("Open Image");
+
+        //set extension filter
+        try {
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+
+        //show open file dialog
+        fileChooser.getInitialDirectory();
+        selectedFile1 = fileChooser.showOpenDialog(null);
+
+        try {
+            if (selectedFile1 != null) {
+                String path = selectedFile1.getPath();
+                selectedFile1 = new File(path);
+                employeeFile = selectedFile1;
+                Image image = new Image(selectedFile1.toURI().toString());
+                avatarEmployeeView.setImage(image);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+     private void populateStaffTable(){
+         try {
+            da.dbConnect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection con = da.getConnection();
+            ResultSet res = con.createStatement().executeQuery("SELECT EmployeeNo,FirstName+' '+MiddleName+' '+LastName AS 'FullName',DOB,Gender,Qualifications,ResidentialAddress,StaffDesignation FROM Staffs.StaffDetails;");
+            while (res.next()) {
+                obs1.add(new TeachersTable(res.getString("EmployeeNo"), res.getString("FullName"),
+                        res.getString("DOB"), res.getString("Gender"), res.getString("Qualifications"),
+                        res.getString("ResidentialAddress"), res.getString("StaffDesignation")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        teacherID.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        teacherFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        teacherDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        teacherGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        teacherQualification.setCellValueFactory(new PropertyValueFactory<>("qualification"));
+        teacherAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        teacherDesignation.setCellValueFactory(new PropertyValueFactory<>("designation"));
+        teachersTable.setItems(obs1);
+
+       teachersTable.setOnMouseClicked((event) -> {
+        String name = teachersTable.getSelectionModel().getSelectedItem().getFullName();
+        teacherName.setText(name);
+
+            Connection con;
+            try {
+                con = da.getConnection();
+                String id = teachersTable.getSelectionModel().getSelectedItem().getEmployeeID();
+                PreparedStatement ps = con.prepareStatement("Select Image from Staffs.StaffDetails WHERE EmployeeNo= ?");
+                ps.setString(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    InputStream ips = rs.getBinaryStream(1);
+                    image = new Image(ips, teacherImage.getHeight(),teacherImage.getWidth(), true, true);
+                   teacherImage.setImage(image);
+//               }
+
+                    if (teacherImage.isVisible()) {
+                        System.out.println("Teacher's image is not visible");
+                    } else {
+                        System.out.println("teacher's image is not visible");
+                    }
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+    }
+     private void refreshStaffTable(){
+         teachersTable.getItems().clear();
+        obs1.removeAll(obs1);
+        populateStaffTable();
+     }
+    private void refreshStudentTable(){
+        adStudentTable.getItems().clear();
+        obs.removeAll(obs);
+        populateStudentTable();
     }
 }
