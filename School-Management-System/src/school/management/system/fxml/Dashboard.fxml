@@ -1065,7 +1065,7 @@
             </Pane>
             <AnchorPane layoutX="14.0" layoutY="73.0" prefHeight="389.0" prefWidth="985.0" style="-fx-background-color: #fff; -fx-background-radius: 6;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="73.0">
                <children>
-                  <TextField layoutX="14.0" layoutY="93.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
+                  <TextField fx:id="OldPasswordTxtF" layoutX="14.0" layoutY="93.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
                      <font>
                         <Font name="Montserrat Regular" size="16.0" />
                      </font>
@@ -1091,7 +1091,7 @@
                         <Font name="Segoe UI Semilight" size="19.0" />
                      </font>
                   </Text>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="14.0" layoutY="337.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10;" text="Save" textFill="#747278">
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="14.0" layoutY="337.0" onAction="#saveAction" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10;" text="Save" textFill="#747278">
                      <font>
                         <Font name="Segoe UI Semilight" size="18.0" />
                      </font>
@@ -1099,12 +1099,12 @@
                         <FontAwesomeIconView fill="#747278" glyphName="SAVE" size="20" />
                      </graphic>
                   </JFXButton>
-                  <TextField layoutX="14.0" layoutY="182.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
+                  <TextField fx:id="NewPasswordTxtF" layoutX="14.0" layoutY="182.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
                      <font>
                         <Font name="Montserrat Regular" size="16.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="14.0" layoutY="272.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
+                  <TextField fx:id="ConfirmPasswordTxtF" layoutX="14.0" layoutY="272.0" prefHeight="42.0" prefWidth="443.0" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10; -fx-text-fill: #2B2733;">
                      <font>
                         <Font name="Montserrat Regular" size="16.0" />
                      </font>
@@ -1250,8 +1250,12 @@
          <children>
             <Pane prefHeight="48.0" prefWidth="188.0" styleClass="tophbar">
                <children>
-                  <MaterialDesignIconView fill="#1e88e5" glyphName="FIRE" layoutX="30.0" layoutY="35.0" size="30" />
-                  <Text fill="WHITE" layoutX="66.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crew">
+                  <ImageView fitHeight="42.0" fitWidth="43.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/CHMS_Icon.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="73.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crew">
                      <font>
                         <Font name="Montserrat Regular" size="25.0" />
                      </font>

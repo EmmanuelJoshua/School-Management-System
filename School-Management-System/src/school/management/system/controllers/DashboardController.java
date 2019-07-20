@@ -51,6 +51,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
@@ -186,9 +187,9 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView<TeachersTable> teachersTable;
     @FXML
-    private TableColumn<TeachersTable,String> teacherID;
+    private TableColumn<TeachersTable, String> teacherID;
     @FXML
-    private TableColumn<TeachersTable,String> teacherFullName;
+    private TableColumn<TeachersTable, String> teacherFullName;
     @FXML
     private TableColumn<TeachersTable, String> teacherDob;
     @FXML
@@ -196,9 +197,9 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<TeachersTable, String> teacherQualification;
     @FXML
-    private TableColumn<TeachersTable,String> teacherAddress;
+    private TableColumn<TeachersTable, String> teacherAddress;
     @FXML
-    private TableColumn<TeachersTable,String> teacherDesignation;
+    private TableColumn<TeachersTable, String> teacherDesignation;
     @FXML
     private FontAwesomeIconView staffIcon1;
     @FXML
@@ -235,6 +236,23 @@ public class DashboardController implements Initializable {
     private Text studentPaymentStatus;
     @FXML
     private Text teacherName;
+    @FXML
+    private TextField OldPasswordTxtF;
+    @FXML
+    private TextField NewPasswordTxtF;
+    @FXML
+    private TextField ConfirmPasswordTxtF;
+
+    String OldPassword, NewPassword, ConfirmedPassword, user1, pass1;
+    Connection conn;
+
+    public DashboardController() {
+        try {
+            this.conn = Database.getConnect();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     private void openStudbtn(ActionEvent event) {
@@ -558,7 +576,7 @@ public class DashboardController implements Initializable {
         ObservableList religions = FXCollections.observableArrayList(
                 "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
-            employeeReligion.setItems(religions);
+        employeeReligion.setItems(religions);
         ObservableList qualifications = FXCollections.observableArrayList(
                 "PHD", "BSC", "HND", "OND", "SSCE");
         selectQualification.setItems(qualifications);
@@ -575,7 +593,7 @@ public class DashboardController implements Initializable {
         populateComboBoxes();
         refreshStudentTable();
         refreshStaffTable();
-       
+
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
                 logOutAction();
@@ -622,7 +640,7 @@ public class DashboardController implements Initializable {
         fade.setOnFinished((ActionEvent event) -> {
             addStudentPane.setVisible(false);
         });
-        
+
     }
 
     @FXML
@@ -684,7 +702,7 @@ public class DashboardController implements Initializable {
         while (re.next()) {
             id = re.getInt("ClassId");
         }
-    
+
         if (selectedFile == null) {
 //                String path = selectedFile.getPath();
             File file = new File("src/user.png");
@@ -739,8 +757,9 @@ public class DashboardController implements Initializable {
         }
         refreshStudentTable();
     }
-    private void populateStudentTable(){
-         try {
+
+    private void populateStudentTable() {
+        try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -769,14 +788,14 @@ public class DashboardController implements Initializable {
 
         adStudentTable.setOnMouseClicked((event) -> {
             Connection con;
-            String name=adStudentTable.getSelectionModel().getSelectedItem().getFullName();
-            String stuPayment=adStudentTable.getSelectionModel().getSelectedItem().getPaymentStatus();
+            String name = adStudentTable.getSelectionModel().getSelectedItem().getFullName();
+            String stuPayment = adStudentTable.getSelectionModel().getSelectedItem().getPaymentStatus();
             studentName.setText(name);
             studentPaymentStatus.setText(stuPayment);
             try {
                 con = da.getConnection();
                 String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
-                
+
                 PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
                 ps.setString(1, id);
                 ResultSet rs = ps.executeQuery();
@@ -795,7 +814,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
-        
+
         if (selectedFile1 == null) {
             File file = new File("src/user.png");
             selectedFile1 = file;
@@ -814,7 +833,7 @@ public class DashboardController implements Initializable {
         statement.setString(3, employeeMiddleName.getText());
         statement.setString(4, employeeLastName.getText());
         statement.setString(5, employeDOB.getValue().toString());
-        statement.setString(6,selectTeacherGender.getValue().toString());
+        statement.setString(6, selectTeacherGender.getValue().toString());
         statement.setString(7, employeeNationality.getText());
         statement.setString(8, selectMaritalStatus.getValue().toString());
         statement.setString(9, employeePhoneNumber.getText());
@@ -824,7 +843,7 @@ public class DashboardController implements Initializable {
         statement.setString(13, selectQualification.getValue().toString());
         statement.setString(14, selectDesignation.getValue().toString());
         statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
-       
+
         int s = statement.executeUpdate();
         if (s > 0) {
             Notifications notify = Notifications.create()
@@ -848,7 +867,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void chooseEmployeeImage(ActionEvent event) {
-         fileChooser.setTitle("Open Image");
+        fileChooser.setTitle("Open Image");
 
         //set extension filter
         try {
@@ -873,8 +892,9 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
     }
-     private void populateStaffTable(){
-         try {
+
+    private void populateStaffTable() {
+        try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -901,9 +921,9 @@ public class DashboardController implements Initializable {
         teacherDesignation.setCellValueFactory(new PropertyValueFactory<>("designation"));
         teachersTable.setItems(obs1);
 
-       teachersTable.setOnMouseClicked((event) -> {
-        String name = teachersTable.getSelectionModel().getSelectedItem().getFullName();
-        teacherName.setText(name);
+        teachersTable.setOnMouseClicked((event) -> {
+            String name = teachersTable.getSelectionModel().getSelectedItem().getFullName();
+            teacherName.setText(name);
 
             Connection con;
             try {
@@ -914,8 +934,8 @@ public class DashboardController implements Initializable {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     InputStream ips = rs.getBinaryStream(1);
-                    image = new Image(ips, teacherImage.getHeight(),teacherImage.getWidth(), true, true);
-                   teacherImage.setImage(image);
+                    image = new Image(ips, teacherImage.getHeight(), teacherImage.getWidth(), true, true);
+                    teacherImage.setImage(image);
 //               }
 
                     if (teacherImage.isVisible()) {
@@ -932,14 +952,127 @@ public class DashboardController implements Initializable {
 
         });
     }
-     private void refreshStaffTable(){
-         teachersTable.getItems().clear();
+
+    private void refreshStaffTable() {
+        teachersTable.getItems().clear();
         obs1.removeAll(obs1);
         populateStaffTable();
-     }
-    private void refreshStudentTable(){
+    }
+
+    private void refreshStudentTable() {
         adStudentTable.getItems().clear();
         obs.removeAll(obs);
         populateStudentTable();
     }
+
+    public void saveChangesAction(ActionEvent event) {
+        try {
+            ResultSet res = conn.createStatement().executeQuery("select * from LogInDetails");
+            while (res.next()) {
+                int id = res.getInt("Id");
+                user1 = res.getString("Username");
+                pass1 = res.getString("Password");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (OldPasswordTxtF.getText().isEmpty() && NewPasswordTxtF.getText().isEmpty() && ConfirmPasswordTxtF.getText().isEmpty()) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("All fields are Empty")
+                    .position(Pos.TOP_CENTER)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
+        } else {
+            if (OldPasswordTxtF.getText().equals(pass1)) {
+                if (NewPasswordTxtF.getText().equals(ConfirmPasswordTxtF.getText())) {
+                    try {
+                        String query = "Update LogInDetails SET Password = '" + NewPasswordTxtF.getText() + "' where id = 1";
+                        PreparedStatement pst = Database.getConnect().prepareStatement(query);
+                        pst.execute();
+                    } catch (ClassNotFoundException | SQLException ex) {
+                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    Notifications notify = Notifications.create()
+                            .graphic(new ImageView(errorImg))
+                            .title("ERROR")
+                            .text("New Password does not Match")
+                            .position(Pos.TOP_CENTER)
+                            .hideAfter(Duration.seconds(3));
+                    notify.show();
+                }
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .title("ERROR")
+                        .text("Password is Incorrect")
+                        .position(Pos.TOP_CENTER)
+                        .hideAfter(Duration.seconds(3));
+                notify.show();
+            }
+        }
+    }
+
+    @FXML
+    private void saveAction(ActionEvent event) {
+        try {
+            ResultSet res = conn.createStatement().executeQuery("select * from LogInDetails");
+            while (res.next()) {
+                int id = res.getInt("Id");
+                user1 = res.getString("Username");
+                pass1 = res.getString("Password");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (OldPasswordTxtF.getText().isEmpty() && NewPasswordTxtF.getText().isEmpty() && ConfirmPasswordTxtF.getText().isEmpty()) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("All fields are Empty")
+                    .position(Pos.TOP_CENTER)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
+        } else {
+            if (OldPasswordTxtF.getText().equals(pass1)) {
+                if (NewPasswordTxtF.getText().equals(ConfirmPasswordTxtF.getText())) {
+                    try {
+                        String query = "Update LogInDetails SET Password = '" + NewPasswordTxtF.getText() + "' where id = 1";
+                        PreparedStatement pst = conn.prepareStatement(query);
+                        pst.execute();
+                        Notifications notify = Notifications.create()
+                            .graphic(new ImageView(successImg))
+                            .title("SUCCESS")
+                            .text("Password Changed Successfully")
+                            .position(Pos.TOP_CENTER)
+                            .hideAfter(Duration.seconds(3));
+                    notify.show();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    Notifications notify = Notifications.create()
+                            .graphic(new ImageView(errorImg))
+                            .title("ERROR")
+                            .text("New Password does not Match")
+                            .position(Pos.TOP_CENTER)
+                            .hideAfter(Duration.seconds(3));
+                    notify.show();
+                }
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .title("ERROR")
+                        .text("Password is Incorrect")
+                        .position(Pos.TOP_CENTER)
+                        .hideAfter(Duration.seconds(3));
+                notify.show();
+            }
+        }
+    }
+
 }

@@ -30,5 +30,17 @@ public class Database {
     public Connection getConnection(){
         return con;
     }
+    //Get Connection for SQLite database
+    public static Connection getConnect() throws ClassNotFoundException, SQLException {
+        Connection connect;
+        Class.forName("org.sqlite.JDBC");
+        connect = DriverManager.getConnection("jdbc:sqlite:LogIn.db");
+        if (connect != null) {
+            System.out.println("Connected Successfully");
+        } else {
+            System.out.println("Connection failed");
+        }
+        return connect;
+    }
 
 }
