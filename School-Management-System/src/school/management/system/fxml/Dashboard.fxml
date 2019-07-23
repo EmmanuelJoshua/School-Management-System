@@ -399,7 +399,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuMaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -430,7 +430,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuFemaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -461,7 +461,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuTotalText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -517,7 +517,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="18" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <JFXButton fx:id="studentResetBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" onAction="#clearAllFields" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
