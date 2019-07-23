@@ -399,7 +399,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuMaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -430,7 +430,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuFemaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -461,7 +461,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuTotalText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -517,7 +517,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="18" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" onAction="#studentResetBtn" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -694,7 +694,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <TableView fx:id="teachersTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>

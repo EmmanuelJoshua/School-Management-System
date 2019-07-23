@@ -7,19 +7,25 @@ package school.management.system.demoDatabase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author JOYOUS
  */
 public class Database {
-    Connection con;
-    public void dbConnect() throws ClassNotFoundException, SQLException{
+    
+    static Connection con = null;
+    static Statement stmt = null;
+    
+    public static void dbConnect() throws ClassNotFoundException, SQLException{
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=CHMS;integratedSecurity=true";
             con = DriverManager.getConnection(connectionUrl);
+            stmt = con.createStatement();
             if (con != null) {
                 System.out.println("Connected");
             }
@@ -27,6 +33,18 @@ public class Database {
             e.printStackTrace();
         }   
     }
+    
+    public static ResultSet executeQuery(String sql) throws ClassNotFoundException, SQLException {
+        dbConnect();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+
+        }
+        return rs;
+    }
+    
     public Connection getConnection(){
         return con;
     }
