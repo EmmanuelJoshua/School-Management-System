@@ -480,7 +480,7 @@
             </HBox>
             <HBox layoutX="770.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="studentSearch" onKeyPressed="#searchStudentDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -850,7 +850,7 @@
             </HBox>
             <HBox layoutX="772.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="teacherSearch" onKeyPressed="#searchTeacherDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

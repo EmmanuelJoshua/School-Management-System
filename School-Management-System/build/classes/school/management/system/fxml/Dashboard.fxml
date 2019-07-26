@@ -480,7 +480,7 @@
             </HBox>
             <HBox layoutX="770.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="studentSearch" onKeyPressed="#searchStudentDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -694,7 +694,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="911.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <TableView fx:id="teachersTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>
@@ -850,7 +850,7 @@
             </HBox>
             <HBox layoutX="772.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="teacherSearch" onKeyPressed="#searchTeacherDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
