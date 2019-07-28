@@ -71,10 +71,10 @@ import javafx.scene.input.KeyEvent;
  * @author DELL
  */
 public class DashboardController implements Initializable {
-    
+
     public Image errorImg = new Image("/school/management/system/images/cross.png");
     public Image successImg = new Image("/school/management/system/images/checked.png");
-    
+
     private static final String NAME = "(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,}";
     private static final String PHONE = "\\d{11}";
     private static final String EMAIL_PATTERN
@@ -82,7 +82,7 @@ public class DashboardController implements Initializable {
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public String where = "";
     String genderSelect;
-    
+
     Database da = new Database();
     private File mainFile;
     private File guardianFile;
@@ -196,7 +196,7 @@ public class DashboardController implements Initializable {
     private JFXDatePicker studentDateOfBirth;
     @FXML
     private JFXTextField guardianName;
-    
+
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
     File selectedFile1;
@@ -264,14 +264,22 @@ public class DashboardController implements Initializable {
     private Text stuFemaleText;
     @FXML
     private Text stuTotalText;
-    
+
     String OldPassword, NewPassword, ConfirmedPassword, user1, pass1;
     Connection conn;
     @FXML
     private TextField studentSearch;
     @FXML
     private TextField teacherSearch;
-    
+    @FXML
+    private Text staffMaleGenderCount;
+    @FXML
+    private Text staffFemaleGenderCount;
+    @FXML
+    private Text staffTotalGenderCount;
+    @FXML
+    private JFXButton staffResetBtn;
+
     public DashboardController() {
         try {
             this.conn = Database.getConnect();
@@ -279,7 +287,7 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void openStudbtn(ActionEvent event) {
         //set title for filechooser
@@ -295,7 +303,7 @@ public class DashboardController implements Initializable {
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
-        
+
         try {
             if (selectedFile != null) {
                 String path = selectedFile.getPath();
@@ -308,7 +316,7 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     private void openGuardbtn(ActionEvent event) {
         //set title for filechooser
@@ -324,7 +332,7 @@ public class DashboardController implements Initializable {
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile = fileChooser.showOpenDialog(null);
-        
+
         try {
             if (selectedFile != null) {
                 String path = selectedFile.getPath();
@@ -337,39 +345,39 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     private void openDashboard(ActionEvent event) {
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
-            
+
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
-            
+
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
-            
+
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
             settingBtn.getStyleClass().remove(2);
             settingsIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
-            
+
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
-            
+
         } else {
             dashboardBtn.getStyleClass().add("active");
             dashIcon.getStyleClass().add("iconActive");
@@ -381,45 +389,45 @@ public class DashboardController implements Initializable {
             fade.setToValue(1);
             fade.play();
         }
-        
+
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
     }
-    
+
     @FXML
     private void openStudent(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
-            
+
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
             dashIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
-            
+
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
-            
+
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
             settingBtn.getStyleClass().remove(2);
             settingsIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
-            
+
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
-            
+
         } else {
             studentBtn.getStyleClass().add("active");
             stuIcon.getStyleClass().add("iconActive");
@@ -431,45 +439,45 @@ public class DashboardController implements Initializable {
             fade.setToValue(1);
             fade.play();
         }
-        
+
         dashboardPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
     }
-    
+
     @FXML
     private void openStaff(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
-            
+
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
             dashIcon.getStyleClass().remove(2);
         }
-        
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
-            
+
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
-            
+
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
             settingBtn.getStyleClass().remove(2);
             settingsIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
-            
+
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
-            
+
         } else {
             staffBtn.getStyleClass().add("active");
             staffIcon.getStyleClass().add("iconActive");
@@ -481,45 +489,45 @@ public class DashboardController implements Initializable {
             fade.setToValue(1);
             fade.play();
         }
-        
+
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
     }
-    
+
     @FXML
     public void openSettings(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
-            
+
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
             dashIcon.getStyleClass().remove(2);
         }
-        
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
-            
+
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
-            
+
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
-            
+
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().toString().contains("active") && settingsIcon.getStyleClass().toString().contains("iconActive")) {
-            
+
         } else {
             settingBtn.getStyleClass().add("active");
             settingsIcon.getStyleClass().add("iconActive");
@@ -531,45 +539,45 @@ public class DashboardController implements Initializable {
             fade.setToValue(1);
             fade.play();
         }
-        
+
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         gradesPane.setVisible(false);
     }
-    
+
     @FXML
     void openGrade(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
-            
+
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
             dashIcon.getStyleClass().remove(2);
         }
-        
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
-            
+
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
-            
+
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
-            
+
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
             settingBtn.getStyleClass().remove(2);
             settingsIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().toString().contains("active") && gradeIcon.getStyleClass().toString().contains("iconActive")) {
-            
+
         } else {
             gradeBtn.getStyleClass().add("active");
             gradeIcon.getStyleClass().add("iconActive");
@@ -581,13 +589,13 @@ public class DashboardController implements Initializable {
             fade.setToValue(1);
             fade.play();
         }
-        
+
         dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
     }
-    
+
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
@@ -613,12 +621,20 @@ public class DashboardController implements Initializable {
                 "Teaching", "Non Teaching");
         selectDesignation.setItems(designation);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateComboBoxes();
         refreshStudentTable();
         refreshStaffTable();
+        try {
+            loadTeacherTableData();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try {
             studentTableData();
         } catch (SQLException ex) {
@@ -627,7 +643,8 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         validators();
-        
+        employeeValidators();
+
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
                 logOutAction();
@@ -647,11 +664,11 @@ public class DashboardController implements Initializable {
             });
         });
     }
-    
+
     public void closeStage() {
         ((Stage) mainDashPane.getScene().getWindow()).close();
     }
-    
+
     @FXML
     private void addStudent(ActionEvent event) {
         addStudentPane.setVisible(true);
@@ -662,7 +679,7 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
     private void backFromAddStudent() {
         FadeTransition fade = new FadeTransition();
@@ -674,9 +691,9 @@ public class DashboardController implements Initializable {
         fade.setOnFinished((ActionEvent event) -> {
             addStudentPane.setVisible(false);
         });
-        
+
     }
-    
+
     @FXML
     private void addTeacher(ActionEvent event) {
         addTeacherPane.setVisible(true);
@@ -687,7 +704,7 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
     private void backFromAddTeacher() {
         FadeTransition fade = new FadeTransition();
@@ -700,7 +717,7 @@ public class DashboardController implements Initializable {
             addTeacherPane.setVisible(false);
         });
     }
-    
+
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
@@ -711,16 +728,16 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     private void logOutAction() throws IOException {
         closeStage();
         Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
-        
+
         Stage stage = new Stage(StageStyle.TRANSPARENT);
-        
+
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-        
+
         stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
         stage.setScene(scene);
         stage.show();
@@ -729,7 +746,7 @@ public class DashboardController implements Initializable {
     // Save student button
     @FXML
     private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException {
-        
+
         if (selectGender.getValue() == "Male") {
             genderSelect = "Male";
         } else if (selectGender.getValue() == "Female") {
@@ -738,7 +755,6 @@ public class DashboardController implements Initializable {
             genderSelect = null;
         }
 
-//                  selectedFile = fileChooser.showOpenDialog(null);
         // if validation returns true
         if (validateStudentMethod()) {
             Statement sta = da.getConnection().createStatement();
@@ -748,9 +764,8 @@ public class DashboardController implements Initializable {
             while (re.next()) {
                 id = re.getInt("ClassId");
             }
-            if (selectedFile == null) {
 
-//                String path = selectedFile.getPath();
+            if (selectedFile == null) {
                 File file = new File("src/user.png");
                 selectedFile = file;
                 guardianFile = selectedFile;
@@ -765,7 +780,7 @@ public class DashboardController implements Initializable {
                     + "DOB,Gender,Class,Department,Religion,"
                     + "GuardianName,GuardianPhone,GuardianAddress,GuardianEmail,Nationality,GuardianOccupation,StudentImage,GuardianImage)"
                     + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            
+
             statement.setString(1, studentAdmissionNumber.getText());
             statement.setString(2, studentFirstName.getText());
             statement.setString(3, studentMiddleName.getText());
@@ -812,9 +827,8 @@ public class DashboardController implements Initializable {
                     .hideAfter(Duration.seconds(5));
             notify.show();
         }
-        
     }
-    
+
     private void populateStudentTable() {
         try {
             da.dbConnect();
@@ -842,7 +856,7 @@ public class DashboardController implements Initializable {
         residentialAddress.setCellValueFactory(new PropertyValueFactory<>("residentialAddress"));
         paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
         adStudentTable.setItems(obs);
-        
+
         adStudentTable.setOnMouseClicked((event) -> {
             Connection con;
             String name = adStudentTable.getSelectionModel().getSelectedItem().getFullName();
@@ -852,7 +866,7 @@ public class DashboardController implements Initializable {
             try {
                 con = da.getConnection();
                 String id = adStudentTable.getSelectionModel().getSelectedItem().getRegistrationNumber();
-                
+
                 PreparedStatement ps = con.prepareStatement("Select StudentImage from Students.vwStudentsInfo WHERE StudentReg= ?");
                 ps.setString(1, id);
                 ResultSet rs = ps.executeQuery();
@@ -861,67 +875,96 @@ public class DashboardController implements Initializable {
                     image = new Image(ips, stuImage.getHeight(), stuImage.getWidth(), true, true);
                     stuImage.setImage(image);
                 }
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
     }
-    
+
     @FXML
     private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
-        
-        if (selectedFile1 == null) {
-            File file = new File("src/user.png");
-            selectedFile1 = file;
-            employeeFile = selectedFile1;
-            Image image = new Image(selectedFile1.toURI().toString());
-            avatarEmployeeView.setImage(image);
+
+        if (selectTeacherGender.getValue() == "Male") {
+            genderSelect = "Male";
+        } else if (selectTeacherGender.getValue() == "Female") {
+            genderSelect = "Female";
+        } else {
+            genderSelect = null;
         }
-        FileInputStream fish = new FileInputStream(employeeFile);
-        PreparedStatement statement = da.getConnection().prepareStatement("insert into staffs.StaffDetails(EmployeeNo,FirstName,MiddleName,LastName,"
-                + "DOB,Gender,Nationality,maritalStatus,Phone,EmailAddress,ResidentialAddress,Religion,"
-                + "Qualifications,StaffDesignation,Image)"
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        
-        statement.setString(1, employeeID.getText());
-        statement.setString(2, employeeFirstName.getText());
-        statement.setString(3, employeeMiddleName.getText());
-        statement.setString(4, employeeLastName.getText());
-        statement.setString(5, employeDOB.getValue().toString());
-        statement.setString(6, selectTeacherGender.getValue().toString());
-        statement.setString(7, employeeNationality.getText());
-        statement.setString(8, selectMaritalStatus.getValue().toString());
-        statement.setString(9, employeePhoneNumber.getText());
-        statement.setString(10, employeeEmail.getText());
-        statement.setString(11, employeeResidence.getText());
-        statement.setString(12, employeeReligion.getValue().toString());
-        statement.setString(13, selectQualification.getValue().toString());
-        statement.setString(14, selectDesignation.getValue().toString());
-        statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
-        
-        int s = statement.executeUpdate();
-        if (s > 0) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(successImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Success")
-                    .text("Uploaded Succesfully")
-                    .position(Pos.TOP_CENTER);
-            notify.show();
+
+        // if validation returns true
+        if (validateTeachersMethod()) {
+//            Statement sta = da.getConnection().createStatement();
+//            String query = "Select StaffID From Staffs.StaffDetails WHERE ClassName ='" + selectClass.getValue().toString() + "'";
+//            ResultSet re = sta.executeQuery(query);
+//            int id = 0;
+//            while (re.next()) {
+//                id = re.getInt("StaffID");
+//            }
+
+            if (selectedFile1 == null) {
+                File file = new File("src/user.png");
+                selectedFile1 = file;
+                employeeFile = selectedFile1;
+                Image image = new Image(selectedFile1.toURI().toString());
+                avatarEmployeeView.setImage(image);
+            }
+
+            FileInputStream fish = new FileInputStream(employeeFile);
+            PreparedStatement statement = da.getConnection().prepareStatement("insert into staffs.StaffDetails(EmployeeNo,FirstName,MiddleName,LastName,"
+                    + "DOB,Gender,Nationality,maritalStatus,Phone,EmailAddress,ResidentialAddress,Religion,"
+                    + "Qualifications,StaffDesignation,Image)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            statement.setString(1, employeeID.getText());
+            statement.setString(2, employeeFirstName.getText());
+            statement.setString(3, employeeMiddleName.getText());
+            statement.setString(4, employeeLastName.getText());
+            statement.setString(5, employeDOB.getValue().toString());
+            statement.setString(6, selectTeacherGender.getValue().toString());
+            statement.setString(7, employeeNationality.getText());
+            statement.setString(8, selectMaritalStatus.getValue().toString());
+            statement.setString(9, employeePhoneNumber.getText());
+            statement.setString(10, employeeEmail.getText());
+            statement.setString(11, employeeResidence.getText());
+            statement.setString(12, employeeReligion.getValue().toString());
+            statement.setString(13, selectQualification.getValue().toString());
+            statement.setString(14, selectDesignation.getValue().toString());
+            statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
+
+            int s = statement.executeUpdate();
+            if (s > 0) {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(successImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Success")
+                        .text("Uploaded Succesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+                staffResetBtn(event);
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Failed")
+                        .text("Uploaded Unsuccesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+            }
+            refreshStaffTable();
         } else {
             Notifications notify = Notifications.create()
                     .graphic(new ImageView(errorImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Failed")
-                    .text("Uploaded Unsuccesfully")
-                    .position(Pos.TOP_CENTER);
+                    .title("Error!")
+                    .text("One or morefields are empty")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(5));
             notify.show();
         }
-        refreshStaffTable();
     }
-    
+
     @FXML
     private void chooseEmployeeImage(ActionEvent event) {
         fileChooser.setTitle("Open Image");
@@ -936,7 +979,7 @@ public class DashboardController implements Initializable {
         //show open file dialog
         fileChooser.getInitialDirectory();
         selectedFile1 = fileChooser.showOpenDialog(null);
-        
+
         try {
             if (selectedFile1 != null) {
                 String path = selectedFile1.getPath();
@@ -949,7 +992,7 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     private void populateStaffTable() {
         try {
             da.dbConnect();
@@ -977,11 +1020,11 @@ public class DashboardController implements Initializable {
         teacherAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         teacherDesignation.setCellValueFactory(new PropertyValueFactory<>("designation"));
         teachersTable.setItems(obs1);
-        
+
         teachersTable.setOnMouseClicked((event) -> {
             String name = teachersTable.getSelectionModel().getSelectedItem().getFullName();
             teacherName.setText(name);
-            
+
             Connection con;
             try {
                 con = da.getConnection();
@@ -1000,28 +1043,25 @@ public class DashboardController implements Initializable {
                     } else {
                         System.out.println("teacher's image is not visible");
                     }
-                    
                 }
-                
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         });
     }
-    
+
     private void refreshStaffTable() {
         teachersTable.getItems().clear();
         obs1.removeAll(obs1);
         populateStaffTable();
     }
-    
+
     private void refreshStudentTable() {
         adStudentTable.getItems().clear();
         obs.removeAll(obs);
         populateStudentTable();
     }
-    
+
     public void saveChangesAction(ActionEvent event) {
         try {
             ResultSet res = conn.createStatement().executeQuery("select * from LogInDetails");
@@ -1051,7 +1091,7 @@ public class DashboardController implements Initializable {
                     } catch (ClassNotFoundException | SQLException ex) {
                         Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 } else {
                     Notifications notify = Notifications.create()
                             .graphic(new ImageView(errorImg))
@@ -1072,7 +1112,7 @@ public class DashboardController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void saveAction(ActionEvent event) {
         try {
@@ -1110,7 +1150,7 @@ public class DashboardController implements Initializable {
                     } catch (SQLException ex) {
                         Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 } else {
                     Notifications notify = Notifications.create()
                             .graphic(new ImageView(errorImg))
@@ -1131,7 +1171,7 @@ public class DashboardController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     // Reset button for student
     private void studentResetBtn(ActionEvent event) {
@@ -1151,7 +1191,7 @@ public class DashboardController implements Initializable {
         selectReligion.setValue(null);
         studentAdmissionNumber.setText("");
         nationality.setText("");
-        
+
         File file = new File("src/user.png");
         selectedFile = file;
         guardianFile = selectedFile;
@@ -1159,61 +1199,203 @@ public class DashboardController implements Initializable {
         Image image = new Image(selectedFile.toURI().toString());
         avatarStudView.setImage(image);
         avatarGuardView.setImage(image);
-        
     }
 
     // Validator method for student
     public void validators() {
         ValidationSupport validation1 = new ValidationSupport();
         validation1.registerValidator(studentFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation2 = new ValidationSupport();
         validation2.registerValidator(studentFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
-        
+
         ValidationSupport validation3 = new ValidationSupport();
         validation3.registerValidator(studentLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation4 = new ValidationSupport();
         validation4.registerValidator(studentLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
-        
+
         ValidationSupport validation5 = new ValidationSupport();
         validation5.registerValidator(guardianMail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation6 = new ValidationSupport();
         validation6.registerValidator(guardianMail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
-        
+
         ValidationSupport validation8 = new ValidationSupport();
         validation8.registerValidator(residence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation9 = new ValidationSupport();
         validation9.registerValidator(guardianPhone, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation10 = new ValidationSupport();
         validation10.registerValidator(guardianPhone, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
-        
+
         ValidationSupport validation11 = new ValidationSupport();
         validation11.registerValidator(selectGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation12 = new ValidationSupport();
         validation12.registerValidator(selectClass, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation13 = new ValidationSupport();
         validation13.registerValidator(selectReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation14 = new ValidationSupport();
         validation14.registerValidator(guardianName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation15 = new ValidationSupport();
         validation15.registerValidator(guardianName, Validator.createRegexValidator("Provide Correct Guardian` Name", NAME, Severity.ERROR));
-        
+
         ValidationSupport validation16 = new ValidationSupport();
         validation16.registerValidator(studentMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        
+
         ValidationSupport validation18 = new ValidationSupport();
         validation18.registerValidator(studentMiddleName, Validator.createRegexValidator("Input Required", NAME, Severity.WARNING));
-        
+
         ValidationSupport validation19 = new ValidationSupport();
         validation19.registerValidator(nationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+    }
+
+    //validations for Staffs 
+    public void employeeValidators() {
+        ValidationSupport validationSupport = new ValidationSupport();
+        validationSupport.registerValidator(employeeLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport.registerValidator(employeeLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport1 = new ValidationSupport();
+        validationSupport1.registerValidator(employeeFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport1.registerValidator(employeeFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport2 = new ValidationSupport();
+        validationSupport2.registerValidator(employeeMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport2.registerValidator(employeeMiddleName, Validator.createRegexValidator("Provide Correct Middle Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport3 = new ValidationSupport();
+        validationSupport3.registerValidator(employeeID, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport4 = new ValidationSupport();
+        validationSupport4.registerValidator(employeeNationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport5 = new ValidationSupport();
+        validationSupport5.registerValidator(employeeResidence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport6 = new ValidationSupport();
+        validationSupport6.registerValidator(employeeEmail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport6.registerValidator(employeeEmail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
+
+        ValidationSupport validationSupport7 = new ValidationSupport();
+        validationSupport7.registerValidator(employeePhoneNumber, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport7.registerValidator(employeePhoneNumber, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
+
+        ValidationSupport validationSupport8 = new ValidationSupport();
+        validationSupport8.registerValidator(employeeReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport9 = new ValidationSupport();
+        validationSupport9.registerValidator(employeDOB, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport10 = new ValidationSupport();
+        validationSupport10.registerValidator(selectQualification, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport11 = new ValidationSupport();
+        validationSupport11.registerValidator(selectTeacherGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport12 = new ValidationSupport();
+        validationSupport12.registerValidator(selectDesignation, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+    }
+
+    // Validations for Staffs method on user input
+    public boolean validateTeachersMethod() {
+        // checks if the employee last name field is empty
+        if ("".equals(employeeLastName.getText())) {
+            return false;
+        }
+
+        // checks if the employee first name field is empty
+        if ("".equals(employeeFirstName.getText())) {
+            return false;
+        }
+
+        // checks if the employee middle name field is empty
+        if ("".equals(employeeMiddleName.getText())) {
+            return false;
+        }
+
+        // checks if the employee ID field is empty
+        if ("".equals(employeeID.getText())) {
+            return false;
+        }
+
+        // checks if the employee nationality field is empty
+        if ("".equals(employeeNationality.getText())) {
+            return false;
+        }
+
+        // checks if the employee residence field is empty
+        if ("".equals(employeeResidence.getText())) {
+            return false;
+        }
+
+        // checks if the employee email field is empty
+        if ("".equals(employeeEmail.getText())) {
+            return false;
+        }
+
+        // checks if the employee phone number field is empty
+        if ("".equals(employeePhoneNumber.getText())) {
+            return false;
+        }
+
+        // checks if the employee religion value is empty
+        if ("".equals(employeeReligion.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee email value is empty
+        if ("".equals(employeDOB.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee qualification value is empty
+        if ("".equals(selectQualification.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee gender value is empty
+        if ("".equals(selectTeacherGender.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee designation value is empty
+        if ("".equals(selectDesignation.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee email mattches the specified email pattern
+        if (!Pattern.matches(EMAIL_PATTERN, employeeEmail.getText())) {
+            return false;
+        }
+
+        // checks if the employee phone number matches the specified phone generic pattern
+        if (!Pattern.matches(PHONE, employeePhoneNumber.getText())) {
+            return false;
+        }
+
+        // checks if the employee first name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeFirstName.getText())) {
+            return false;
+        }
+
+        // checks if the employee last name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeLastName.getText())) {
+            return false;
+        }
+
+        // checks if the employee middle name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeMiddleName.getText())) {
+            return false;
+        }
+
+        // else if all fields are entered correctly return false
+        return true;
     }
 
     // Validation Method 2 for student on user input
@@ -1336,20 +1518,20 @@ public class DashboardController implements Initializable {
         String femaleCount = "SELECT count(Gender) AS 'Count2' FROM students.vwStudentsInfo where Gender = 'Female'";
         // query for counting total genders on the table
         String totalCount = "SELECT count(Gender) AS 'Count3' FROM students.vwStudentsInfo";
-        
+
         ResultSet rrs1 = da.executeQuery(sql);
         ResultSet rrs = da.executeQuery(maleCount);
         ResultSet rrs2 = da.executeQuery(femaleCount);
         ResultSet rrs3 = da.executeQuery(totalCount);
-        
+
         try {
-            
+
             while (rrs1.next()) {
                 String gen = rrs1.getString("gender");
             }
-            
+
             while (rrs.next()) {
-                
+
                 String num = rrs.getString("count1");
                 if (num.length() == 1) {
                     stuMaleText.setText("00" + num);
@@ -1359,7 +1541,7 @@ public class DashboardController implements Initializable {
                     stuMaleText.setText(num);
                 }
             }
-            
+
             while (rrs2.next()) {
                 String num = rrs2.getString("count2");
                 if (num.length() == 1) {
@@ -1370,7 +1552,7 @@ public class DashboardController implements Initializable {
                     stuFemaleText.setText(num);
                 }
             }
-            
+
             while (rrs3.next()) {
                 String num = rrs3.getString("count3");
                 if (num.length() == 1) {
@@ -1385,14 +1567,79 @@ public class DashboardController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
+
+    // Method for loading count on staff Table
+    public void loadTeacherTableData() throws SQLException, ClassNotFoundException {
+        Connection conn;
+        conn = da.getConnection();
+        Statement statement = da.getConnection().createStatement();
+
+        // query for selecting all the data on the students table
+        String sql = "SELECT * FROM  Staffs.StaffDetails ";
+
+        // query for counting number of males in the student table
+        String maleCount = "SELECT count(Gender) AS 'Count1' FROM  Staffs.StaffDetails  where Gender = 'Male' ";
+
+        // query for counting number of females on the students table
+        String femaleCount = "SELECT count(Gender) AS 'Count2' FROM  Staffs.StaffDetails where Gender = 'Female'";
+
+        // query for counting total genders on the table
+        String totalCount = "SELECT count(Gender) AS 'Count3' FROM  Staffs.StaffDetails";
+
+        ResultSet rrs1 = da.executeQuery(sql);
+        ResultSet rrs = da.executeQuery(maleCount);
+        ResultSet rrs2 = da.executeQuery(femaleCount);
+        ResultSet rrs3 = da.executeQuery(totalCount);
+
+        try {
+            while (rrs1.next()) {
+                String gen = rrs1.getString("gender");
+            }
+
+            while (rrs.next()) {
+                String num = rrs.getString("count1");
+                if (num.length() == 1) {
+                    staffMaleGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffMaleGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffMaleGenderCount.setText(num);
+                }
+            }
+
+            while (rrs2.next()) {
+                String num = rrs2.getString("count2");
+                if (num.length() == 1) {
+                    staffFemaleGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffFemaleGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffFemaleGenderCount.setText(num);
+                }
+            }
+
+            while (rrs3.next()) {
+                String num = rrs3.getString("count3");
+                if (num.length() == 1) {
+                    staffTotalGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffTotalGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffTotalGenderCount.setText(num);
+                }
+            }
+            rrs1.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
     private void searchStudentDetails(KeyEvent event) {
-         FilteredList<AdminStudentsTable> filteredData = new FilteredList<>(obs, e -> true);
+        FilteredList<AdminStudentsTable> filteredData = new FilteredList<>(obs, e -> true);
         studentSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
-             filteredData.setPredicate((Predicate<? super AdminStudentsTable>) adminStudentTable -> {
+            filteredData.setPredicate((Predicate<? super AdminStudentsTable>) adminStudentTable -> {
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -1403,18 +1650,18 @@ public class DashboardController implements Initializable {
                     return true;
                 } else if (adminStudentTable.getGender().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                }else if (adminStudentTable.getStudentClass().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (adminStudentTable.getStudentClass().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
                 return false;
-             });    
-            
+            });
+
         });
         SortedList<AdminStudentsTable> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(adStudentTable.comparatorProperty());
         adStudentTable.setItems(sortedData);
     }
-    
+
     @FXML
     private void searchTeacherDetails(KeyEvent event) {
         FilteredList<TeachersTable> filteredData = new FilteredList<>(obs1, e -> true);
@@ -1438,5 +1685,30 @@ public class DashboardController implements Initializable {
         sortedData.comparatorProperty().bind(teachersTable.comparatorProperty());
         teachersTable.setItems(sortedData);
     }
-    
+
+    // Reset button for Staff 
+    @FXML
+    private void staffResetBtn(ActionEvent event) {
+        // Set all fields to empty or null on click
+        employeeID.setText("");
+        employeeFirstName.setText("");
+        employeeLastName.setText("");
+        employeeMiddleName.setText("");
+        selectQualification.setValue(null);
+        selectTeacherGender.setValue(null);
+        employeDOB.setValue(null);
+        selectMaritalStatus.setValue(null);
+        employeeReligion.setValue(null);
+        employeePhoneNumber.setText("");
+        employeeResidence.setText("");
+        employeeEmail.setText("");
+        employeeNationality.setText("");
+        selectDesignation.setValue(null);
+
+        File file = new File("src/user.png");
+        selectedFile = file;
+        employeeFile = selectedFile;
+        Image image = new Image(selectedFile.toURI().toString());
+        avatarEmployeeView.setImage(image);
+    }
 }
