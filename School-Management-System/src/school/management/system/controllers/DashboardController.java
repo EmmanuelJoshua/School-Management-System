@@ -47,10 +47,13 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.function.Predicate;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -65,6 +68,7 @@ import java.util.regex.Pattern;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
+import java.util.Calendar;
 
 /**
  *
@@ -87,6 +91,7 @@ public class DashboardController implements Initializable {
     private File mainFile;
     private File guardianFile;
     private File employeeFile;
+    
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -1499,7 +1504,13 @@ public class DashboardController implements Initializable {
         if (!Pattern.matches(NAME, guardianName.getText())) {
             return false;
         }
-
+       
+        // checks if the date entered is more than the current date which is invalid
+if(isDateValid("dd-mm-yyyy",currentDate("-"), studentDateOfBirth.getValue().toString()) == false){
+//    studentDateOfBirth.setValue(null);
+         return false;
+}
+        
         // else if all fields are entered correctly return false
         return true;
     }
@@ -1710,5 +1721,59 @@ public class DashboardController implements Initializable {
         employeeFile = selectedFile;
         Image image = new Image(selectedFile.toURI().toString());
         avatarEmployeeView.setImage(image);
+    }
+    
+    // Method for getting the current date
+     public static String currentDate(String separator) {
+    Calendar date = Calendar.getInstance();
+    String day = Integer.toString(date.get(Calendar.DAY_OF_MONTH));
+    String month = Integer.toString(date.get(Calendar.MONTH) + 1);
+    String year = Integer.toString(date.get(Calendar.YEAR));
+    if (month.length() < 2) {
+        month = "0" + month;
+    }
+    if (day.length() < 2) {
+        day = "0" + day;
+    }
+    String regDate = year + separator + month + separator + day;
+    return regDate;
+}
+     
+     //boolean method for returning boolean value if date is valid or not
+    public boolean isDateValid(String dateformat, 
+            String currentDate, String dateOfInterest) {
+
+        Calendar cal = Calendar.getInstance();
+        String format = dateformat;
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        Date cd = null;  // current date
+        Date doi = null; // date of interest
+
+        try {
+            cd = sdf.parse(currentDate);
+            doi = sdf.parse(dateOfInterest);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diff = cd.getTime() - doi.getTime();
+        int diffDays = (int) (diff / (24 * 1000 * 60 * 60));
+        
+//        Date currentTime =  cal.getTime();
+//        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+//        String formatDate = df.format(currentTime);
+
+        if (diffDays > 0) {
+            Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .title("ERROR")
+                        .text("Date of birth cannot be greater than current date")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(3));
+                notify.show();
+            return false;
+        } else {
+            return true;
+        }
     }
 }
