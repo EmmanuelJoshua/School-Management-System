@@ -399,7 +399,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuMaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -430,7 +430,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuFemaleText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -461,7 +461,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="stuTotalText" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -480,7 +480,7 @@
             </HBox>
             <HBox layoutX="770.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="studentSearch" onKeyPressed="#searchStudentDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -517,7 +517,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="18" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="487.0" layoutY="571.0" onAction="#studentResetBtn" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -767,7 +767,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="staffMaleGenderCount" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="CENTER" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -799,7 +799,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="staffFemaleGenderCount" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="200" textAlignment="RIGHT" wrappingWidth="46.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -831,7 +831,7 @@
                               <Insets bottom="10.0" left="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <Text fx:id="staffTotalGenderCount" fill="#938383" strokeType="OUTSIDE" strokeWidth="0.0" text="400" textAlignment="RIGHT" wrappingWidth="47.983402743935585" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font size="29.0" />
                            </font>
@@ -850,7 +850,7 @@
             </HBox>
             <HBox layoutX="772.0" layoutY="107.0" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.rightAnchor="16.0">
                <children>
-                  <TextField prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                  <TextField fx:id="teacherSearch" onKeyPressed="#searchTeacherDetails" prefHeight="39.0" prefWidth="225.0" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -881,7 +881,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="151.0" layoutY="485.0" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <JFXButton fx:id="staffResetBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="151.0" layoutY="485.0" onAction="#staffResetBtn" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Reset" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>

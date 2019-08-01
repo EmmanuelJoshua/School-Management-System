@@ -47,16 +47,28 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.function.Predicate;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.validation.Severity;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import school.management.system.tables.TeachersTable;
+import java.util.regex.Pattern;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.input.KeyEvent;
+import java.util.Calendar;
 
 /**
  *
@@ -67,10 +79,19 @@ public class DashboardController implements Initializable {
     public Image errorImg = new Image("/school/management/system/images/cross.png");
     public Image successImg = new Image("/school/management/system/images/checked.png");
 
+    private static final String NAME = "(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,}";
+    private static final String PHONE = "\\d{11}";
+    private static final String EMAIL_PATTERN
+            = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public String where = "";
+    String genderSelect;
+
     Database da = new Database();
     private File mainFile;
     private File guardianFile;
     private File employeeFile;
+    
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -242,9 +263,27 @@ public class DashboardController implements Initializable {
     private TextField NewPasswordTxtF;
     @FXML
     private TextField ConfirmPasswordTxtF;
+    @FXML
+    private Text stuMaleText;
+    @FXML
+    private Text stuFemaleText;
+    @FXML
+    private Text stuTotalText;
 
     String OldPassword, NewPassword, ConfirmedPassword, user1, pass1;
     Connection conn;
+    @FXML
+    private TextField studentSearch;
+    @FXML
+    private TextField teacherSearch;
+    @FXML
+    private Text staffMaleGenderCount;
+    @FXML
+    private Text staffFemaleGenderCount;
+    @FXML
+    private Text staffTotalGenderCount;
+    @FXML
+    private JFXButton staffResetBtn;
 
     public DashboardController() {
         try {
@@ -571,14 +610,14 @@ public class DashboardController implements Initializable {
                 "JSS1", "JSS2", "JSS3", "SS1", "SS2", "SS3");
         selectClass.setItems(classes);
         ObservableList departments = FXCollections.observableArrayList(
-                "Science", "Art", "Commercial");
+                "Science", "Art", "Commercial", "None");
         selectDepartment.setItems(departments);
         ObservableList religions = FXCollections.observableArrayList(
                 "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
         employeeReligion.setItems(religions);
         ObservableList qualifications = FXCollections.observableArrayList(
-                "PHD", "BSC", "HND", "OND", "SSCE");
+                "PHD", "BSC", "HND", "OND", "SSCE", "None");
         selectQualification.setItems(qualifications);
         ObservableList maritalStats = FXCollections.observableArrayList(
                 "Married", "Single", "Divorced", "Seperated");
@@ -593,6 +632,23 @@ public class DashboardController implements Initializable {
         populateComboBoxes();
         refreshStudentTable();
         refreshStaffTable();
+        try {
+            loadTeacherTableData();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            studentTableData();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        validators();
+        employeeValidators();
 
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
@@ -692,70 +748,90 @@ public class DashboardController implements Initializable {
         stage.show();
     }
 
+    // Save student button
     @FXML
     private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException {
 
-        Statement sta = da.getConnection().createStatement();
-        String query = "Select ClassId From Students.Class WHERE ClassName ='" + selectClass.getValue().toString() + "'";
-        ResultSet re = sta.executeQuery(query);
-        int id = 0;
-        while (re.next()) {
-            id = re.getInt("ClassId");
+        if (selectGender.getValue() == "Male") {
+            genderSelect = "Male";
+        } else if (selectGender.getValue() == "Female") {
+            genderSelect = "Female";
+        } else {
+            genderSelect = null;
         }
 
-        if (selectedFile == null) {
-//                String path = selectedFile.getPath();
-            File file = new File("src/user.png");
-            selectedFile = file;
-            guardianFile = selectedFile;
-            mainFile = selectedFile;
-            Image image = new Image(selectedFile.toURI().toString());
-            avatarStudView.setImage(image);
-            avatarGuardView.setImage(image);
-        }
-        FileInputStream fis = new FileInputStream(mainFile);
-        FileInputStream fis1 = new FileInputStream(guardianFile);
-        PreparedStatement statement = da.getConnection().prepareStatement("insert into students.StudentDetails(StudentReg,FirstName,MiddleName,LastName,"
-                + "DOB,Gender,Class,Department,Religion,"
-                + "GuardianName,GuardianPhone,GuardianAddress,GuardianEmail,Nationality,GuardianOccupation,StudentImage,GuardianImage)"
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        // if validation returns true
+        if (validateStudentMethod()) {
+            Statement sta = da.getConnection().createStatement();
+            String query = "Select ClassId From Students.Class WHERE ClassName ='" + selectClass.getValue().toString() + "'";
+            ResultSet re = sta.executeQuery(query);
+            int id = 0;
+            while (re.next()) {
+                id = re.getInt("ClassId");
+            }
 
-        statement.setString(1, studentAdmissionNumber.getText());
-        statement.setString(2, studentFirstName.getText());
-        statement.setString(3, studentMiddleName.getText());
-        statement.setString(4, studentLastName.getText());
-        statement.setString(5, studentDateOfBirth.getValue().toString());
-        statement.setString(6, selectGender.getValue().toString());
-        statement.setInt(7, id);
-        statement.setString(8, selectDepartment.getValue().toString());
-        statement.setString(9, selectReligion.getValue().toString());
-        statement.setString(10, guardianName.getText());
-        statement.setString(11, guardianPhone.getText());
-        statement.setString(12, residence.getText());
-        statement.setString(13, guardianMail.getText());
-        statement.setString(14, nationality.getText());
-        statement.setString(15, guardianOccupation.getText());
-        statement.setBinaryStream(16, (InputStream) fis, (int) mainFile.length());
-        statement.setBinaryStream(17, (InputStream) fis1, (int) guardianFile.length());
-        int s = statement.executeUpdate();
-        if (s > 0) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(successImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Success")
-                    .text("Uploaded Succesfully")
-                    .position(Pos.TOP_CENTER);
-            notify.show();
+            if (selectedFile == null) {
+                File file = new File("src/user.png");
+                selectedFile = file;
+                guardianFile = selectedFile;
+                mainFile = selectedFile;
+                Image image = new Image(selectedFile.toURI().toString());
+                avatarStudView.setImage(image);
+                avatarGuardView.setImage(image);
+            }
+            FileInputStream fis = new FileInputStream(mainFile);
+            FileInputStream fis1 = new FileInputStream(guardianFile);
+            PreparedStatement statement = da.getConnection().prepareStatement("insert into students.StudentDetails(StudentReg,FirstName,MiddleName,LastName,"
+                    + "DOB,Gender,Class,Department,Religion,"
+                    + "GuardianName,GuardianPhone,GuardianAddress,GuardianEmail,Nationality,GuardianOccupation,StudentImage,GuardianImage)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            statement.setString(1, studentAdmissionNumber.getText());
+            statement.setString(2, studentFirstName.getText());
+            statement.setString(3, studentMiddleName.getText());
+            statement.setString(4, studentLastName.getText());
+            statement.setString(5, studentDateOfBirth.getValue().toString());
+            statement.setString(6, selectGender.getValue().toString());
+            statement.setInt(7, id);
+            statement.setString(8, selectDepartment.getValue().toString());
+            statement.setString(9, selectReligion.getValue().toString());
+            statement.setString(10, guardianName.getText());
+            statement.setString(11, guardianPhone.getText());
+            statement.setString(12, residence.getText());
+            statement.setString(13, guardianMail.getText());
+            statement.setString(14, nationality.getText());
+            statement.setString(15, guardianOccupation.getText());
+            statement.setBinaryStream(16, (InputStream) fis, (int) mainFile.length());
+            statement.setBinaryStream(17, (InputStream) fis1, (int) guardianFile.length());
+            int s = statement.executeUpdate();
+            if (s != 0) {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(successImg))
+                        .hideAfter(Duration.seconds(8))
+                        .title("Success")
+                        .text("Uploaded Succesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+                studentResetBtn(event);
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Failed")
+                        .text("Uploaded Unsuccesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+            }
+            refreshStudentTable();
         } else {
             Notifications notify = Notifications.create()
                     .graphic(new ImageView(errorImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Failed")
-                    .text("Uploaded Unsuccesfully")
-                    .position(Pos.TOP_CENTER);
+                    .title("Error!")
+                    .text("One or morefields are empty")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(5));
             notify.show();
         }
-        refreshStudentTable();
     }
 
     private void populateStudentTable() {
@@ -815,54 +891,83 @@ public class DashboardController implements Initializable {
     @FXML
     private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
 
-        if (selectedFile1 == null) {
-            File file = new File("src/user.png");
-            selectedFile1 = file;
-            employeeFile = selectedFile1;
-            Image image = new Image(selectedFile1.toURI().toString());
-            avatarEmployeeView.setImage(image);
+        if (selectTeacherGender.getValue() == "Male") {
+            genderSelect = "Male";
+        } else if (selectTeacherGender.getValue() == "Female") {
+            genderSelect = "Female";
+        } else {
+            genderSelect = null;
         }
-        FileInputStream fish = new FileInputStream(employeeFile);
-        PreparedStatement statement = da.getConnection().prepareStatement("insert into staffs.StaffDetails(EmployeeNo,FirstName,MiddleName,LastName,"
-                + "DOB,Gender,Nationality,maritalStatus,Phone,EmailAddress,ResidentialAddress,Religion,"
-                + "Qualifications,StaffDesignation,Image)"
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-        statement.setString(1, employeeID.getText());
-        statement.setString(2, employeeFirstName.getText());
-        statement.setString(3, employeeMiddleName.getText());
-        statement.setString(4, employeeLastName.getText());
-        statement.setString(5, employeDOB.getValue().toString());
-        statement.setString(6, selectTeacherGender.getValue().toString());
-        statement.setString(7, employeeNationality.getText());
-        statement.setString(8, selectMaritalStatus.getValue().toString());
-        statement.setString(9, employeePhoneNumber.getText());
-        statement.setString(10, employeeEmail.getText());
-        statement.setString(11, employeeResidence.getText());
-        statement.setString(12, employeeReligion.getValue().toString());
-        statement.setString(13, selectQualification.getValue().toString());
-        statement.setString(14, selectDesignation.getValue().toString());
-        statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
+        // if validation returns true
+        if (validateTeachersMethod()) {
+//            Statement sta = da.getConnection().createStatement();
+//            String query = "Select StaffID From Staffs.StaffDetails WHERE ClassName ='" + selectClass.getValue().toString() + "'";
+//            ResultSet re = sta.executeQuery(query);
+//            int id = 0;
+//            while (re.next()) {
+//                id = re.getInt("StaffID");
+//            }
 
-        int s = statement.executeUpdate();
-        if (s > 0) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(successImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Success")
-                    .text("Uploaded Succesfully")
-                    .position(Pos.TOP_CENTER);
-            notify.show();
+            if (selectedFile1 == null) {
+                File file = new File("src/user.png");
+                selectedFile1 = file;
+                employeeFile = selectedFile1;
+                Image image = new Image(selectedFile1.toURI().toString());
+                avatarEmployeeView.setImage(image);
+            }
+
+            FileInputStream fish = new FileInputStream(employeeFile);
+            PreparedStatement statement = da.getConnection().prepareStatement("insert into staffs.StaffDetails(EmployeeNo,FirstName,MiddleName,LastName,"
+                    + "DOB,Gender,Nationality,maritalStatus,Phone,EmailAddress,ResidentialAddress,Religion,"
+                    + "Qualifications,StaffDesignation,Image)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            statement.setString(1, employeeID.getText());
+            statement.setString(2, employeeFirstName.getText());
+            statement.setString(3, employeeMiddleName.getText());
+            statement.setString(4, employeeLastName.getText());
+            statement.setString(5, employeDOB.getValue().toString());
+            statement.setString(6, selectTeacherGender.getValue().toString());
+            statement.setString(7, employeeNationality.getText());
+            statement.setString(8, selectMaritalStatus.getValue().toString());
+            statement.setString(9, employeePhoneNumber.getText());
+            statement.setString(10, employeeEmail.getText());
+            statement.setString(11, employeeResidence.getText());
+            statement.setString(12, employeeReligion.getValue().toString());
+            statement.setString(13, selectQualification.getValue().toString());
+            statement.setString(14, selectDesignation.getValue().toString());
+            statement.setBinaryStream(15, (InputStream) fish, (int) employeeFile.length());
+
+            int s = statement.executeUpdate();
+            if (s > 0) {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(successImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Success")
+                        .text("Uploaded Succesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+                staffResetBtn(event);
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Failed")
+                        .text("Uploaded Unsuccesfully")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+            }
+            refreshStaffTable();
         } else {
             Notifications notify = Notifications.create()
                     .graphic(new ImageView(errorImg))
-                    .hideAfter(Duration.seconds(5))
-                    .title("Failed")
-                    .text("Uploaded Unsuccesfully")
-                    .position(Pos.TOP_CENTER);
+                    .title("Error!")
+                    .text("One or morefields are empty")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(5));
             notify.show();
         }
-        refreshStaffTable();
     }
 
     @FXML
@@ -943,13 +1048,10 @@ public class DashboardController implements Initializable {
                     } else {
                         System.out.println("teacher's image is not visible");
                     }
-
                 }
-
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         });
     }
 
@@ -1044,12 +1146,12 @@ public class DashboardController implements Initializable {
                         PreparedStatement pst = conn.prepareStatement(query);
                         pst.execute();
                         Notifications notify = Notifications.create()
-                            .graphic(new ImageView(successImg))
-                            .title("SUCCESS")
-                            .text("Password Changed Successfully")
-                            .position(Pos.TOP_CENTER)
-                            .hideAfter(Duration.seconds(3));
-                    notify.show();
+                                .graphic(new ImageView(successImg))
+                                .title("SUCCESS")
+                                .text("Password Changed Successfully")
+                                .position(Pos.TOP_CENTER)
+                                .hideAfter(Duration.seconds(3));
+                        notify.show();
                     } catch (SQLException ex) {
                         Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -1075,4 +1177,603 @@ public class DashboardController implements Initializable {
         }
     }
 
+    @FXML
+    // Reset button for student
+    private void studentResetBtn(ActionEvent event) {
+        // Set all fields to empty or null on click
+        studentFirstName.setText("");
+        studentLastName.setText("");
+        studentMiddleName.setText("");
+        guardianName.setText("");
+        studentDateOfBirth.setValue(null);
+        guardianMail.setText("");
+        guardianOccupation.setText("");
+        residence.setText("");
+        guardianPhone.setText("");
+        selectClass.setValue(null);
+        selectDepartment.setValue(null);
+        selectGender.setValue(null);
+        selectReligion.setValue(null);
+        studentAdmissionNumber.setText("");
+        nationality.setText("");
+
+        File file = new File("src/user.png");
+        selectedFile = file;
+        guardianFile = selectedFile;
+        mainFile = selectedFile;
+        Image image = new Image(selectedFile.toURI().toString());
+        avatarStudView.setImage(image);
+        avatarGuardView.setImage(image);
+    }
+
+    // Validator method for student
+    public void validators() {
+        ValidationSupport validation1 = new ValidationSupport();
+        validation1.registerValidator(studentFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation2 = new ValidationSupport();
+        validation2.registerValidator(studentFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
+
+        ValidationSupport validation3 = new ValidationSupport();
+        validation3.registerValidator(studentLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation4 = new ValidationSupport();
+        validation4.registerValidator(studentLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
+
+        ValidationSupport validation5 = new ValidationSupport();
+        validation5.registerValidator(guardianMail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation6 = new ValidationSupport();
+        validation6.registerValidator(guardianMail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
+
+        ValidationSupport validation8 = new ValidationSupport();
+        validation8.registerValidator(residence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation9 = new ValidationSupport();
+        validation9.registerValidator(guardianPhone, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation10 = new ValidationSupport();
+        validation10.registerValidator(guardianPhone, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
+
+        ValidationSupport validation11 = new ValidationSupport();
+        validation11.registerValidator(selectGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation12 = new ValidationSupport();
+        validation12.registerValidator(selectClass, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation13 = new ValidationSupport();
+        validation13.registerValidator(selectReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation14 = new ValidationSupport();
+        validation14.registerValidator(guardianName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation15 = new ValidationSupport();
+        validation15.registerValidator(guardianName, Validator.createRegexValidator("Provide Correct Guardian` Name", NAME, Severity.ERROR));
+
+        ValidationSupport validation16 = new ValidationSupport();
+        validation16.registerValidator(studentMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validation18 = new ValidationSupport();
+        validation18.registerValidator(studentMiddleName, Validator.createRegexValidator("Input Required", NAME, Severity.WARNING));
+
+        ValidationSupport validation19 = new ValidationSupport();
+        validation19.registerValidator(nationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+    }
+
+    //validations for Staffs 
+    public void employeeValidators() {
+        ValidationSupport validationSupport = new ValidationSupport();
+        validationSupport.registerValidator(employeeLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport.registerValidator(employeeLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport1 = new ValidationSupport();
+        validationSupport1.registerValidator(employeeFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport1.registerValidator(employeeFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport2 = new ValidationSupport();
+        validationSupport2.registerValidator(employeeMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport2.registerValidator(employeeMiddleName, Validator.createRegexValidator("Provide Correct Middle Name", NAME, Severity.ERROR));
+
+        ValidationSupport validationSupport3 = new ValidationSupport();
+        validationSupport3.registerValidator(employeeID, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport4 = new ValidationSupport();
+        validationSupport4.registerValidator(employeeNationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport5 = new ValidationSupport();
+        validationSupport5.registerValidator(employeeResidence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport6 = new ValidationSupport();
+        validationSupport6.registerValidator(employeeEmail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport6.registerValidator(employeeEmail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
+
+        ValidationSupport validationSupport7 = new ValidationSupport();
+        validationSupport7.registerValidator(employeePhoneNumber, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+        validationSupport7.registerValidator(employeePhoneNumber, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
+
+        ValidationSupport validationSupport8 = new ValidationSupport();
+        validationSupport8.registerValidator(employeeReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport9 = new ValidationSupport();
+        validationSupport9.registerValidator(employeDOB, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport10 = new ValidationSupport();
+        validationSupport10.registerValidator(selectQualification, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport11 = new ValidationSupport();
+        validationSupport11.registerValidator(selectTeacherGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+
+        ValidationSupport validationSupport12 = new ValidationSupport();
+        validationSupport12.registerValidator(selectDesignation, Validator.createEmptyValidator("Input Required", Severity.WARNING));
+    }
+
+    // Validations for Staffs method on user input
+    public boolean validateTeachersMethod() {
+        // checks if the employee last name field is empty
+        if ("".equals(employeeLastName.getText())) {
+            return false;
+        }
+
+        // checks if the employee first name field is empty
+        if ("".equals(employeeFirstName.getText())) {
+            return false;
+        }
+
+        // checks if the employee middle name field is empty
+        if ("".equals(employeeMiddleName.getText())) {
+            return false;
+        }
+
+        // checks if the employee ID field is empty
+        if ("".equals(employeeID.getText())) {
+            return false;
+        }
+
+        // checks if the employee nationality field is empty
+        if ("".equals(employeeNationality.getText())) {
+            return false;
+        }
+
+        // checks if the employee residence field is empty
+        if ("".equals(employeeResidence.getText())) {
+            return false;
+        }
+
+        // checks if the employee email field is empty
+        if ("".equals(employeeEmail.getText())) {
+            return false;
+        }
+
+        // checks if the employee phone number field is empty
+        if ("".equals(employeePhoneNumber.getText())) {
+            return false;
+        }
+
+        // checks if the employee religion value is empty
+        if ("".equals(employeeReligion.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee email value is empty
+        if ("".equals(employeDOB.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee qualification value is empty
+        if ("".equals(selectQualification.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee gender value is empty
+        if ("".equals(selectTeacherGender.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee designation value is empty
+        if ("".equals(selectDesignation.getValue().toString().isEmpty())) {
+            return false;
+        }
+
+        // checks if the employee email mattches the specified email pattern
+        if (!Pattern.matches(EMAIL_PATTERN, employeeEmail.getText())) {
+            return false;
+        }
+
+        // checks if the employee phone number matches the specified phone generic pattern
+        if (!Pattern.matches(PHONE, employeePhoneNumber.getText())) {
+            return false;
+        }
+
+        // checks if the employee first name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeFirstName.getText())) {
+            return false;
+        }
+
+        // checks if the employee last name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeLastName.getText())) {
+            return false;
+        }
+
+        // checks if the employee middle name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, employeeMiddleName.getText())) {
+            return false;
+        }
+
+        // else if all fields are entered correctly return false
+        return true;
+    }
+
+    // Validation Method 2 for student on user input
+    public boolean validateStudentMethod() {
+        // checks if the first name field is empty
+        if ("".equals(studentFirstName.getText())) {
+            return false;
+        }
+
+        // checks if the last name field is empty
+        if ("".equals(studentLastName.getText())) {
+            return false;
+        }
+
+        // checks if the middle name field is empty
+        if ("".equals(studentMiddleName.getText())) {
+            return false;
+        }
+
+        // checks and returns false if the guardian field is empty
+        if ("".equals(guardianName.getText())) {
+            return false;
+        }
+
+        // checks if the guardian's Email field is empty
+        if ("".equals(guardianMail.getText())) {
+            return false;
+        }
+
+        // checks if the student's admin number is empty
+        if ("".equals(studentAdmissionNumber.getText())) {
+            return false;
+        }
+
+        // checks if the residence address is empty
+        if ("".equals(residence.getText())) {
+            return false;
+        }
+
+        //checks if the phone number field is empty
+        if ("".equals(guardianPhone.getText())) {
+            return false;
+        }
+
+        // checks if the guardian occupation field is empty
+        if ("".equals(guardianOccupation.getText())) {
+            return false;
+        }
+
+        // checks if the date of birth value is empty
+        if ("".equals(studentDateOfBirth.getValue().toString())) {
+            return false;
+        }
+
+        // checks if the students class field is empty
+        if ("".equals(selectClass.getValue().toString())) {
+            return false;
+        }
+
+        // checks if the student department field is empty
+        if ("".equals(selectDepartment.getValue().toString())) {
+            return false;
+        }
+
+        // checks if the students gender field is empty
+        if ("".equals(selectGender.getValue().toString())) {
+            return false;
+        }
+
+        // checks if the religion value field is empty
+        if ("".equals(selectReligion.getValue().toString())) {
+            return false;
+        }
+
+        // checks if the guardians email mattches the specified email pattern
+        if (!Pattern.matches(EMAIL_PATTERN, guardianMail.getText())) {
+            return false;
+        }
+
+        // checks if the guardians phone matches the specified phone generic pattern
+        if (!Pattern.matches(PHONE, guardianPhone.getText())) {
+            return false;
+        }
+
+        // checks if the first name field matches the desired generic pattern
+        if (!Pattern.matches(NAME, studentFirstName.getText())) {
+            return false;
+        }
+
+        // specifies if the middle name matches the desired generic pattern
+        if (!Pattern.matches(NAME, studentLastName.getText())) {
+            return false;
+        }
+
+        // specifies if the middle name matches the desired generic pattern
+        if (!Pattern.matches(NAME, studentMiddleName.getText())) {
+            return false;
+        }
+
+        // checks if the guardians name matches the desired generic pattern
+        if (!Pattern.matches(NAME, guardianName.getText())) {
+            return false;
+        }
+       
+        // checks if the date entered is more than the current date which is invalid
+if(isDateValid("dd-mm-yyyy",currentDate("-"), studentDateOfBirth.getValue().toString()) == false){
+//    studentDateOfBirth.setValue(null);
+         return false;
+}
+        
+        // else if all fields are entered correctly return false
+        return true;
+    }
+
+    // Method for loading count on student Table data
+    public void studentTableData() throws SQLException, ClassNotFoundException {
+        Connection con;
+        con = da.getConnection();
+        Statement state = da.getConnection().createStatement();
+
+        // query for selecting all the data on the students table
+        String sql = "SELECT * FROM students.studentDetails ";
+        // query for counting number of males in the student table
+        String maleCount = "SELECT count(Gender) AS 'Count1' FROM students.studentDetails  where Gender = 'Male' ";
+        // query for counting number of females on the students table
+        String femaleCount = "SELECT count(Gender) AS 'Count2' FROM students.vwStudentsInfo where Gender = 'Female'";
+        // query for counting total genders on the table
+        String totalCount = "SELECT count(Gender) AS 'Count3' FROM students.vwStudentsInfo";
+
+        ResultSet rrs1 = da.executeQuery(sql);
+        ResultSet rrs = da.executeQuery(maleCount);
+        ResultSet rrs2 = da.executeQuery(femaleCount);
+        ResultSet rrs3 = da.executeQuery(totalCount);
+
+        try {
+
+            while (rrs1.next()) {
+                String gen = rrs1.getString("gender");
+            }
+
+            while (rrs.next()) {
+
+                String num = rrs.getString("count1");
+                if (num.length() == 1) {
+                    stuMaleText.setText("00" + num);
+                } else if (num.length() == 2) {
+                    stuMaleText.setText("0" + num);
+                } else if (num.length() == 3) {
+                    stuMaleText.setText(num);
+                }
+            }
+
+            while (rrs2.next()) {
+                String num = rrs2.getString("count2");
+                if (num.length() == 1) {
+                    stuFemaleText.setText("00" + num);
+                } else if (num.length() == 2) {
+                    stuFemaleText.setText("0" + num);
+                } else if (num.length() == 3) {
+                    stuFemaleText.setText(num);
+                }
+            }
+
+            while (rrs3.next()) {
+                String num = rrs3.getString("count3");
+                if (num.length() == 1) {
+                    stuTotalText.setText("00" + num);
+                } else if (num.length() == 2) {
+                    stuTotalText.setText("0" + num);
+                } else if (num.length() == 3) {
+                    stuTotalText.setText(num);
+                }
+            }
+            rrs1.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Method for loading count on staff Table
+    public void loadTeacherTableData() throws SQLException, ClassNotFoundException {
+        Connection conn;
+        conn = da.getConnection();
+        Statement statement = da.getConnection().createStatement();
+
+        // query for selecting all the data on the students table
+        String sql = "SELECT * FROM  Staffs.StaffDetails ";
+
+        // query for counting number of males in the student table
+        String maleCount = "SELECT count(Gender) AS 'Count1' FROM  Staffs.StaffDetails  where Gender = 'Male' ";
+
+        // query for counting number of females on the students table
+        String femaleCount = "SELECT count(Gender) AS 'Count2' FROM  Staffs.StaffDetails where Gender = 'Female'";
+
+        // query for counting total genders on the table
+        String totalCount = "SELECT count(Gender) AS 'Count3' FROM  Staffs.StaffDetails";
+
+        ResultSet rrs1 = da.executeQuery(sql);
+        ResultSet rrs = da.executeQuery(maleCount);
+        ResultSet rrs2 = da.executeQuery(femaleCount);
+        ResultSet rrs3 = da.executeQuery(totalCount);
+
+        try {
+            while (rrs1.next()) {
+                String gen = rrs1.getString("gender");
+            }
+
+            while (rrs.next()) {
+                String num = rrs.getString("count1");
+                if (num.length() == 1) {
+                    staffMaleGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffMaleGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffMaleGenderCount.setText(num);
+                }
+            }
+
+            while (rrs2.next()) {
+                String num = rrs2.getString("count2");
+                if (num.length() == 1) {
+                    staffFemaleGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffFemaleGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffFemaleGenderCount.setText(num);
+                }
+            }
+
+            while (rrs3.next()) {
+                String num = rrs3.getString("count3");
+                if (num.length() == 1) {
+                    staffTotalGenderCount.setText("00" + num);
+                } else if (num.length() == 2) {
+                    staffTotalGenderCount.setText("0" + num);
+                } else if (num.length() == 3) {
+                    staffTotalGenderCount.setText(num);
+                }
+            }
+            rrs1.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void searchStudentDetails(KeyEvent event) {
+        FilteredList<AdminStudentsTable> filteredData = new FilteredList<>(obs, e -> true);
+        studentSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate((Predicate<? super AdminStudentsTable>) adminStudentTable -> {
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                if (adminStudentTable.getRegistrationNumber().contains(newValue)) {
+                    return true;
+                } else if (adminStudentTable.getFullName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (adminStudentTable.getGender().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (adminStudentTable.getStudentClass().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+
+        });
+        SortedList<AdminStudentsTable> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(adStudentTable.comparatorProperty());
+        adStudentTable.setItems(sortedData);
+    }
+
+    @FXML
+    private void searchTeacherDetails(KeyEvent event) {
+        FilteredList<TeachersTable> filteredData = new FilteredList<>(obs1, e -> true);
+        teacherSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate((Predicate<? super TeachersTable>) teac -> {
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                if (teac.getEmployeeID().contains(newValue)) {
+                    return true;
+                } else if (teac.getFullName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (teac.getGender().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<TeachersTable> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(teachersTable.comparatorProperty());
+        teachersTable.setItems(sortedData);
+    }
+
+    // Reset button for Staff 
+    @FXML
+    private void staffResetBtn(ActionEvent event) {
+        // Set all fields to empty or null on click
+        employeeID.setText("");
+        employeeFirstName.setText("");
+        employeeLastName.setText("");
+        employeeMiddleName.setText("");
+        selectQualification.setValue(null);
+        selectTeacherGender.setValue(null);
+        employeDOB.setValue(null);
+        selectMaritalStatus.setValue(null);
+        employeeReligion.setValue(null);
+        employeePhoneNumber.setText("");
+        employeeResidence.setText("");
+        employeeEmail.setText("");
+        employeeNationality.setText("");
+        selectDesignation.setValue(null);
+
+        File file = new File("src/user.png");
+        selectedFile = file;
+        employeeFile = selectedFile;
+        Image image = new Image(selectedFile.toURI().toString());
+        avatarEmployeeView.setImage(image);
+    }
+    
+    // Method for getting the current date
+     public static String currentDate(String separator) {
+    Calendar date = Calendar.getInstance();
+    String day = Integer.toString(date.get(Calendar.DAY_OF_MONTH));
+    String month = Integer.toString(date.get(Calendar.MONTH) + 1);
+    String year = Integer.toString(date.get(Calendar.YEAR));
+    if (month.length() < 2) {
+        month = "0" + month;
+    }
+    if (day.length() < 2) {
+        day = "0" + day;
+    }
+    String regDate = year + separator + month + separator + day;
+    return regDate;
+}
+     
+     //boolean method for returning boolean value if date is valid or not
+    public boolean isDateValid(String dateformat, 
+            String currentDate, String dateOfInterest) {
+
+        Calendar cal = Calendar.getInstance();
+        String format = dateformat;
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        Date cd = null;  // current date
+        Date doi = null; // date of interest
+
+        try {
+            cd = sdf.parse(currentDate);
+            doi = sdf.parse(dateOfInterest);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diff = cd.getTime() - doi.getTime();
+        int diffDays = (int) (diff / (24 * 1000 * 60 * 60));
+        
+//        Date currentTime =  cal.getTime();
+//        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+//        String formatDate = df.format(currentTime);
+
+        if (diffDays > 0) {
+            Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .title("ERROR")
+                        .text("Date of birth cannot be greater than current date")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(3));
+                notify.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
