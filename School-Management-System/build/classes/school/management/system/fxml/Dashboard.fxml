@@ -699,7 +699,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="staffPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <TableView fx:id="teachersTable" layoutX="17.0" layoutY="163.0" prefHeight="445.0" prefWidth="652.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="163.0">
                <columns>
@@ -875,7 +875,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BRIEFCASE" layoutX="14.0" layoutY="34.0" size="25" text="" />
                </children>
             </Pane>
-            <AnchorPane fx:id="addTeacherPane" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="addTeacherPane" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Text fill="#4d4c4c" layoutX="17.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Information">
                      <font>
@@ -1044,7 +1044,7 @@
                   <TableColumn editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Parent ID" />
                   <TableColumn editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Full Name" />
                   <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
-                  <TableColumn fx:id="teacherGender1" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                  <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
                   <TableColumn editable="false" prefWidth="77.5018310546875" text="Address" />
                </columns>
                <columnResizePolicy>
@@ -1055,7 +1055,7 @@
                <children>
                   <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;">
                      <children>
-                        <GNAvatarView fx:id="teacherImage1" layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
+                        <GNAvatarView layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
                            <image>
                               <Image url="@../images/user%20(2).png" />
                            </image>
