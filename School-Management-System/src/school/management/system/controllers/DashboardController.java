@@ -91,7 +91,7 @@ public class DashboardController implements Initializable {
     private File mainFile;
     private File guardianFile;
     private File employeeFile;
-    
+
     @FXML
     private TableColumn<AdminStudentsTable, String> registrationNumber;
     @FXML
@@ -195,7 +195,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXTextField guardianPhone;
     @FXML
-    private JFXTextField nationality;
+    private JFXComboBox nationality;
     private Image image;
     @FXML
     private JFXDatePicker studentDateOfBirth;
@@ -284,6 +284,20 @@ public class DashboardController implements Initializable {
     private Text staffTotalGenderCount;
     @FXML
     private JFXButton staffResetBtn;
+    @FXML
+    private AnchorPane parentsPane;
+    @FXML
+    private AnchorPane addParentsPane;
+    @FXML
+    private JFXButton parentBtn;
+    @FXML
+    private MaterialDesignIconView parentIcon;
+    @FXML
+    private AnchorPane coursesPane;
+    @FXML
+    private JFXButton courseBtn;
+    @FXML
+    private MaterialDesignIconView courseIcon;
 
     public DashboardController() {
         try {
@@ -381,6 +395,20 @@ public class DashboardController implements Initializable {
             gradeIcon.getStyleClass().remove(2);
         }
 
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+       
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+
         if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -397,8 +425,10 @@ public class DashboardController implements Initializable {
 
         studentPane.setVisible(false);
         staffPane.setVisible(false);
+        parentsPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
+        coursesPane.setVisible(false);
     }
 
     @FXML
@@ -431,6 +461,20 @@ public class DashboardController implements Initializable {
             gradeIcon.getStyleClass().remove(2);
         }
 
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+        
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+
         if (studentBtn.getStyleClass().toString().contains("active") && stuIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -449,6 +493,8 @@ public class DashboardController implements Initializable {
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
+        parentsPane.setVisible(false);
+        coursesPane.setVisible(false);
     }
 
     @FXML
@@ -481,6 +527,20 @@ public class DashboardController implements Initializable {
             gradeIcon.getStyleClass().remove(2);
         }
 
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+        
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -499,6 +559,8 @@ public class DashboardController implements Initializable {
         studentPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
+        parentsPane.setVisible(false);
+        coursesPane.setVisible(false);
     }
 
     @FXML
@@ -531,6 +593,20 @@ public class DashboardController implements Initializable {
             gradeIcon.getStyleClass().remove(2);
         }
 
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+        
         if (settingBtn.getStyleClass().toString().contains("active") && settingsIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -549,6 +625,8 @@ public class DashboardController implements Initializable {
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         gradesPane.setVisible(false);
+        parentsPane.setVisible(false);
+        coursesPane.setVisible(false);
     }
 
     @FXML
@@ -581,6 +659,20 @@ public class DashboardController implements Initializable {
             settingsIcon.getStyleClass().remove(2);
         }
 
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+        
         if (gradeBtn.getStyleClass().toString().contains("active") && gradeIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -599,6 +691,141 @@ public class DashboardController implements Initializable {
         studentPane.setVisible(false);
         staffPane.setVisible(false);
         settingsPane.setVisible(false);
+        parentsPane.setVisible(false);
+        coursesPane.setVisible(false);
+    }
+
+    @FXML
+    void openParents(ActionEvent event) {
+         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+        
+        if (parentBtn.getStyleClass().toString().contains("active") && parentIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            parentBtn.getStyleClass().add("active");
+            parentIcon.getStyleClass().add("iconActive");
+            parentsPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(parentsPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
+        staffPane.setVisible(false);
+        settingsPane.setVisible(false);
+        gradesPane.setVisible(false);
+        coursesPane.setVisible(false);
+    }
+    
+     @FXML
+    void openCourses(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+        
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+        
+         if (courseBtn.getStyleClass().toString().contains("active") && courseIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            courseBtn.getStyleClass().add("active");
+            courseIcon.getStyleClass().add("iconActive");
+            coursesPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(coursesPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
+        staffPane.setVisible(false);
+        settingsPane.setVisible(false);
+        gradesPane.setVisible(false);
+        parentsPane.setVisible(false);
+        
     }
 
     public void populateComboBoxes() {
@@ -617,7 +844,7 @@ public class DashboardController implements Initializable {
         selectReligion.setItems(religions);
         employeeReligion.setItems(religions);
         ObservableList qualifications = FXCollections.observableArrayList(
-                "PHD", "BSC", "HND", "OND", "SSCE", "None");
+                "None","PHD", "BSC", "HND", "OND", "SSCE");
         selectQualification.setItems(qualifications);
         ObservableList maritalStats = FXCollections.observableArrayList(
                 "Married", "Single", "Divorced", "Seperated");
@@ -625,6 +852,9 @@ public class DashboardController implements Initializable {
         ObservableList designation = FXCollections.observableArrayList(
                 "Teaching", "Non Teaching");
         selectDesignation.setItems(designation);
+        ObservableList nationality1 = FXCollections.observableArrayList(
+            "Nigerian","Ghanian","Cameroonian","Benin");
+        nationality.setItems(nationality1);
     }
 
     @Override
@@ -647,8 +877,8 @@ public class DashboardController implements Initializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        validators();
-        employeeValidators();
+//        validators();
+//        employeeValidators();
 
         logoutYes.setOnAction((ActionEvent event1) -> {
             try {
@@ -799,7 +1029,7 @@ public class DashboardController implements Initializable {
             statement.setString(11, guardianPhone.getText());
             statement.setString(12, residence.getText());
             statement.setString(13, guardianMail.getText());
-            statement.setString(14, nationality.getText());
+            statement.setString(14, nationality.getValue().toString());
             statement.setString(15, guardianOccupation.getText());
             statement.setBinaryStream(16, (InputStream) fis, (int) mainFile.length());
             statement.setBinaryStream(17, (InputStream) fis1, (int) guardianFile.length());
@@ -1195,7 +1425,7 @@ public class DashboardController implements Initializable {
         selectGender.setValue(null);
         selectReligion.setValue(null);
         studentAdmissionNumber.setText("");
-        nationality.setText("");
+        nationality.setValue("");
 
         File file = new File("src/user.png");
         selectedFile = file;
@@ -1504,13 +1734,13 @@ public class DashboardController implements Initializable {
         if (!Pattern.matches(NAME, guardianName.getText())) {
             return false;
         }
-       
+
         // checks if the date entered is more than the current date which is invalid
-if(isDateValid("dd-mm-yyyy",currentDate("-"), studentDateOfBirth.getValue().toString()) == false){
+        if (isDateValid("dd-mm-yyyy", currentDate("-"), studentDateOfBirth.getValue().toString()) == false) {
 //    studentDateOfBirth.setValue(null);
-         return false;
-}
-        
+            return false;
+        }
+
         // else if all fields are entered correctly return false
         return true;
     }
@@ -1722,25 +1952,25 @@ if(isDateValid("dd-mm-yyyy",currentDate("-"), studentDateOfBirth.getValue().toSt
         Image image = new Image(selectedFile.toURI().toString());
         avatarEmployeeView.setImage(image);
     }
-    
+
     // Method for getting the current date
-     public static String currentDate(String separator) {
-    Calendar date = Calendar.getInstance();
-    String day = Integer.toString(date.get(Calendar.DAY_OF_MONTH));
-    String month = Integer.toString(date.get(Calendar.MONTH) + 1);
-    String year = Integer.toString(date.get(Calendar.YEAR));
-    if (month.length() < 2) {
-        month = "0" + month;
+    public static String currentDate(String separator) {
+        Calendar date = Calendar.getInstance();
+        String day = Integer.toString(date.get(Calendar.DAY_OF_MONTH));
+        String month = Integer.toString(date.get(Calendar.MONTH) + 1);
+        String year = Integer.toString(date.get(Calendar.YEAR));
+        if (month.length() < 2) {
+            month = "0" + month;
+        }
+        if (day.length() < 2) {
+            day = "0" + day;
+        }
+        String regDate = year + separator + month + separator + day;
+        return regDate;
     }
-    if (day.length() < 2) {
-        day = "0" + day;
-    }
-    String regDate = year + separator + month + separator + day;
-    return regDate;
-}
-     
-     //boolean method for returning boolean value if date is valid or not
-    public boolean isDateValid(String dateformat, 
+
+    //boolean method for returning boolean value if date is valid or not
+    public boolean isDateValid(String dateformat,
             String currentDate, String dateOfInterest) {
 
         Calendar cal = Calendar.getInstance();
@@ -1758,22 +1988,25 @@ if(isDateValid("dd-mm-yyyy",currentDate("-"), studentDateOfBirth.getValue().toSt
 
         long diff = cd.getTime() - doi.getTime();
         int diffDays = (int) (diff / (24 * 1000 * 60 * 60));
-        
+
 //        Date currentTime =  cal.getTime();
 //        DateFormat df = new SimpleDateFormat("HH:mm:ss");
 //        String formatDate = df.format(currentTime);
-
         if (diffDays > 0) {
             Notifications notify = Notifications.create()
-                        .graphic(new ImageView(errorImg))
-                        .title("ERROR")
-                        .text("Date of birth cannot be greater than current date")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(3));
-                notify.show();
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("Date of birth cannot be greater than current date")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
             return false;
         } else {
             return true;
         }
+    }
+
+    @FXML
+    private void addParent(ActionEvent event) {
     }
 }

@@ -65,11 +65,10 @@ public class LoginController implements Initializable {
 
     Connection con2;
     String user, pass;
-    
+
 //    private boolean userLogin(String username, String password) {
 //        return Validator.validate(username, password);
 //    }
-
     public void closeStage() {
         ((Stage) loginPane.getScene().getWindow()).close();
     }
@@ -112,7 +111,8 @@ public class LoginController implements Initializable {
         stage.setIconified(true);
     }
 //method to validate sign 
-    public void validateSignIn(){
+
+    public void validateSignIn() {
         try {
             ResultSet res = con2.createStatement().executeQuery("select * from LogInDetails");
             while (res.next()) {
@@ -123,36 +123,36 @@ public class LoginController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       if (username.getText().isEmpty() && password.getText().isEmpty()) {
-            Notifications notify=Notifications.create()
-                        .graphic(new ImageView(errorImg))
-                        .title("ERROR")
-                        .text("Username and Password Empty")
-                        .position(Pos.TOP_CENTER)
-                        .hideAfter(Duration.seconds(3));
-                notify.show();
+
+        if (username.getText().isEmpty() && password.getText().isEmpty()) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("Username and Password Empty")
+                    .position(Pos.TOP_CENTER)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
         } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
-           Notifications notify=Notifications.create()
-                        .graphic(new ImageView(errorImg))
-                        .title("ERROR")
-                        .text("Invalid Login")
-                        .position(Pos.TOP_CENTER)
-                        .hideAfter(Duration.seconds(3));
-                notify.show(); 
-        } else{
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("Invalid Login")
+                    .position(Pos.TOP_CENTER)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
+        } else {
 //            MainUIController.adminID = user_name.getText();
             PauseTransition pause = new PauseTransition(Duration.seconds(5));
             loginBtn.setMouseTransparent(true);
-//            progress.setVisible(true);
+            progress.setVisible(true);
             pause.play();
             pause.setOnFinished((ActionEvent event1) -> {
-        closeStage();
-        next();
+                closeStage();
+                next();
             });
         }
     }
-    
+
     @FXML
     private void signIn(ActionEvent event) {
         validateSignIn();
@@ -188,16 +188,16 @@ public class LoginController implements Initializable {
             }
 
         });
-        
+
         //get connection from database
-         try {
-        con2 = Database.getConnect();
+        try {
+            con2 = Database.getConnect();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-         
+        }
+
         //Enter Button Key event Listener
 //         username.setOnKeyPressed(new EventHandler<KeyEvent>(){
 //           @Override
