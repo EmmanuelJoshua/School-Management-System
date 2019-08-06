@@ -77,11 +77,11 @@ public class LoginController implements Initializable {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Dashboard.fxml"));
 
-//            String path = "/ManagementSystem/images/homeA.png";
-//            Image img = new Image(path);
+            String path = "/school/management/system/images/CHMS_Icon.png";
+            Image img = new Image(path);
             Stage stage = new Stage();
             stage.setTitle("Home | CHMS");
-//            stage.getIcons().add(0, img);
+            stage.getIcons().add(0, img);
             stage.setScene(new Scene(parent));
             stage.initOwner(((Stage) loginPane.getScene().getWindow()));
             stage.setMinWidth(1200);
