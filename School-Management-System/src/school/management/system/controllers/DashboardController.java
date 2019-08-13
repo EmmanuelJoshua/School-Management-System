@@ -9,6 +9,7 @@ import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -69,6 +70,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  *
@@ -298,6 +301,10 @@ public class DashboardController implements Initializable {
     private JFXButton courseBtn;
     @FXML
     private MaterialDesignIconView courseIcon;
+    @FXML
+    private JFXListView<Label> view;
+    @FXML
+    private JFXListView<Label> leaderList;
 
     public DashboardController() {
         try {
@@ -401,7 +408,7 @@ public class DashboardController implements Initializable {
             parentBtn.getStyleClass().remove(2);
             parentIcon.getStyleClass().remove(2);
         }
-       
+
         if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
 
         } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
@@ -467,7 +474,7 @@ public class DashboardController implements Initializable {
             parentBtn.getStyleClass().remove(2);
             parentIcon.getStyleClass().remove(2);
         }
-        
+
         if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
 
         } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
@@ -540,7 +547,7 @@ public class DashboardController implements Initializable {
             courseBtn.getStyleClass().remove(2);
             courseIcon.getStyleClass().remove(2);
         }
-        
+
         if (staffBtn.getStyleClass().toString().contains("active") && staffIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -606,7 +613,7 @@ public class DashboardController implements Initializable {
             courseBtn.getStyleClass().remove(2);
             courseIcon.getStyleClass().remove(2);
         }
-        
+
         if (settingBtn.getStyleClass().toString().contains("active") && settingsIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -672,7 +679,7 @@ public class DashboardController implements Initializable {
             courseBtn.getStyleClass().remove(2);
             courseIcon.getStyleClass().remove(2);
         }
-        
+
         if (gradeBtn.getStyleClass().toString().contains("active") && gradeIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -697,7 +704,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void openParents(ActionEvent event) {
-         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
 
         } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
             dashboardBtn.getStyleClass().remove(2);
@@ -738,7 +745,7 @@ public class DashboardController implements Initializable {
             courseBtn.getStyleClass().remove(2);
             courseIcon.getStyleClass().remove(2);
         }
-        
+
         if (parentBtn.getStyleClass().toString().contains("active") && parentIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
@@ -760,8 +767,8 @@ public class DashboardController implements Initializable {
         gradesPane.setVisible(false);
         coursesPane.setVisible(false);
     }
-    
-     @FXML
+
+    @FXML
     void openCourses(ActionEvent event) {
         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
 
@@ -797,15 +804,15 @@ public class DashboardController implements Initializable {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
-        
+
         if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
 
         } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
             parentBtn.getStyleClass().remove(2);
             parentIcon.getStyleClass().remove(2);
         }
-        
-         if (courseBtn.getStyleClass().toString().contains("active") && courseIcon.getStyleClass().toString().contains("iconActive")) {
+
+        if (courseBtn.getStyleClass().toString().contains("active") && courseIcon.getStyleClass().toString().contains("iconActive")) {
 
         } else {
             courseBtn.getStyleClass().add("active");
@@ -825,7 +832,7 @@ public class DashboardController implements Initializable {
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
         parentsPane.setVisible(false);
-        
+
     }
 
     public void populateComboBoxes() {
@@ -844,7 +851,7 @@ public class DashboardController implements Initializable {
         selectReligion.setItems(religions);
         employeeReligion.setItems(religions);
         ObservableList qualifications = FXCollections.observableArrayList(
-                "None","PHD", "BSC", "HND", "OND", "SSCE");
+                "None", "PHD", "BSC", "HND", "OND", "SSCE");
         selectQualification.setItems(qualifications);
         ObservableList maritalStats = FXCollections.observableArrayList(
                 "Married", "Single", "Divorced", "Seperated");
@@ -853,30 +860,68 @@ public class DashboardController implements Initializable {
                 "Teaching", "Non Teaching");
         selectDesignation.setItems(designation);
         ObservableList nationality1 = FXCollections.observableArrayList(
-            "Nigerian","Ghanian","Cameroonian","Benin");
+                "Nigerian", "Ghanian", "Cameroonian", "Benin");
         nationality.setItems(nationality1);
+    }
+
+    public void birthdays() {
+        String[] names = {"Isaac Ogunleye", "Joy Ajiboye", "Olumide Awodeji", "Daniel Odey", "Edmund Giwa"};
+//        String[] dates = {"1/1/1","2/2/2","3/3/3","4/4/4","5/5/5"};
+        for (int i = 0; i < names.length; i++) {
+
+            try {
+                Image img = new Image(new FileInputStream("src/school/management/system/images/birthday.png"));
+                Label lbl = new Label(names[i]);
+                ImageView imgView = new ImageView(img);
+                imgView.setFitHeight(25);
+                imgView.setFitWidth(25);
+                lbl.setGraphicTextGap(10);
+                lbl.setGraphic(imgView);
+                view.getItems().add(lbl);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+
+            try {
+                Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Star_Filled_48px.png"));
+                Label lbl = new Label(names[i]);
+                ImageView imgView = new ImageView(img);
+                imgView.setFitHeight(25);
+                imgView.setFitWidth(25);
+                lbl.setGraphicTextGap(10);
+                lbl.setGraphic(imgView);
+                leaderList.getItems().add(lbl);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        birthdays();
         populateComboBoxes();
-        refreshStudentTable();
-        refreshStaffTable();
-        try {
-            loadTeacherTableData();
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            studentTableData();
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        refreshStudentTable();
+//        refreshStaffTable();
+//        try {
+//            loadTeacherTableData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        try {
+//            studentTableData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 //        validators();
 //        employeeValidators();
 
@@ -1434,107 +1479,6 @@ public class DashboardController implements Initializable {
         Image image = new Image(selectedFile.toURI().toString());
         avatarStudView.setImage(image);
         avatarGuardView.setImage(image);
-    }
-
-    // Validator method for student
-    public void validators() {
-        ValidationSupport validation1 = new ValidationSupport();
-        validation1.registerValidator(studentFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation2 = new ValidationSupport();
-        validation2.registerValidator(studentFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
-
-        ValidationSupport validation3 = new ValidationSupport();
-        validation3.registerValidator(studentLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation4 = new ValidationSupport();
-        validation4.registerValidator(studentLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
-
-        ValidationSupport validation5 = new ValidationSupport();
-        validation5.registerValidator(guardianMail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation6 = new ValidationSupport();
-        validation6.registerValidator(guardianMail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
-
-        ValidationSupport validation8 = new ValidationSupport();
-        validation8.registerValidator(residence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation9 = new ValidationSupport();
-        validation9.registerValidator(guardianPhone, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation10 = new ValidationSupport();
-        validation10.registerValidator(guardianPhone, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
-
-        ValidationSupport validation11 = new ValidationSupport();
-        validation11.registerValidator(selectGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation12 = new ValidationSupport();
-        validation12.registerValidator(selectClass, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation13 = new ValidationSupport();
-        validation13.registerValidator(selectReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation14 = new ValidationSupport();
-        validation14.registerValidator(guardianName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation15 = new ValidationSupport();
-        validation15.registerValidator(guardianName, Validator.createRegexValidator("Provide Correct Guardian` Name", NAME, Severity.ERROR));
-
-        ValidationSupport validation16 = new ValidationSupport();
-        validation16.registerValidator(studentMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validation18 = new ValidationSupport();
-        validation18.registerValidator(studentMiddleName, Validator.createRegexValidator("Input Required", NAME, Severity.WARNING));
-
-        ValidationSupport validation19 = new ValidationSupport();
-        validation19.registerValidator(nationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-    }
-
-    //validations for Staffs 
-    public void employeeValidators() {
-        ValidationSupport validationSupport = new ValidationSupport();
-        validationSupport.registerValidator(employeeLastName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        validationSupport.registerValidator(employeeLastName, Validator.createRegexValidator("Provide Correct Last Name", NAME, Severity.ERROR));
-
-        ValidationSupport validationSupport1 = new ValidationSupport();
-        validationSupport1.registerValidator(employeeFirstName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        validationSupport1.registerValidator(employeeFirstName, Validator.createRegexValidator("Provide Correct First Name", NAME, Severity.ERROR));
-
-        ValidationSupport validationSupport2 = new ValidationSupport();
-        validationSupport2.registerValidator(employeeMiddleName, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        validationSupport2.registerValidator(employeeMiddleName, Validator.createRegexValidator("Provide Correct Middle Name", NAME, Severity.ERROR));
-
-        ValidationSupport validationSupport3 = new ValidationSupport();
-        validationSupport3.registerValidator(employeeID, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport4 = new ValidationSupport();
-        validationSupport4.registerValidator(employeeNationality, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport5 = new ValidationSupport();
-        validationSupport5.registerValidator(employeeResidence, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport6 = new ValidationSupport();
-        validationSupport6.registerValidator(employeeEmail, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        validationSupport6.registerValidator(employeeEmail, Validator.createRegexValidator("Provide Correct Email", EMAIL_PATTERN, Severity.ERROR));
-
-        ValidationSupport validationSupport7 = new ValidationSupport();
-        validationSupport7.registerValidator(employeePhoneNumber, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-        validationSupport7.registerValidator(employeePhoneNumber, Validator.createRegexValidator("Provide Correct Phone Number", PHONE, Severity.ERROR));
-
-        ValidationSupport validationSupport8 = new ValidationSupport();
-        validationSupport8.registerValidator(employeeReligion, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport9 = new ValidationSupport();
-        validationSupport9.registerValidator(employeDOB, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport10 = new ValidationSupport();
-        validationSupport10.registerValidator(selectQualification, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport11 = new ValidationSupport();
-        validationSupport11.registerValidator(selectTeacherGender, Validator.createEmptyValidator("Input Required", Severity.WARNING));
-
-        ValidationSupport validationSupport12 = new ValidationSupport();
-        validationSupport12.registerValidator(selectDesignation, Validator.createEmptyValidator("Input Required", Severity.WARNING));
     }
 
     // Validations for Staffs method on user input

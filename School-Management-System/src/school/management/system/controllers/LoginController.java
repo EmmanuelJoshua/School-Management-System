@@ -93,6 +93,26 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void nextStaff() {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/staffDashboard.fxml"));
+
+            String path = "/school/management/system/images/CHMS_Icon.png";
+            Image img = new Image(path);
+            Stage stage = new Stage();
+            stage.setTitle("Staff | CHMS");
+            stage.getIcons().add(0, img);
+            stage.setScene(new Scene(parent));
+            stage.initOwner(((Stage) loginPane.getScene().getWindow()));
+            stage.setMinWidth(1200);
+            stage.setMinHeight(750);
+            stage.setMaximized(true);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
     private void exitLogin(MouseEvent event) {
         exitConfirmPane.setVisible(true);
@@ -132,24 +152,34 @@ public class LoginController implements Initializable {
                     .position(Pos.TOP_CENTER)
                     .hideAfter(Duration.seconds(3));
             notify.show();
-        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(errorImg))
-                    .title("ERROR")
-                    .text("Invalid Login")
-                    .position(Pos.TOP_CENTER)
-                    .hideAfter(Duration.seconds(3));
-            notify.show();
+//        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
+//            Notifications notify = Notifications.create()
+//                    .graphic(new ImageView(errorImg))
+//                    .title("ERROR")
+//                    .text("Invalid Login")
+//                    .position(Pos.TOP_CENTER)
+//                    .hideAfter(Duration.seconds(3));
+//            notify.show();
+        } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
+             StaffDashboardController.teacherID = username.getText();
+//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+//            loginBtn.setMouseTransparent(true);
+//            progress.setVisible(true);
+//            pause.play();
+//            pause.setOnFinished((ActionEvent event1) -> {
+                closeStage();
+                nextStaff();
+//            });
         } else {
-//            MainUIController.adminID = user_name.getText();
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            loginBtn.setMouseTransparent(true);
-            progress.setVisible(true);
-            pause.play();
-            pause.setOnFinished((ActionEvent event1) -> {
+
+//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+//            loginBtn.setMouseTransparent(true);
+//            progress.setVisible(true);
+//            pause.play();
+//            pause.setOnFinished((ActionEvent event1) -> {
                 closeStage();
                 next();
-            });
+//            });
         }
     }
 

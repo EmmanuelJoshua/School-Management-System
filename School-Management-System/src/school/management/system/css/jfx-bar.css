@@ -10,6 +10,15 @@ and open the template in the editor.
 /*.load-Progress > .progress{
     -fx-background-color: #235492;
 }*/
-.jfx-progress-bar > .bar{
-    -fx-background-color: #235492;
+.foreground {
+    -fx-background-color : transparent;
+}
+
+.jfx-progress-bar:determinate .bar
+{
+    -fx-background-color : #235492;
+}
+
+.jfx-progress-bar:determinate .track {
+  -fx-background-color : transparent;
 }
