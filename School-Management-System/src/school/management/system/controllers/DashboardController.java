@@ -69,9 +69,12 @@ import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Rectangle2D;
+import javafx.print.JobSettings;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
+import javafx.print.PrintResolution;
+import javafx.print.PrintSides;
 import javafx.print.Printer;
 import javafx.print.PrinterAttributes;
 import javafx.print.PrinterJob;
@@ -79,6 +82,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  *
@@ -1530,7 +1534,7 @@ public class DashboardController implements Initializable {
                 employeeFirstName.validate();
             }
         });
-
+        
         RequiredFieldValidator rFValidator2;
         rFValidator2 = new RequiredFieldValidator();
         rFValidator2.setMessage("Empty Field");
@@ -1719,7 +1723,6 @@ public class DashboardController implements Initializable {
 //        employeePhoneNumber.getValidators().add(eventFilter);
 //        eventFilter.setMessage("Input Only Numbers");
 //    }
-
     // Validations for Staffs method on user input
     public boolean validateTeachersMethod() {
         // checks if the employee last name field is empty
@@ -2193,91 +2196,47 @@ public class DashboardController implements Initializable {
     private void addParent(ActionEvent event) {
     }
     
+    //Print Button method
     private void printSetup(Node node, Stage owner) {
         // Create the PrinterJob        
-//        PrinterJob job = PrinterJob.createPrinterJob();
-//
-////        if (job == null) {
-////            return;
-////        }
-//
-//        // Show the print setup dialog
-////        boolean p = job.showPageSetupDialog(owner);
-////        boolean proceed = job.showPrintDialog(owner);
-//        JobSettings jobSettings = job.getJobSettings();
-//        jobSettings.setPrintSides(PrintSides.DUPLEX);
-////        PrinterJob.JobStatus jobStat = job.getJobStatus();
-//        Printer printer = Printer.getDefaultPrinter();
-//        PageLayout pageLayout = printer.createPageLayout(Paper.A4,
-//                PageOrientation.PORTRAIT,Printer.MarginType.EQUAL);
-//
-// 
-//    
-//    PrinterAttributes attr = printer.getPrinterAttributes();
-////    PrinterJob job = PrinterJob.createPrinterJob();
-//    double scaleX
-//        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-//    double scaleY
-//        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
-//    Scale scale = new Scale(scaleX, scaleY);
-//    node.getTransforms().add(scale);
-//
-//    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
-//      boolean success = job.printPage(pageLayout, node);
-//      if (success) {
-//        job.endJob();
-//
-//      }
-//    }
-//    node.getTransforms().remove(scale);
+        PrinterJob job = PrinterJob.createPrinterJob();
 
-    Printer printer = Printer.getDefaultPrinter();
-    PageLayout pageLayout
-        = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
-    PrinterAttributes attr = printer.getPrinterAttributes();
-    PrinterJob job = PrinterJob.createPrinterJob();
-    double scaleX
-        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-    double scaleY
-        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
-    Scale scale = new Scale(scaleX, scaleY);
-    node.getTransforms().add(scale);
+        // Get default Printer 
+        Printer printer = Printer.getDefaultPrinter();
 
-    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
-      boolean success = job.printPage(pageLayout, node);
-      if (success) {
-        job.endJob();
+        JobSettings jobSettings = job.getJobSettings();
+        jobSettings.setPrintSides(PrintSides.DUPLEX);
 
-      }
+        //Layout for the Page
+        PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT,
+                Printer.MarginType.EQUAL_OPPOSITES);
+        PrinterAttributes attr = printer.getPrinterAttributes();
+//        PrintResolution defaultPrintResolution = attr.getDefaultPrintResolution();
+//        defaultPrintResolution.getFeedResolution();
+//        attr.getDefaultCopies();
+//        attr.getDefaultCollation();
+//        attr.getDefaultPageOrientation();
+
+        // Scaling the page 
+        double scaleX = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
+        double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+        Scale scale = new Scale(scaleX, scaleY);
+        node.getTransforms().add(scale);
+        
+
+        if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
+            boolean success = job.printPage(pageLayout, node);
+            if (success) {
+                job.endJob();
+            }
+        }
+        node.getTransforms().remove(scale);
     }
-    node.getTransforms().remove(scale);
-  }
-  
-//    }
 
-//    private void print(PrinterJob job, Node node) {
-//        // Set the Job Status Message
-//        Label jobStatus = new Label();
-//        jobStatus.textProperty().bind(job.jobStatusProperty().asString());
-//
-//        // Print the node
-//        boolean printed = job.printPage(node);
-//        PrinterJob.JobStatus jobStat = job.getJobStatus();
-//
-//        if (printed) {
-//            job.endJob();
-//        } else {
-//            // Write Error Message
-//            PrinterJob.JobStatus ERROR = jobStat.ERROR;
-//            jobStatus.textProperty().unbind();
-//            jobStatus.setText("Printing failed.");
-//        }
-//    }
+    Stage primaryStage;
 
-Stage primaryStage;
     @FXML
     private void staffPrintBtn(ActionEvent event) {
         printSetup(teachersTable, primaryStage);
-   
     }
 }

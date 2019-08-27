@@ -151,13 +151,15 @@ public class LoginController implements Initializable {
         }
 
         if (username.getText().isEmpty() && password.getText().isEmpty()) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(errorImg))
-                    .title("ERROR")
-                    .text("Username and Password Empty")
-                    .position(Pos.TOP_CENTER)
-                    .hideAfter(Duration.seconds(3));
-            notify.show();
+//            Notifications notify = Notifications.create()
+//                    .graphic(new ImageView(errorImg))
+//                    .title("ERROR")
+//                    .text("Username and Password Empty")
+//                    .position(Pos.TOP_CENTER)
+//                    .hideAfter(Duration.seconds(3));
+//            notify.show();
+            closeStage();
+            next();
 //        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
 //            Notifications notify = Notifications.create()
 //                    .graphic(new ImageView(errorImg))
@@ -167,7 +169,7 @@ public class LoginController implements Initializable {
 //                    .hideAfter(Duration.seconds(3));
 //            notify.show();
         } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
-            StaffDashboardController.teacherID = username.getText();
+//            StaffDashboardController.teacherID = username.getText();
 //            PauseTransition pause = new PauseTransition(Duration.seconds(5));
 //            loginBtn.setMouseTransparent(true);
 //            progress.setVisible(true);
