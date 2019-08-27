@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
@@ -48,10 +50,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.function.Predicate;
 import javafx.geometry.Pos;
@@ -61,17 +61,24 @@ import javafx.scene.image.ImageView;
 import school.management.system.demoDatabase.Database;
 import school.management.system.tables.AdminStudentsTable;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 import school.management.system.tables.TeachersTable;
 import java.util.regex.Pattern;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
-import javafx.scene.control.Button;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Rectangle2D;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterAttributes;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.transform.Scale;
+import javafx.stage.Screen;
 
 /**
  *
@@ -82,7 +89,8 @@ public class DashboardController implements Initializable {
     public Image errorImg = new Image("/school/management/system/images/cross.png");
     public Image successImg = new Image("/school/management/system/images/checked.png");
 
-    private static final String NAME = "(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,}";
+//    private static final String NAME = "(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,}";
+    private static final String NAME = "(?=^[^-':\\n]*[-':]{0,1}[^-':\\n]*$)^[A-Z][-':\\w ]{4,30}$";
     private static final String PHONE = "\\d{11}";
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -305,6 +313,10 @@ public class DashboardController implements Initializable {
     private JFXListView<Label> view;
     @FXML
     private JFXListView<Label> leaderList;
+    @FXML
+    private JFXButton staffPrintBtn;
+    @FXML
+    private FontAwesomeIconView staffIcon11;
 
     public DashboardController() {
         try {
@@ -901,6 +913,15 @@ public class DashboardController implements Initializable {
 
     }
 
+//    public void start(Stage primaryStage) {
+//
+//        staffPrintBtn.setOnAction((ActionEvent event) -> {
+//            printSetup(teachersTable, primaryStage);
+//        });
+//
+//        primaryStage.setResizable(false);
+//        primaryStage.show();
+//    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthdays();
@@ -1013,14 +1034,15 @@ public class DashboardController implements Initializable {
         closeStage();
         Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
 
-        Stage stage = new Stage(StageStyle.TRANSPARENT);
-
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-
+        Stage stage = new Stage(StageStyle.TRANSPARENT);
         stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
         stage.setScene(scene);
         stage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     // Save student button
@@ -1480,6 +1502,223 @@ public class DashboardController implements Initializable {
         avatarStudView.setImage(image);
         avatarGuardView.setImage(image);
     }
+
+    // Validator method for student
+    public void validators() {
+
+    }
+
+    //validations for Staffs 
+    public void employeeValidators() {
+
+        RequiredFieldValidator rFValidator1;
+        rFValidator1 = new RequiredFieldValidator();
+        rFValidator1.setMessage("Empty Field");
+        rFValidator1.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeFirstName.getValidators().add(rFValidator1);
+        employeeFirstName.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeFirstName.validate();
+            }
+        });
+
+        employeeFirstName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeFirstName.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeFirstName.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator2;
+        rFValidator2 = new RequiredFieldValidator();
+        rFValidator2.setMessage("Empty Field");
+        rFValidator2.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeLastName.getValidators().add(rFValidator2);
+        employeeLastName.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeLastName.validate();
+            }
+        });
+
+        employeeLastName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeLastName.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeLastName.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator3;
+        rFValidator3 = new RequiredFieldValidator();
+        rFValidator3.setMessage("Empty Field");
+        rFValidator3.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeMiddleName.getValidators().add(rFValidator3);
+        employeeMiddleName.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeMiddleName.validate();
+            }
+        });
+
+        employeeMiddleName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeMiddleName.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeMiddleName.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator4;
+        rFValidator4 = new RequiredFieldValidator();
+        rFValidator4.setMessage("Empty Field");
+        rFValidator4.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeID.getValidators().add(rFValidator4);
+        employeeID.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeID.validate();
+            }
+        });
+
+        employeeID.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeID.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeID.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator5;
+        rFValidator5 = new RequiredFieldValidator();
+        rFValidator5.setMessage("Empty Field");
+        rFValidator5.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeNationality.getValidators().add(rFValidator5);
+        employeeNationality.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeNationality.validate();
+            }
+        });
+
+        employeeNationality.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeNationality.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeNationality.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator6;
+        rFValidator6 = new RequiredFieldValidator();
+        rFValidator6.setMessage("Empty Field");
+        rFValidator6.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeResidence.getValidators().add(rFValidator6);
+        employeeResidence.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeResidence.validate();
+            }
+        });
+
+        employeeResidence.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeResidence.resetValidation();
+                rFValidator6.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+            } else if (newValue.isEmpty()) {
+                employeeResidence.validate();
+            }
+        });
+
+        RequiredFieldValidator rFValidator7;
+        rFValidator7 = new RequiredFieldValidator();
+        rFValidator7.setMessage("Empty Field");
+        rFValidator7.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeeEmail.getValidators().add(rFValidator7);
+        employeeEmail.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                employeeEmail.validate();
+            }
+        });
+
+        employeeEmail.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeeEmail.resetValidation();
+            } else if (newValue.isEmpty()) {
+                employeeEmail.validate();
+            }
+        });
+
+        NumberValidator numberValidator;
+        numberValidator = new NumberValidator();
+        RequiredFieldValidator phonenum = new RequiredFieldValidator();
+
+        numberValidator.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+
+        employeePhoneNumber.getValidators().add(phonenum);
+        employeePhoneNumber.getValidators().add(numberValidator);
+
+        employeePhoneNumber.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (!newValue) {
+                phonenum.setMessage("Empty Field");
+                phonenum.setIcon(new ImageView(getClass().getResource("/school/management/system/images/warning.png").toString()));
+                System.out.println("Empty field");
+                employeePhoneNumber.validate();
+            } else {
+                System.out.println("just lost focus");
+            }
+        });
+
+        employeePhoneNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                employeePhoneNumber.resetValidation();
+                if ((!employeePhoneNumber.getText().matches(PHONE)) && (employeePhoneNumber.getText().length() != 11)) {
+                    numberValidator.setMessage("Numbers must be 11 digits only");
+                    System.out.println("i said eleven");
+                    employeePhoneNumber.validate();
+                } else {
+                    employeePhoneNumber.resetValidation();
+                    System.out.println("Correct Input");
+                }
+            } else if (newValue.isEmpty()) {
+                employeePhoneNumber.validate();
+            }
+        });
+
+        boolean isMyComboBoxEmpty = selectQualification.getSelectionModel().isEmpty();
+
+        employeePhoneNumber.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!"0123456789".contains(event.getCharacter())) {
+//                          RequiredFieldValidator eventFilter = new RequiredFieldValidator();
+//                                  employeePhoneNumber.getValidators().add(eventFilter);
+//                                  eventFilter.setMessage("Input Only Numbers");
+//                    keyTypedErrorMsg();
+                    event.consume();
+                }
+            }
+        });
+
+//        employeePhoneNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+//            if (!newValue.isEmpty()) {
+//                employeePhoneNumber.resetValidation();
+//            } else if (newValue.isEmpty()) {
+//                employeePhoneNumber.validate();
+//            }else if(employeePhoneNumber.getText().matches(PHONE)){
+//                employeePhoneNumber.validate();
+//            }
+//        });
+    }
+
+//    void keyTypedErrorMsg() {
+//        RequiredFieldValidator eventFilter = new RequiredFieldValidator();
+//        employeePhoneNumber.getValidators().add(eventFilter);
+//        eventFilter.setMessage("Input Only Numbers");
+//    }
 
     // Validations for Staffs method on user input
     public boolean validateTeachersMethod() {
@@ -1952,5 +2191,93 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void addParent(ActionEvent event) {
+    }
+    
+    private void printSetup(Node node, Stage owner) {
+        // Create the PrinterJob        
+//        PrinterJob job = PrinterJob.createPrinterJob();
+//
+////        if (job == null) {
+////            return;
+////        }
+//
+//        // Show the print setup dialog
+////        boolean p = job.showPageSetupDialog(owner);
+////        boolean proceed = job.showPrintDialog(owner);
+//        JobSettings jobSettings = job.getJobSettings();
+//        jobSettings.setPrintSides(PrintSides.DUPLEX);
+////        PrinterJob.JobStatus jobStat = job.getJobStatus();
+//        Printer printer = Printer.getDefaultPrinter();
+//        PageLayout pageLayout = printer.createPageLayout(Paper.A4,
+//                PageOrientation.PORTRAIT,Printer.MarginType.EQUAL);
+//
+// 
+//    
+//    PrinterAttributes attr = printer.getPrinterAttributes();
+////    PrinterJob job = PrinterJob.createPrinterJob();
+//    double scaleX
+//        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
+//    double scaleY
+//        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+//    Scale scale = new Scale(scaleX, scaleY);
+//    node.getTransforms().add(scale);
+//
+//    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
+//      boolean success = job.printPage(pageLayout, node);
+//      if (success) {
+//        job.endJob();
+//
+//      }
+//    }
+//    node.getTransforms().remove(scale);
+
+    Printer printer = Printer.getDefaultPrinter();
+    PageLayout pageLayout
+        = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
+    PrinterAttributes attr = printer.getPrinterAttributes();
+    PrinterJob job = PrinterJob.createPrinterJob();
+    double scaleX
+        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
+    double scaleY
+        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+    Scale scale = new Scale(scaleX, scaleY);
+    node.getTransforms().add(scale);
+
+    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
+      boolean success = job.printPage(pageLayout, node);
+      if (success) {
+        job.endJob();
+
+      }
+    }
+    node.getTransforms().remove(scale);
+  }
+  
+//    }
+
+//    private void print(PrinterJob job, Node node) {
+//        // Set the Job Status Message
+//        Label jobStatus = new Label();
+//        jobStatus.textProperty().bind(job.jobStatusProperty().asString());
+//
+//        // Print the node
+//        boolean printed = job.printPage(node);
+//        PrinterJob.JobStatus jobStat = job.getJobStatus();
+//
+//        if (printed) {
+//            job.endJob();
+//        } else {
+//            // Write Error Message
+//            PrinterJob.JobStatus ERROR = jobStat.ERROR;
+//            jobStatus.textProperty().unbind();
+//            jobStatus.setText("Printing failed.");
+//        }
+//    }
+
+Stage primaryStage;
+    @FXML
+    private void staffPrintBtn(ActionEvent event) {
+        printSetup(teachersTable, primaryStage);
+   
     }
 }

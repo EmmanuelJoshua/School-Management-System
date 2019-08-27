@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -36,6 +37,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -88,6 +90,10 @@ public class LoginController implements Initializable {
             stage.setMinHeight(750);
             stage.setMaximized(true);
             stage.show();
+            stage.centerOnScreen();
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,14 +167,14 @@ public class LoginController implements Initializable {
 //                    .hideAfter(Duration.seconds(3));
 //            notify.show();
         } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
-             StaffDashboardController.teacherID = username.getText();
+            StaffDashboardController.teacherID = username.getText();
 //            PauseTransition pause = new PauseTransition(Duration.seconds(5));
 //            loginBtn.setMouseTransparent(true);
 //            progress.setVisible(true);
 //            pause.play();
 //            pause.setOnFinished((ActionEvent event1) -> {
-                closeStage();
-                nextStaff();
+            closeStage();
+            nextStaff();
 //            });
         } else {
 
@@ -177,8 +183,8 @@ public class LoginController implements Initializable {
 //            progress.setVisible(true);
 //            pause.play();
 //            pause.setOnFinished((ActionEvent event1) -> {
-                closeStage();
-                next();
+            closeStage();
+            next();
 //            });
         }
     }
