@@ -16,8 +16,10 @@ import java.sql.Statement;
  * @author JOYOUS
  */
 public class Database {
-    static Connection con;
+
+    static Connection con = null;
     static Statement stmt = null;
+
     public static void dbConnect() throws ClassNotFoundException, SQLException{
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -29,13 +31,10 @@ public class Database {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }   
+        }
     }
-    public Connection getConnection(){
-        return con;
-    }
-    
-     public static ResultSet executeQuery(String sql) throws ClassNotFoundException, SQLException {
+
+    public static ResultSet executeQuery(String sql) throws ClassNotFoundException, SQLException {
         dbConnect();
         ResultSet rs = null;
         try {
@@ -44,6 +43,22 @@ public class Database {
 
         }
         return rs;
+    }
+
+    public Connection getConnection(){
+        return con;
+    }
+    //Get Connection for SQLite database
+    public static Connection getConnect() throws ClassNotFoundException, SQLException {
+        Connection connect;
+        Class.forName("org.sqlite.JDBC");
+        connect = DriverManager.getConnection("jdbc:sqlite:LogIn.db");
+        if (connect != null) {
+            System.out.println("Connected Successfully");
+        } else {
+            System.out.println("Connection failed");
+        }
+        return connect;
     }
 
 }

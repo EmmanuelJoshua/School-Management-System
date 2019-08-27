@@ -3,13 +3,13 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : May 15, 2019, 4:16:43 AM
     Author     : EddyfhizzyPc
 */
 .parent{
-     -fx-background-color: #fff;
-     
+    -fx-background-color: #fff;
+
 }
 .sidebar{
     -fx-background-color: #042954;
@@ -19,7 +19,7 @@ and open the template in the editor.
 }
 
 .elevator {
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,.4) , 30, 0 , 0 , 0 );
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,.4) , 30, 0 , 0 , 0 );
 }
 
 .tophbar{
@@ -32,9 +32,20 @@ and open the template in the editor.
     background-color: #042954;
 }
 .allsubpane{
-    -fx-background-color: rgba(255,255,255,0.8);
+    -fx-background-color :  linear-gradient(to left, #808080 40%,#802876);
     -fx-background-radius: 10;
 }
+
+.allsubpane2{
+    -fx-background-color :  linear-gradient(to left,#802876 40%,#808080);
+}
+.allsubpane3{
+    -fx-background-color :  linear-gradient(to left,#808080 20%,#802876);
+}
+.allsubpane4{
+    -fx-background-color :  linear-gradient(to left,#802876 50%,#808080);
+}
+
 .teacher{
     -fx-background-color: rgba(86,176,167,0.7);
     -fx-background-radius: 10;

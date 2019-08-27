@@ -13,6 +13,9 @@ import de.jensd.fx.glyphs.octicons.OctIconView;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +41,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import school.management.system.validation.Validator;
+import school.management.system.demoDatabase.Database;
 
 /**
  *
@@ -59,10 +63,12 @@ public class LoginController implements Initializable {
     @FXML
     private Pane exitConfirmPane;
 
-    private boolean userLogin(String username, String password) {
-        return Validator.validate(username, password);
-    }
+    Connection con2;
+    String user, pass;
 
+//    private boolean userLogin(String username, String password) {
+//        return Validator.validate(username, password);
+//    }
     public void closeStage() {
         ((Stage) loginPane.getScene().getWindow()).close();
     }
@@ -71,11 +77,31 @@ public class LoginController implements Initializable {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Dashboard.fxml"));
 
-//            String path = "/ManagementSystem/images/homeA.png";
-//            Image img = new Image(path);
+            String path = "/school/management/system/images/CHMS_Icon.png";
+            Image img = new Image(path);
             Stage stage = new Stage();
             stage.setTitle("Home | CHMS");
-//            stage.getIcons().add(0, img);
+            stage.getIcons().add(0, img);
+            stage.setScene(new Scene(parent));
+            stage.initOwner(((Stage) loginPane.getScene().getWindow()));
+            stage.setMinWidth(1200);
+            stage.setMinHeight(750);
+            stage.setMaximized(true);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void nextStaff() {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/staffDashboard.fxml"));
+
+            String path = "/school/management/system/images/CHMS_Icon.png";
+            Image img = new Image(path);
+            Stage stage = new Stage();
+            stage.setTitle("Staff | CHMS");
+            stage.getIcons().add(0, img);
             stage.setScene(new Scene(parent));
             stage.initOwner(((Stage) loginPane.getScene().getWindow()));
             stage.setMinWidth(1200);
@@ -104,36 +130,62 @@ public class LoginController implements Initializable {
         stage = (Stage) ((OctIconView) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+//method to validate sign 
+
+    public void validateSignIn() {
+        try {
+            ResultSet res = con2.createStatement().executeQuery("select * from LogInDetails");
+            while (res.next()) {
+                int id = res.getInt("Id");
+                user = res.getString("Username");
+                pass = res.getString("Password");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (username.getText().isEmpty() && password.getText().isEmpty()) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .title("ERROR")
+                    .text("Username and Password Empty")
+                    .position(Pos.TOP_CENTER)
+                    .hideAfter(Duration.seconds(3));
+            notify.show();
+//        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
+//            Notifications notify = Notifications.create()
+//                    .graphic(new ImageView(errorImg))
+//                    .title("ERROR")
+//                    .text("Invalid Login")
+//                    .position(Pos.TOP_CENTER)
+//                    .hideAfter(Duration.seconds(3));
+//            notify.show();
+        } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
+             StaffDashboardController.teacherID = username.getText();
+//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+//            loginBtn.setMouseTransparent(true);
+//            progress.setVisible(true);
+//            pause.play();
+//            pause.setOnFinished((ActionEvent event1) -> {
+                closeStage();
+                nextStaff();
+//            });
+        } else {
+
+//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+//            loginBtn.setMouseTransparent(true);
+//            progress.setVisible(true);
+//            pause.play();
+//            pause.setOnFinished((ActionEvent event1) -> {
+                closeStage();
+                next();
+//            });
+        }
+    }
 
     @FXML
     private void signIn(ActionEvent event) {
-//       if (username.getText().isEmpty() && password.getText().isEmpty()) {
-//            Notifications notify=Notifications.create()
-//                        .graphic(new ImageView(errorImg))
-//                        .title("ERROR")
-//                        .text("Username and Password Empty")
-//                        .position(Pos.TOP_CENTER)
-//                        .hideAfter(Duration.seconds(3));
-//                notify.show();
-//        } else if (!userLogin(username.getText(), password.getText())) {
-//           Notifications notify=Notifications.create()
-//                        .graphic(new ImageView(errorImg))
-//                        .title("ERROR")
-//                        .text("Invalid Login")
-//                        .position(Pos.TOP_CENTER)
-//                        .hideAfter(Duration.seconds(3));
-//                notify.show(); 
-//        } else {
-////            MainUIController.adminID = user_name.getText();
-//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-//            loginBtn.setMouseTransparent(true);
-////            progress.setVisible(true);
-//            pause.play();
-//            pause.setOnFinished((ActionEvent event1) -> {
-        closeStage();
-        next();
-//            });
-//        }
+        validateSignIn();
     }
 
     @FXML
@@ -161,12 +213,20 @@ public class LoginController implements Initializable {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
-                    closeStage();
-                    next();
+                    validateSignIn();
                 }
             }
 
         });
+
+        //get connection from database
+        try {
+            con2 = Database.getConnect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         //Enter Button Key event Listener
 //         username.setOnKeyPressed(new EventHandler<KeyEvent>(){

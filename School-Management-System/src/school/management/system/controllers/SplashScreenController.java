@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -119,7 +120,12 @@ public class SplashScreenController implements Initializable {
                 textProgress.textProperty().unbind();
                 ((Stage) splashPane.getScene().getWindow()).close();
                 try {
+                    String path = "/school/management/system/images/CHMS_Icon.png";
+
+                    Image img = new Image(path);
+                   
                     Stage stage = new Stage();
+                     stage.getIcons().add(0, img);
                     Parent root = FXMLLoader.load(SplashScreenController.this.getClass().getResource("/school/management/system/fxml/Login.fxml"));
                     Scene scene = new Scene(root);
                     stage.initStyle(StageStyle.TRANSPARENT);
