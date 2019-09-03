@@ -72,6 +72,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -150,7 +151,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton logoutNo;
     @FXML
-    private AnchorPane logoutPane;
+    private StackPane logoutPane;
     @FXML
     private AnchorPane addStudentPane;
     @FXML
@@ -305,6 +306,12 @@ public class DashboardController implements Initializable {
     private JFXListView<Label> view;
     @FXML
     private JFXListView<Label> leaderList;
+    @FXML
+    private StackPane editStudentModals;
+    @FXML
+    private StackPane editTeachersModals;
+    @FXML
+    private StackPane editParentsModals;
 
     public DashboardController() {
         try {
@@ -835,6 +842,120 @@ public class DashboardController implements Initializable {
 
     }
 
+    @FXML
+    public void editStudent() {
+        editStudentModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editStudentModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void editTeacher() {
+        editTeachersModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editTeachersModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+    
+    @FXML
+    public void editParents(){
+        editParentsModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editParentsModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void exitStudentEditModal() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editStudentModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editStudentModals.setVisible(false);
+        });
+    }
+
+    @FXML
+    public void exitTeacherEditModal() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editTeachersModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editTeachersModals.setVisible(false);
+        });
+    }
+
+    @FXML
+    public void exitParentEditModal(){
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editParentsModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editParentsModals.setVisible(false);
+        });
+    }
+    
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
@@ -940,6 +1061,13 @@ public class DashboardController implements Initializable {
             fade3.setToValue(0);
             fade3.play();
             fade3.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
                 logoutPane.setVisible(false);
             });
         });
@@ -1001,6 +1129,13 @@ public class DashboardController implements Initializable {
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(500));
         fade.setNode(logoutPane);

@@ -36,6 +36,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -53,8 +54,6 @@ public class LoginController implements Initializable {
     @FXML
     private JFXProgressBar progress;
     @FXML
-    private JFXButton loginBtn;
-    @FXML
     private JFXTextField username;
     @FXML
     private JFXPasswordField password;
@@ -62,7 +61,15 @@ public class LoginController implements Initializable {
     private AnchorPane loginPane;
     @FXML
     private Pane exitConfirmPane;
-
+    @FXML
+    private StackPane forgot_password;
+           @FXML
+    private AnchorPane adminPassword;
+      @FXML
+    private AnchorPane generatePassword;
+          @FXML
+    private Pane login_Stage;
+    
     Connection con2;
     String user, pass;
 
@@ -193,6 +200,49 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
+      @FXML
+    void forgotPassword(ActionEvent event) {
+            forgot_password.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(forgot_password);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+        @FXML
+    void submit_btn(ActionEvent event) {
+         generatePassword.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(generatePassword);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+        @FXML
+    void login_backBtn(ActionEvent event) {
+         login_Stage.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(login_Stage);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+            @FXML
+    void exit_pass(ActionEvent event) {
+                FadeTransition fade3 = new FadeTransition();
+        fade3.setDuration(Duration.millis(500));
+        fade3.setNode(forgot_password);
+        fade3.setFromValue(1);
+        fade3.setToValue(0);
+        fade3.play();
+        fade3.setOnFinished((ActionEvent event1) -> {
+            forgot_password.setVisible(false);
+        });
+    }
     @FXML
     private void exitNoAction(ActionEvent event) {
         FadeTransition fade3 = new FadeTransition();
