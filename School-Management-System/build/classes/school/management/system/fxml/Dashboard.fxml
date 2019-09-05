@@ -983,14 +983,6 @@
                         <JFXComboBox fx:id="employeeReligion" prefHeight="30.0" prefWidth="172.0" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <JFXButton fx:id="staffPrintBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="281.0" layoutY="485.0" onAction="#staffPrintBtn" prefHeight="37.0" prefWidth="111.0" style="-fx-background-radius: 10; -fx-background-color: #bf9393;" text="Print" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="PRINTER" size="19" />
-                     </graphic>
-                  </JFXButton>
                </children>
             </AnchorPane>
          </children>
