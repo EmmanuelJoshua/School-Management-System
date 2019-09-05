@@ -67,20 +67,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Rectangle2D;
-import javafx.print.JobSettings;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.PrintResolution;
-import javafx.print.PrintSides;
-import javafx.print.Printer;
-import javafx.print.PrinterAttributes;
-import javafx.print.PrinterJob;
-import javafx.scene.Node;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
 /**
  *
  * @author DELL
@@ -299,8 +291,6 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane parentsPane;
     @FXML
-    private AnchorPane addParentsPane;
-    @FXML
     private JFXButton parentBtn;
     @FXML
     private MaterialDesignIconView parentIcon;
@@ -320,6 +310,19 @@ public class DashboardController implements Initializable {
     private StackPane editTeachersModals;
     @FXML
     private StackPane editParentsModals;
+    @FXML
+    private StackPane deleteStudentPane;
+    @FXML
+    private JFXButton deleteStudentYes;
+    @FXML
+    private JFXButton deleteStudentNo;
+    @FXML
+    private StackPane deleteStaffPane;
+    @FXML
+    private JFXButton deleteStaffYes;
+    @FXML
+    private JFXButton deleteStaffNo;
+
     public DashboardController() {
         try {
             this.conn = Database.getConnect();
@@ -868,6 +871,24 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    public void deleteStudent() {
+        deleteStudentPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStudentPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
     public void editTeacher() {
         editTeachersModals.setVisible(true);
         dashboardPane.setDisable(true);
@@ -884,9 +905,27 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
-    public void editParents(){
+    public void deleteTeacher() {
+        deleteStaffPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStaffPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void editParents() {
         editParentsModals.setVisible(true);
         dashboardPane.setDisable(true);
         studentPane.setDisable(true);
@@ -944,7 +983,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void exitParentEditModal(){
+    public void exitParentEditModal() {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(editParentsModals);
@@ -962,7 +1001,7 @@ public class DashboardController implements Initializable {
             editParentsModals.setVisible(false);
         });
     }
-    
+
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
@@ -1029,15 +1068,6 @@ public class DashboardController implements Initializable {
 
     }
 
-//    public void start(Stage primaryStage) {
-//
-//        staffPrintBtn.setOnAction((ActionEvent event) -> {
-//            printSetup(teachersTable, primaryStage);
-//        });
-//
-//        primaryStage.setResizable(false);
-//        primaryStage.show();
-//    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthdays();
@@ -1087,6 +1117,53 @@ public class DashboardController implements Initializable {
                 logoutPane.setVisible(false);
             });
         });
+
+        deleteStudentYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStudentNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStudentPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStudentPane.setVisible(false);
+            });
+        });
+
+        deleteStaffYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStaffNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStaffPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStaffPane.setVisible(false);
+            });
+        });
+
     }
 
     public void closeStage() {
@@ -1638,7 +1715,7 @@ public class DashboardController implements Initializable {
 
     }
 
-    //validations for Staffs 
+    //validations for Staffs
     public void employeeValidators() {
 
         RequiredFieldValidator rFValidator1;
@@ -1660,7 +1737,7 @@ public class DashboardController implements Initializable {
                 employeeFirstName.validate();
             }
         });
-        
+
         RequiredFieldValidator rFValidator2;
         rFValidator2 = new RequiredFieldValidator();
         rFValidator2.setMessage("Empty Field");
@@ -2239,7 +2316,7 @@ public class DashboardController implements Initializable {
         teachersTable.setItems(sortedData);
     }
 
-    // Reset button for Staff 
+    // Reset button for Staff
     @FXML
     private void staffResetBtn(ActionEvent event) {
         // Set all fields to empty or null on click
@@ -2318,51 +2395,4 @@ public class DashboardController implements Initializable {
         }
     }
 
-    @FXML
-    private void addParent(ActionEvent event) {
-    }
-    
-    //Print Button method
-    private void printSetup(Node node, Stage owner) {
-        // Create the PrinterJob        
-        PrinterJob job = PrinterJob.createPrinterJob();
-
-        // Get default Printer 
-        Printer printer = Printer.getDefaultPrinter();
-
-        JobSettings jobSettings = job.getJobSettings();
-        jobSettings.setPrintSides(PrintSides.DUPLEX);
-
-        //Layout for the Page
-        PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT,
-                Printer.MarginType.EQUAL_OPPOSITES);
-        PrinterAttributes attr = printer.getPrinterAttributes();
-//        PrintResolution defaultPrintResolution = attr.getDefaultPrintResolution();
-//        defaultPrintResolution.getFeedResolution();
-//        attr.getDefaultCopies();
-//        attr.getDefaultCollation();
-//        attr.getDefaultPageOrientation();
-
-        // Scaling the page 
-        double scaleX = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-        double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
-        Scale scale = new Scale(scaleX, scaleY);
-        node.getTransforms().add(scale);
-        
-
-        if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
-            boolean success = job.printPage(pageLayout, node);
-            if (success) {
-                job.endJob();
-            }
-        }
-        node.getTransforms().remove(scale);
-    }
-
-    Stage primaryStage;
-
-    @FXML
-    private void staffPrintBtn(ActionEvent event) {
-        printSetup(teachersTable, primaryStage);
-    }
 }
