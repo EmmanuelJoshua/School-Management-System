@@ -69,15 +69,8 @@ import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Rectangle2D;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.Printer;
-import javafx.print.PrinterAttributes;
-import javafx.print.PrinterJob;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.transform.Scale;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
 /**
@@ -158,7 +151,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton logoutNo;
     @FXML
-    private AnchorPane logoutPane;
+    private StackPane logoutPane;
     @FXML
     private AnchorPane addStudentPane;
     @FXML
@@ -298,8 +291,6 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane parentsPane;
     @FXML
-    private AnchorPane addParentsPane;
-    @FXML
     private JFXButton parentBtn;
     @FXML
     private MaterialDesignIconView parentIcon;
@@ -314,9 +305,23 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXListView<Label> leaderList;
     @FXML
-    private JFXButton staffPrintBtn;
+    private StackPane editStudentModals;
     @FXML
-    private FontAwesomeIconView staffIcon11;
+    private StackPane editTeachersModals;
+    @FXML
+    private StackPane editParentsModals;
+    @FXML
+    private StackPane deleteStudentPane;
+    @FXML
+    private JFXButton deleteStudentYes;
+    @FXML
+    private JFXButton deleteStudentNo;
+    @FXML
+    private StackPane deleteStaffPane;
+    @FXML
+    private JFXButton deleteStaffYes;
+    @FXML
+    private JFXButton deleteStaffNo;
 
     public DashboardController() {
         try {
@@ -847,6 +852,156 @@ public class DashboardController implements Initializable {
 
     }
 
+    @FXML
+    public void editStudent() {
+        editStudentModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editStudentModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void deleteStudent() {
+        deleteStudentPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStudentPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void editTeacher() {
+        editTeachersModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editTeachersModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void deleteTeacher() {
+        deleteStaffPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStaffPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void editParents() {
+        editParentsModals.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editParentsModals);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void exitStudentEditModal() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editStudentModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editStudentModals.setVisible(false);
+        });
+    }
+
+    @FXML
+    public void exitTeacherEditModal() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editTeachersModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editTeachersModals.setVisible(false);
+        });
+    }
+
+    @FXML
+    public void exitParentEditModal() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(editParentsModals);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event) -> {
+            dashboardPane.setDisable(false);
+            studentPane.setDisable(false);
+            staffPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+            coursesPane.setDisable(false);
+            editParentsModals.setVisible(false);
+        });
+    }
+
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
@@ -913,15 +1068,6 @@ public class DashboardController implements Initializable {
 
     }
 
-//    public void start(Stage primaryStage) {
-//
-//        staffPrintBtn.setOnAction((ActionEvent event) -> {
-//            printSetup(teachersTable, primaryStage);
-//        });
-//
-//        primaryStage.setResizable(false);
-//        primaryStage.show();
-//    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthdays();
@@ -961,9 +1107,63 @@ public class DashboardController implements Initializable {
             fade3.setToValue(0);
             fade3.play();
             fade3.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
                 logoutPane.setVisible(false);
             });
         });
+
+        deleteStudentYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStudentNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStudentPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStudentPane.setVisible(false);
+            });
+        });
+
+        deleteStaffYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStaffNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStaffPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStaffPane.setVisible(false);
+            });
+        });
+
     }
 
     public void closeStage() {
@@ -1022,6 +1222,13 @@ public class DashboardController implements Initializable {
     @FXML
     private void logOut(ActionEvent event) {
         logoutPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(500));
         fade.setNode(logoutPane);
@@ -1508,7 +1715,7 @@ public class DashboardController implements Initializable {
 
     }
 
-    //validations for Staffs 
+    //validations for Staffs
     public void employeeValidators() {
 
         RequiredFieldValidator rFValidator1;
@@ -1719,7 +1926,6 @@ public class DashboardController implements Initializable {
 //        employeePhoneNumber.getValidators().add(eventFilter);
 //        eventFilter.setMessage("Input Only Numbers");
 //    }
-
     // Validations for Staffs method on user input
     public boolean validateTeachersMethod() {
         // checks if the employee last name field is empty
@@ -2189,95 +2395,4 @@ public class DashboardController implements Initializable {
         }
     }
 
-    @FXML
-    private void addParent(ActionEvent event) {
-    }
-    
-    private void printSetup(Node node, Stage owner) {
-        // Create the PrinterJob        
-//        PrinterJob job = PrinterJob.createPrinterJob();
-//
-////        if (job == null) {
-////            return;
-////        }
-//
-//        // Show the print setup dialog
-////        boolean p = job.showPageSetupDialog(owner);
-////        boolean proceed = job.showPrintDialog(owner);
-//        JobSettings jobSettings = job.getJobSettings();
-//        jobSettings.setPrintSides(PrintSides.DUPLEX);
-////        PrinterJob.JobStatus jobStat = job.getJobStatus();
-//        Printer printer = Printer.getDefaultPrinter();
-//        PageLayout pageLayout = printer.createPageLayout(Paper.A4,
-//                PageOrientation.PORTRAIT,Printer.MarginType.EQUAL);
-//
-// 
-//    
-//    PrinterAttributes attr = printer.getPrinterAttributes();
-////    PrinterJob job = PrinterJob.createPrinterJob();
-//    double scaleX
-//        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-//    double scaleY
-//        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
-//    Scale scale = new Scale(scaleX, scaleY);
-//    node.getTransforms().add(scale);
-//
-//    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
-//      boolean success = job.printPage(pageLayout, node);
-//      if (success) {
-//        job.endJob();
-//
-//      }
-//    }
-//    node.getTransforms().remove(scale);
-
-    Printer printer = Printer.getDefaultPrinter();
-    PageLayout pageLayout
-        = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
-    PrinterAttributes attr = printer.getPrinterAttributes();
-    PrinterJob job = PrinterJob.createPrinterJob();
-    double scaleX
-        = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
-    double scaleY
-        = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
-    Scale scale = new Scale(scaleX, scaleY);
-    node.getTransforms().add(scale);
-
-    if (job != null && job.showPrintDialog(node.getScene().getWindow())) {
-      boolean success = job.printPage(pageLayout, node);
-      if (success) {
-        job.endJob();
-
-      }
-    }
-    node.getTransforms().remove(scale);
-  }
-  
-//    }
-
-//    private void print(PrinterJob job, Node node) {
-//        // Set the Job Status Message
-//        Label jobStatus = new Label();
-//        jobStatus.textProperty().bind(job.jobStatusProperty().asString());
-//
-//        // Print the node
-//        boolean printed = job.printPage(node);
-//        PrinterJob.JobStatus jobStat = job.getJobStatus();
-//
-//        if (printed) {
-//            job.endJob();
-//        } else {
-//            // Write Error Message
-//            PrinterJob.JobStatus ERROR = jobStat.ERROR;
-//            jobStatus.textProperty().unbind();
-//            jobStatus.setText("Printing failed.");
-//        }
-//    }
-
-Stage primaryStage;
-    @FXML
-    private void staffPrintBtn(ActionEvent event) {
-        printSetup(teachersTable, primaryStage);
-   
-    }
 }

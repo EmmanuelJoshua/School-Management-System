@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
@@ -16,13 +17,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="497.0" prefWidth="781.0" style="-fx-background-color: transparent;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.LoginController">
+<AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="559.0" prefWidth="887.0" style="-fx-background-color: transparent;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.LoginController">
     <children>
-      <ImageView fitHeight="478.0" fitWidth="781.0" layoutY="26.0">
+      <ImageView fitHeight="504.0" fitWidth="887.0" layoutY="26.0">
          <image>
             <Image url="@../images/doug-linstedt-135670-unsplash.jpg" />
          </image>
@@ -30,7 +32,7 @@
             <Rectangle2D minX="12.0" minY="12.0" width="12.0" />
          </viewport>
       </ImageView>
-      <Pane layoutY="26.0" prefHeight="478.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.5);">
+      <Pane fx:id="login_Stage" layoutY="26.0" prefHeight="504.0" prefWidth="887.0" style="-fx-background-color: rgba(1,1,1,0.5);">
          <children>
             <HBox layoutX="-9.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: rgba(255,255,255,0.1);">
                <children>
@@ -64,19 +66,19 @@
                </children>
             </HBox>
          </children></Pane>
-      <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="668.0" style="-fx-background-color: rgba(1,1,65,0.7); -fx-background-radius: 1.5em;">
+      <Pane layoutX="57.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="450.0" prefWidth="710.0" style="-fx-background-color: rgba(1,1,65,0.7); -fx-background-radius: 1.5em;">
          <children>
-            <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" layoutX="102.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
+            <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="156.0" prefHeight="42.0" prefWidth="351.0" promptText="Username" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
                <font>
                   <Font name="Calibri Light" size="20.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="password" focusColor="WHITE" labelFloat="true" layoutX="103.0" layoutY="246.0" prefHeight="42.0" prefWidth="351.0" promptText="Password" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
+            <JFXPasswordField fx:id="password" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="240.0" prefHeight="42.0" prefWidth="351.0" promptText="Password" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="#939cb2">
                <font>
                   <Font name="Calibri Light" size="20.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton fx:id="loginBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="219.0" layoutY="336.0" onAction="#signIn" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 20;" text="Login" textFill="WHITE">
+            <JFXButton fx:id="loginBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="228.0" layoutY="395.0" onAction="#signIn" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 20;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semilight" size="17.0" />
                </font>
@@ -94,20 +96,28 @@
                </font>
             </Text>
             <Pane layoutX="1.0" layoutY="31.0" prefHeight="40.0" prefWidth="4.0" style="-fx-background-color: #fff;" />
-            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="52.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/pass.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="52.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/user.png" />
                </image>
             </ImageView>
             <JFXProgressBar fx:id="progress" layoutX="178.0" layoutY="394.0" visible="false" />
+            <JFXButton layoutX="357.0" layoutY="287.0" onAction="#forgotPassword" prefHeight="30.0" prefWidth="141.0" text="Forgot password?" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="546.0" layoutY="4.0" maxWidth="250.0" prefHeight="511.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 1.5em;">
+      <Pane layoutX="579.0" layoutY="4.0" maxWidth="250.0" prefHeight="541.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 1.5em;">
          <children>
             <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="62.0" layoutY="428.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="About us" textFill="WHITE">
                <graphic>
@@ -139,9 +149,9 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="exitConfirmPane" layoutY="25.0" prefHeight="478.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
+      <Pane fx:id="exitConfirmPane" layoutY="25.0" prefHeight="504.0" prefWidth="887.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
          <children>
-            <Pane layoutX="226.0" layoutY="190.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
+            <Pane layoutX="279.0" layoutY="196.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
                <children>
                   <JFXButton buttonType="RAISED" layoutX="54.0" layoutY="68.0" onAction="#exitYesAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="Yes" textFill="#e8e8e8">
                      <font>
@@ -164,5 +174,110 @@
             </Pane>
          </children>
       </Pane>
+      <StackPane fx:id="forgot_password" layoutY="28.0" prefHeight="504.0" prefWidth="887.0" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+         <children>
+            <AnchorPane fx:id="adminPassword" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+               <children>
+                  <JFXButton layoutX="833.0" onAction="#exit_pass" prefHeight="45.0" prefWidth="30.0" ripplerFill="#900a0aeb" textFill="#8a777700">
+                     <graphic>
+                        <FontAwesomeIconView fill="#a40707" glyphName="CLOSE" size="30" wrappingWidth="20.571428298950195" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="forgotp_pane" maxHeight="300.0" maxWidth="500.0" prefHeight="150.0" prefWidth="431.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Pane layoutY="38.0" prefHeight="45.0" prefWidth="500.0" style="-fx-background-color: #2a468f; -fx-background-radius: 12;">
+                     <children>
+                        <ImageView fitHeight="95.0" fitWidth="118.0" layoutX="205.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/key.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <JFXButton layoutX="190.0" layoutY="228.0" onAction="#submit_btn" prefHeight="45.0" prefWidth="131.0" style="-fx-background-color: #2a468f; -fx-background-radius: 10;" text="Submit" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="44.0" fitWidth="62.0" layoutX="53.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/password.png" />
+                     </image>
+                  </ImageView>
+                  <JFXPasswordField layoutX="108.0" layoutY="150.0" prefHeight="37.0" prefWidth="307.0" promptText="Enter Admin Password" unFocusColor="#9a9797">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXPasswordField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="generatePassword" prefHeight="200.0" prefWidth="850.0" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+               <children>
+                  <ImageView fitHeight="504.0" fitWidth="887.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/Close_up_autumn_leaves_cold_roads_fallen_leaves_1920x1080.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="118.0" fitWidth="95.0" layoutX="237.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icon%20(2).png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="332.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Password">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField layoutX="347.0" layoutY="217.0" prefHeight="45.0" prefWidth="307.0" promptText="Enter ID">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <ImageView fitHeight="69.0" fitWidth="79.0" layoutX="268.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/users.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="347.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identification(ID)">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField editable="false" layoutX="342.0" layoutY="318.0" prefHeight="45.0" prefWidth="307.0" promptText="Password">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <ImageView fitHeight="69.0" fitWidth="79.0" layoutX="263.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/gnupg.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="342.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generated Password">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutX="348.0" layoutY="401.0" prefHeight="45.0" prefWidth="192.0" style="-fx-background-color: green; -fx-background-radius: 15;" text="Reset" textFill="#eeeeee">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#fcfcfc" glyphName="REFRESH" size="23" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton onAction="#login_backBtn" prefHeight="69.0" prefWidth="118.0" text="Back" textFill="#f5f4f4">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" size="40" />
+                     </graphic>
+                  </JFXButton>
+               </children></AnchorPane>
+         </children>
+      </StackPane>
     </children>
 </AnchorPane>
