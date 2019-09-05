@@ -70,9 +70,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -291,8 +293,6 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane parentsPane;
     @FXML
-    private AnchorPane addParentsPane;
-    @FXML
     private JFXButton parentBtn;
     @FXML
     private MaterialDesignIconView parentIcon;
@@ -312,6 +312,18 @@ public class DashboardController implements Initializable {
     private StackPane editTeachersModals;
     @FXML
     private StackPane editParentsModals;
+    @FXML
+    private StackPane deleteStudentPane;
+    @FXML
+    private JFXButton deleteStudentYes;
+    @FXML
+    private JFXButton deleteStudentNo;
+    @FXML
+    private StackPane deleteStaffPane;
+    @FXML
+    private JFXButton deleteStaffYes;
+    @FXML
+    private JFXButton deleteStaffNo;
 
     public DashboardController() {
         try {
@@ -861,6 +873,24 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    public void deleteStudent() {
+        deleteStudentPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStudentPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
     public void editTeacher() {
         editTeachersModals.setVisible(true);
         dashboardPane.setDisable(true);
@@ -877,9 +907,27 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
-    public void editParents(){
+    public void deleteTeacher() {
+        deleteStaffPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        staffPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        coursesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(deleteStaffPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    public void editParents() {
         editParentsModals.setVisible(true);
         dashboardPane.setDisable(true);
         studentPane.setDisable(true);
@@ -937,7 +985,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void exitParentEditModal(){
+    public void exitParentEditModal() {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(editParentsModals);
@@ -955,7 +1003,7 @@ public class DashboardController implements Initializable {
             editParentsModals.setVisible(false);
         });
     }
-    
+
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
                 "Male", "Female");
@@ -1021,7 +1069,7 @@ public class DashboardController implements Initializable {
         }
 
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthdays();
@@ -1071,6 +1119,53 @@ public class DashboardController implements Initializable {
                 logoutPane.setVisible(false);
             });
         });
+
+        deleteStudentYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStudentNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStudentPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStudentPane.setVisible(false);
+            });
+        });
+
+        deleteStaffYes.setOnAction((ActionEvent event) -> {
+
+        });
+
+        deleteStaffNo.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(deleteStaffPane);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                staffPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                coursesPane.setDisable(false);
+                deleteStaffPane.setVisible(false);
+            });
+        });
+
     }
 
     public void closeStage() {
@@ -2085,7 +2180,4 @@ public class DashboardController implements Initializable {
         }
     }
 
-    @FXML
-    private void addParent(ActionEvent event) {
-    }
 }

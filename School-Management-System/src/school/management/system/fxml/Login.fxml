@@ -149,9 +149,9 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="exitConfirmPane" layoutY="25.0" prefHeight="478.0" prefWidth="781.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
+      <Pane fx:id="exitConfirmPane" layoutY="25.0" prefHeight="504.0" prefWidth="887.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false">
          <children>
-            <Pane layoutX="226.0" layoutY="190.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
+            <Pane layoutX="279.0" layoutY="196.0" prefHeight="112.0" prefWidth="329.0" style="-fx-background-color: #F4F3EF; -fx-background-radius: 20;">
                <children>
                   <JFXButton buttonType="RAISED" layoutX="54.0" layoutY="68.0" onAction="#exitYesAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="Yes" textFill="#e8e8e8">
                      <font>
