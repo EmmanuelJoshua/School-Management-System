@@ -21,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -123,9 +125,9 @@ public class SplashScreenController implements Initializable {
                     String path = "/school/management/system/images/CHMS_Icon.png";
 
                     Image img = new Image(path);
-                   
+
                     Stage stage = new Stage();
-                     stage.getIcons().add(0, img);
+                    stage.getIcons().add(0, img);
                     Parent root = FXMLLoader.load(SplashScreenController.this.getClass().getResource("/school/management/system/fxml/Login.fxml"));
                     Scene scene = new Scene(root);
                     stage.initStyle(StageStyle.TRANSPARENT);
@@ -134,6 +136,9 @@ public class SplashScreenController implements Initializable {
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     stage.show();
+                    Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+                    stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+                    stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 
                     //dragable login stage
                     root.setOnMousePressed((MouseEvent event) -> {
