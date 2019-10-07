@@ -151,7 +151,7 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+        if (username.getText().isEmpty() && password.getText().isEmpty()) {
             Notifications notify = Notifications.create()
                     .graphic(new ImageView(errorImg))
                     .title("ERROR")

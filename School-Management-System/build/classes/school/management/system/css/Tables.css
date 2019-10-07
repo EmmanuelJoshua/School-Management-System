@@ -11,7 +11,7 @@ and open the template in the editor.
 .table-view{
 	/*-fx-background-color: #fff;*/
 	-fx-border-width: 3 0 0 0;
-	-fx-background-radius: 0 0 20 20;
+	-fx-background-radius: 0 0 0 20;
     -fx-border-color: #343756;
     -fx-table-color:rgba(211, 211, 211, 0.8);
     -fx-table-rippler-color:rgba(255, 0, 0, 0.9);
@@ -38,7 +38,7 @@ and open the template in the editor.
 
 .table-view .column-header{
     -fx-border-width: 0 0 2 0;
-    -fx-border-color: #E8E8E8;
+    -fx-border-color: #F3F3F3;
     -fx-font-family: 'Montserrat';
     -fx-font-smoothing-type:'Gray' ;
     -fx-font-size: 15px;
