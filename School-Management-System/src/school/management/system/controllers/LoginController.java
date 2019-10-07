@@ -37,12 +37,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import school.management.system.validation.Validator;
 import school.management.system.demoDatabase.Database;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 
 /**
  *
@@ -152,13 +155,9 @@ public class LoginController implements Initializable {
         }
 
         if (username.getText().isEmpty() || password.getText().isEmpty()) {
-            Notifications notify = Notifications.create()
-                    .graphic(new ImageView(errorImg))
-                    .title("ERROR")
-                    .text("Username and Password Empty")
-                    .position(Pos.TOP_CENTER)
-                    .hideAfter(Duration.seconds(3));
-            notify.show();
+             TrayNotification sd = new TrayNotification("Error", "Input Empty", errorImg, Paint.valueOf("#6AC259"));
+                sd.setAnimationType(AnimationType.FADE);
+                sd.showAndDismiss(Duration.seconds(2));
 //        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
 //            Notifications notify = Notifications.create()
 //                    .graphic(new ImageView(errorImg))

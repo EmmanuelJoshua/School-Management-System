@@ -22,12 +22,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -159,6 +163,14 @@ public class StaffDashboardController implements Initializable {
     private File guardianFile;
     private File employeeFile;
     static String teacherID;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private VBox views;
+    @FXML
+    private StackPane editStudentModals;
+    @FXML
+    private AnchorPane primary_SecPaneStudent;
 
     /**
      * Initializes the controller class.
@@ -481,7 +493,37 @@ public class StaffDashboardController implements Initializable {
     }
 
     @FXML
+    private void studentPrimary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStudent.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void studentSecondary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStudent.setVisible(false);
+        });
+    }
+    
+    @FXML
     private void logOut(ActionEvent event) {
+    }
+
+    @FXML
+    private void exitStudentEditModal(MouseEvent event) {
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package school.management.system.controllers;
 
+import tray.notification.TrayNotification;
 import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -76,12 +77,14 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 
 /**
- *
+ *g 
  * @author DELL
  */
-
 public class DashboardController implements Initializable {
 
     public Image errorImg = new Image("/school/management/system/images/cross.png");
@@ -352,25 +355,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView<?> gradesStudents;
     @FXML
-    private TableColumn<?, ?> dob1;
-    @FXML
-    private TableColumn<?, ?> gender1;
-    @FXML
-    private TableColumn<?, ?> studentClass1;
-    @FXML
-    private TableColumn<?, ?> residentialAddress1;
-    @FXML
     private TableView<?> gradesTable;
-    @FXML
-    private TableColumn<?, ?> dob11;
-    @FXML
-    private TableColumn<?, ?> gender11;
-    @FXML
-    private TableColumn<?, ?> studentClass11;
-    @FXML
-    private TableColumn<?, ?> residentialAddress11;
-    @FXML
-    private TableColumn<?, ?> paymentStatus11;
 
     public DashboardController() {
         try {
@@ -1106,6 +1091,115 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    private void addGrade(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void gradesPrimary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneGrades);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneGrades.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void gradesSecondary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneGrades);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneGrades.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void studentPrimary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStudent.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void studentSecondary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStudent.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void staffPrimary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStaff);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStaff.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void staffSecondary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStaff);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneStaff.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void parentsPrimary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneParents);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneParents.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void parentsSecondary(ActionEvent event) {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneParents);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneParents.setVisible(false);
+        });
+    }
+
+    @FXML
     private void coursePrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1169,6 +1263,17 @@ public class DashboardController implements Initializable {
             coursesPane.setDisable(false);
             editCourses.setVisible(false);
         });
+    }
+    
+    @FXML
+    private void selectStudentSchool(ActionEvent event) {
+         primary_SecPaneStudent.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
     }
 
     public void populateComboBoxes() {
@@ -1236,7 +1341,7 @@ public class DashboardController implements Initializable {
         }
 
     }
-
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthdays();
@@ -1334,7 +1439,9 @@ public class DashboardController implements Initializable {
         });
 
         deleteCourseYes.setOnAction((ActionEvent event) -> {
-
+                TrayNotification sd = new TrayNotification("Delete Succesful", "Course Deleted", successImg, Paint.valueOf("#6AC259"));
+                sd.setAnimationType(AnimationType.POPUP);
+                sd.showAndDismiss(Duration.seconds(2));
         });
 
         deleteCourseNo.setOnAction((ActionEvent event) -> {
@@ -2368,18 +2475,6 @@ public class DashboardController implements Initializable {
         } else {
             return true;
         }
-    }
-
-    @FXML
-    private void addGrade(ActionEvent event) {
-    }
-
-    @FXML
-    private void gradesPrimary(ActionEvent event) {
-    }
-
-    @FXML
-    private void gradesSecondary(ActionEvent event) {
     }
 
 }

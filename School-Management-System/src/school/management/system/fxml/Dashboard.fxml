@@ -647,6 +647,14 @@
                   </GridPane>
                </children>
             </AnchorPane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectStudentSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneStudent" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
@@ -1041,7 +1049,7 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="primary_SecPaneStaff" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);">
+            <AnchorPane fx:id="primary_SecPaneStaff" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
@@ -1265,7 +1273,7 @@
                   <MaterialDesignIconView fill="WHITE" glyphName="HUMAN_MALE_FEMALE" layoutX="11.0" layoutY="35.0" size="30" text="" />
                </children>
             </Pane>
-            <AnchorPane fx:id="primary_SecPaneParents" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);">
+            <AnchorPane fx:id="primary_SecPaneParents" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>

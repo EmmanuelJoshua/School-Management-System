@@ -647,22 +647,30 @@
                   </GridPane>
                </children>
             </AnchorPane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectStudentSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneStudent" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
+                  <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Text fill="#0000f3" layoutX="85.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Portal">
+                        <Text fill="#042954" layoutX="90.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Portal">
                            <font>
                               <Font name="Segoe UI Semilight" size="27.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/icons8_Student_Male_80px_1.png" />
+                              <Image url="@../images/icons8_Student_Male_100px_2.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -674,7 +682,7 @@
                               <Image url="@../images/primary.jpg" />
                            </image>
                         </ImageView>
-                        <JFXButton layoutX="91.0" layoutY="318.0" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
+                        <JFXButton layoutX="91.0" layoutY="318.0" onAction="#studentPrimary" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
                            <font>
                               <Font size="23.0" />
                            </font>
@@ -691,7 +699,7 @@
                               <Image url="@../images/secondary.jpg" />
                            </image>
                         </ImageView>
-                        <JFXButton layoutX="86.0" layoutY="318.0" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
+                        <JFXButton layoutX="86.0" layoutY="318.0" onAction="#studentSecondary" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
                            <font>
                               <Font size="23.0" />
                            </font>
@@ -1041,72 +1049,60 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="primary_SecPaneStaff" prefHeight="686.0" prefWidth="1200.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="-47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-188.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="primary_SecPaneStaff" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane prefHeight="639.0" prefWidth="1012.0">
+                  <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Pane layoutX="160.0" layoutY="169.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;">
-                           <children>
-                              <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../images/primary.jpg" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton layoutX="91.0" layoutY="318.0" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
-                                 <font>
-                                    <Font size="23.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="51.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/students.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <padding>
-                                    <Insets left="4.0" />
-                                 </padding>
-                              </JFXButton>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="538.0" layoutY="169.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;">
-                           <children>
-                              <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../images/secondary.jpg" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton layoutX="86.0" layoutY="318.0" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
-                                 <font>
-                                    <Font size="23.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="4.0" />
-                                 </padding>
-                              </JFXButton>
-                           </children>
-                        </Pane>
-                        <ImageView fitHeight="56.0" fitWidth="62.0" layoutX="345.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text fill="#042954" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Portal">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="27.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_Training_100px_2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Pane layoutX="156.0" layoutY="152.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.leftAnchor="156.0">
+                     <children>
+                        <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/primary.jpg" />
+                           </image>
+                        </ImageView>
+                        <JFXButton layoutX="91.0" layoutY="318.0" onAction="#staffPrimary" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
                      </children>
                   </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 10px;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="26.0">
-               <children>
-                  <Text fill="#0c0d5b" layoutX="124.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEACHERS PORTAL">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="15.0" layoutY="5.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 100px;">
-               <children>
-                  <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8_Training_80px_1.png" />
-                     </image>
-                  </ImageView>
+                  <Pane layoutX="534.0" layoutY="152.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.rightAnchor="127.0">
+                     <children>
+                        <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/secondary.jpg" />
+                           </image>
+                        </ImageView>
+                        <JFXButton layoutX="86.0" layoutY="318.0" onAction="#staffSecondary" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
          </children>
@@ -1277,79 +1273,60 @@
                   <MaterialDesignIconView fill="WHITE" glyphName="HUMAN_MALE_FEMALE" layoutX="11.0" layoutY="35.0" size="30" text="" />
                </children>
             </Pane>
-            <AnchorPane fx:id="primary_SecPaneParents" prefHeight="686.0" prefWidth="1200.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-188.0" AnchorPane.topAnchor="-46.0">
+            <AnchorPane fx:id="primary_SecPaneParents" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane prefHeight="639.0" prefWidth="1012.0">
+                  <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Pane layoutX="160.0" layoutY="169.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;">
-                           <children>
-                              <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../images/primary.jpg" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton layoutX="91.0" layoutY="318.0" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
-                                 <font>
-                                    <Font size="23.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="51.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/students.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <padding>
-                                    <Insets left="4.0" />
-                                 </padding>
-                              </JFXButton>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="538.0" layoutY="169.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;">
-                           <children>
-                              <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../images/secondary.jpg" />
-                                 </image>
-                              </ImageView>
-                              <JFXButton layoutX="86.0" layoutY="318.0" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
-                                 <font>
-                                    <Font size="23.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="4.0" />
-                                 </padding>
-                                 <graphic>
-                                    <ImageView fitHeight="51.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/students.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </Pane>
-                        <ImageView fitHeight="56.0" fitWidth="62.0" layoutX="345.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text fill="#042954" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parents Portal">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="27.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_Family_100px_2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Pane layoutX="156.0" layoutY="152.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.leftAnchor="156.0">
+                     <children>
+                        <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/primary.jpg" />
+                           </image>
+                        </ImageView>
+                        <JFXButton layoutX="91.0" layoutY="318.0" onAction="#parentsPrimary" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Primary" textFill="#362e2e">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
                      </children>
                   </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="55.0" layoutY="45.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 10px;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="26.0">
-               <children>
-                  <Text fill="#0c0d5b" layoutX="124.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARENTS PORTAL">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="15.0" layoutY="5.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.8); -fx-background-radius: 100px;">
-               <children>
-                  <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8_Family_80px_1.png" />
-                     </image>
-                  </ImageView>
+                  <Pane layoutX="534.0" layoutY="152.0" prefHeight="382.0" prefWidth="351.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.rightAnchor="127.0">
+                     <children>
+                        <ImageView fitHeight="304.0" fitWidth="351.0" layoutY="-3.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/secondary.jpg" />
+                           </image>
+                        </ImageView>
+                        <JFXButton layoutX="86.0" layoutY="318.0" onAction="#parentsSecondary" prefHeight="50.0" prefWidth="199.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Secondary" textFill="#362e2e">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
          </children>
@@ -1405,10 +1382,10 @@
                   </AnchorPane>
                   <TableView fx:id="gradesStudents" layoutX="14.0" layoutY="62.0" prefHeight="236.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="62.0">
                      <columns>
-                        <TableColumn fx:id="dob1" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
-                        <TableColumn fx:id="gender1" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
-                        <TableColumn fx:id="studentClass1" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
-                        <TableColumn fx:id="residentialAddress1" editable="false" prefWidth="77.5018310546875" text="Address" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="Reg. No" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Full Name" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="48.0" text="Gender" />
+                        <TableColumn editable="false" prefWidth="77.5018310546875" text="DOB" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -1416,11 +1393,11 @@
                   </TableView>
                   <TableView fx:id="gradesTable" layoutX="14.0" layoutY="297.0" prefHeight="255.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                      <columns>
-                        <TableColumn fx:id="dob11" editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="DOB" />
-                        <TableColumn fx:id="gender11" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
-                        <TableColumn fx:id="studentClass11" editable="false" maxWidth="3000.0" prefWidth="48.0" text="Class" />
-                        <TableColumn fx:id="residentialAddress11" editable="false" prefWidth="77.5018310546875" text="Address" />
-                        <TableColumn fx:id="paymentStatus11" editable="false" maxWidth="6000.0" prefWidth="75.0" text="Payment Status" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="Subject" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="CA 1" />
+                        <TableColumn editable="false" maxWidth="3000.0" prefWidth="48.0" text="CA 2" />
+                        <TableColumn editable="false" prefWidth="77.5018310546875" text="Exam" />
+                        <TableColumn editable="false" maxWidth="6000.0" prefWidth="75.0" text="Total" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -1431,18 +1408,18 @@
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Text fill="#0000f3" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grades Portal">
+                        <Text fill="#042954" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grades Portal">
                            <font>
                               <Font name="Segoe UI Semilight" size="27.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/icons8_Exam_80px_1.png" />
+                              <Image url="@../images/icons8_Exam_100px_3.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -1565,18 +1542,18 @@
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
                      <children>
-                        <Text fill="#0000f3" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses Portal">
+                        <Text fill="#042954" layoutX="93.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses Portal">
                            <font>
                               <Font name="Segoe UI Semilight" size="27.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/icons8_Course_80px_2.png" />
+                              <Image url="@../images/icons8_Course_100px_2.png" />
                            </image>
                         </ImageView>
                      </children>
