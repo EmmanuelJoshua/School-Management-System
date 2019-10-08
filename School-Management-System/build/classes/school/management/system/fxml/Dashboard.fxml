@@ -1049,6 +1049,14 @@
                   </GridPane>
                </children>
             </AnchorPane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectStaffSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneStaff" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
@@ -1273,6 +1281,14 @@
                   <MaterialDesignIconView fill="WHITE" glyphName="HUMAN_MALE_FEMALE" layoutX="11.0" layoutY="35.0" size="30" text="" />
                </children>
             </Pane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectParentSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneParents" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
@@ -1380,7 +1396,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="gradesStudents" layoutX="14.0" layoutY="62.0" prefHeight="236.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="62.0">
+                  <TableView fx:id="gradesStudents" layoutX="14.0" layoutY="62.0" prefHeight="236.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables-2.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="62.0">
                      <columns>
                         <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="Reg. No" />
                         <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Full Name" />
@@ -1391,7 +1407,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TableView fx:id="gradesTable" layoutX="14.0" layoutY="297.0" prefHeight="255.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                  <TableView fx:id="gradesTable" layoutX="14.0" layoutY="297.0" prefHeight="255.0" prefWidth="957.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables-2.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                      <columns>
                         <TableColumn editable="false" maxWidth="3000.0" prefWidth="88.39495849609375" text="Subject" />
                         <TableColumn editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="CA 1" />
@@ -1404,6 +1420,14 @@
                      </columnResizePolicy>
                   </TableView>
                </children></AnchorPane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectGradesSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneGrades" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
@@ -1476,7 +1500,7 @@
             </Pane>
             <AnchorPane layoutX="14.0" layoutY="73.0" prefHeight="552.0" prefWidth="985.0" style="-fx-background-color: #fff; -fx-background-radius: 6;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="73.0">
                <children>
-                  <TableView fx:id="CoursesTable" fixedCellSize="0.0" layoutX="14.0" layoutY="97.0" prefHeight="445.0" prefWidth="957.0" style="-fx-background-color: FBFBFB;" stylesheets="@../css/Tables.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                  <TableView fx:id="CoursesTable" fixedCellSize="0.0" layoutX="14.0" layoutY="97.0" prefHeight="445.0" prefWidth="957.0" style="-fx-background-color: FBFBFB;" stylesheets="@../css/Tables-2.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                      <columns>
                         <TableColumn editable="false" maxWidth="4500.0" prefWidth="236.0" text="Course ID" />
                         <TableColumn editable="false" maxWidth="4500.0" prefWidth="231.0" text="Course Name" />
@@ -1538,6 +1562,14 @@
                   </JFXButton>
                </children>
             </AnchorPane>
+            <JFXButton layoutX="898.0" layoutY="23.0" onAction="#selectCourseSchool" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: FBFBFB;" text="Selection" textFill="#bf9393" AnchorPane.rightAnchor="22.0">
+               <graphic>
+                  <MaterialDesignIconView fill="#bf9393" glyphName="BOOK" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+            </JFXButton>
             <AnchorPane fx:id="primary_SecPaneCourses" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: rgba(255,255,255,1); -fx-background-radius: 5;" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="10.0">
@@ -1732,6 +1764,20 @@
                   <MaterialDesignIconView fx:id="parentIcon" fill="#65657b" glyphName="HUMAN_MALE_FEMALE" size="27" text="" />
                </graphic>
             </JFXButton>
+            <JFXButton fx:id="classBtn" graphicTextGap="11.0" layoutX="10.0" layoutY="476.0" onAction="#openClasses" prefHeight="45.0" prefWidth="200.0" text="Classes" textFill="#65657b">
+               <font>
+                  <Font name="Segoe UI Semilight" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fx:id="classIcon" fill="#65657b" glyphName="LIBRARY_BOOKS" size="25" />
+               </graphic>
+            </JFXButton>
             <JFXButton fx:id="gradeBtn" graphicTextGap="15.0" onAction="#openGrade" prefHeight="45.0" prefWidth="200.0" text="Grades" textFill="#65657b">
                <font>
                   <Font name="Segoe UI Semilight" size="16.0" />
@@ -1779,7 +1825,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
                </graphic>
                <VBox.margin>
-                  <Insets left="25.0" top="50.0" />
+                  <Insets left="25.0" top="30.0" />
                </VBox.margin>
             </JFXButton>
          </children>

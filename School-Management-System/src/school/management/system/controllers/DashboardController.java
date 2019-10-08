@@ -82,7 +82,8 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
 /**
- *g 
+ * g
+ *
  * @author DELL
  */
 public class DashboardController implements Initializable {
@@ -356,6 +357,10 @@ public class DashboardController implements Initializable {
     private TableView<?> gradesStudents;
     @FXML
     private TableView<?> gradesTable;
+    @FXML
+    private JFXButton classBtn;
+    @FXML
+    private MaterialDesignIconView classIcon;
 
     public DashboardController() {
         try {
@@ -886,6 +891,11 @@ public class DashboardController implements Initializable {
 
     }
 
+     @FXML
+    private void openClasses(ActionEvent event) {
+        
+    }
+    
     @FXML
     public void editStudent() {
         editStudentModals.setVisible(true);
@@ -1264,13 +1274,57 @@ public class DashboardController implements Initializable {
             editCourses.setVisible(false);
         });
     }
-    
+
     @FXML
     private void selectStudentSchool(ActionEvent event) {
-         primary_SecPaneStudent.setVisible(true);
+        primary_SecPaneStudent.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(primary_SecPaneStudent);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+    
+    @FXML
+    private void selectStaffSchool(ActionEvent event) {
+        primary_SecPaneStaff.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneStaff);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    private void selectParentSchool(ActionEvent event) {
+        primary_SecPaneParents.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneParents);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    private void selectGradesSchool(ActionEvent event) {
+        primary_SecPaneGrades.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneGrades);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
+    @FXML
+    private void selectCourseSchool(ActionEvent event) {
+        primary_SecPaneCourses.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneCourses);
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.play();
@@ -1305,28 +1359,20 @@ public class DashboardController implements Initializable {
         nationality.setItems(nationality1);
     }
 
-    public void birthdays() {
+    public void birthdays() throws FileNotFoundException {
         String[] names = {"Isaac Ogunleye", "Joy Ajiboye", "Olumide Awodeji", "Daniel Odey", "Edmund Giwa"};
-//        String[] dates = {"1/1/1","2/2/2","3/3/3","4/4/4","5/5/5"};
-        for (int i = 0; i < names.length; i++) {
-
-            try {
-                Image img = new Image(new FileInputStream("src/school/management/system/images/birthday.png"));
-                Label lbl = new Label(names[i]);
-                ImageView imgView = new ImageView(img);
-                imgView.setFitHeight(25);
-                imgView.setFitWidth(25);
-                lbl.setGraphicTextGap(10);
-                lbl.setGraphic(imgView);
-                view.getItems().add(lbl);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        for (String name : names) {
+            Image img = new Image(new FileInputStream("src/school/management/system/images/birthday.png"));
+            Label lbl = new Label(name);
+            ImageView imgView = new ImageView(img);
+            imgView.setFitHeight(25);
+            imgView.setFitWidth(25);
+            lbl.setGraphicTextGap(10);
+            lbl.setGraphic(imgView);
+            view.getItems().add(lbl);
         }
 
         for (int i = 0; i < 3; i++) {
-
-            try {
                 Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Star_Filled_48px.png"));
                 Label lbl = new Label(names[i]);
                 ImageView imgView = new ImageView(img);
@@ -1335,16 +1381,17 @@ public class DashboardController implements Initializable {
                 lbl.setGraphicTextGap(10);
                 lbl.setGraphic(imgView);
                 leaderList.getItems().add(lbl);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
 
     }
-   
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        birthdays();
+        try {
+            birthdays();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         populateComboBoxes();
 //        refreshStudentTable();
 //        refreshStaffTable();
@@ -1439,9 +1486,9 @@ public class DashboardController implements Initializable {
         });
 
         deleteCourseYes.setOnAction((ActionEvent event) -> {
-                TrayNotification sd = new TrayNotification("Delete Succesful", "Course Deleted", successImg, Paint.valueOf("#6AC259"));
-                sd.setAnimationType(AnimationType.POPUP);
-                sd.showAndDismiss(Duration.seconds(2));
+            TrayNotification sd = new TrayNotification("Delete Succesful", "Course Deleted", successImg, Paint.valueOf("#6AC259"));
+            sd.setAnimationType(AnimationType.POPUP);
+            sd.showAndDismiss(Duration.seconds(2));
         });
 
         deleteCourseNo.setOnAction((ActionEvent event) -> {
