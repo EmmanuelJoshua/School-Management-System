@@ -9,19 +9,26 @@ import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,10 +37,13 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -120,10 +130,6 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private AnchorPane parentsPane;
     @FXML
-    private AnchorPane addParentsPane;
-    @FXML
-    private FontAwesomeIconView staffIcon11;
-    @FXML
     private AnchorPane gradesPane;
     @FXML
     private AnchorPane settingsPane;
@@ -150,12 +156,12 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private MaterialDesignIconView settingsIcon;
     @FXML
-    private AnchorPane logoutPane;
+    private StackPane logoutPane;
     @FXML
     private JFXButton logoutYes;
     @FXML
     private JFXButton logoutNo;
-    
+
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
     File selectedFile1;
@@ -169,8 +175,65 @@ public class StaffDashboardController implements Initializable {
     private VBox views;
     @FXML
     private StackPane editStudentModals;
-    @FXML
     private AnchorPane primary_SecPaneStudent;
+    @FXML
+    private AnchorPane dashboardPane;
+    @FXML
+    private JFXListView<?> newsList;
+    @FXML
+    private JFXListView<?> view;
+    @FXML
+    private TextField studentSearch1;
+    @FXML
+    private TableView<?> gradesStudents;
+    @FXML
+    private TableView<?> gradesTable;
+    @FXML
+    private AnchorPane primary_SecPaneGrades;
+    @FXML
+    private AnchorPane classesPane;
+    @FXML
+    private TextField coursesSearch;
+    @FXML
+    private Pane classesPrimary;
+    @FXML
+    private Pane classesSecondary;
+    @FXML
+    private TableView<?> classesTable;
+    @FXML
+    private TableColumn<?, ?> registrationNumber1;
+    @FXML
+    private TableColumn<?, ?> fullName1;
+    @FXML
+    private TableColumn<?, ?> dob1;
+    @FXML
+    private TableColumn<?, ?> gender1;
+    @FXML
+    private TableColumn<?, ?> studentClass1;
+    @FXML
+    private TableColumn<?, ?> residentialAddress1;
+    @FXML
+    private TableColumn<?, ?> paymentStatus1;
+    @FXML
+    private GNAvatarView stuImage1;
+    @FXML
+    private Text studentName1;
+    @FXML
+    private Text studentPaymentStatus1;
+    @FXML
+    private JFXButton dashboardBtn;
+    @FXML
+    private MaterialDesignIconView dashIcon;
+    @FXML
+    private JFXButton classBtn;
+    @FXML
+    private MaterialDesignIconView classIcon;
+    @FXML
+    private StackPane deleteStudentPane;
+    @FXML
+    private JFXButton deleteStudentYes;
+    @FXML
+    private JFXButton deleteStudentNo;
 
     /**
      * Initializes the controller class.
@@ -178,7 +241,46 @@ public class StaffDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateComboBoxes();
+        logoutYes.setOnAction((ActionEvent event1) -> {
+            try {
+                logOutAction();
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        logoutNo.setOnAction((ActionEvent event2) -> {
+            FadeTransition fade3 = new FadeTransition();
+            fade3.setDuration(Duration.millis(500));
+            fade3.setNode(logoutPane);
+            fade3.setFromValue(1);
+            fade3.setToValue(0);
+            fade3.play();
+            fade3.setOnFinished((ActionEvent event1) -> {
+                dashboardPane.setDisable(false);
+                studentPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+                logoutPane.setVisible(false);
+            });
+        });
+
     }
+
+    private void logOutAction() throws IOException {
+        closeStage();
+        Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
+
+        Stage stage = new Stage(StageStyle.TRANSPARENT);
+
+        Scene scene = new Scene(parent);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+
+        stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     
     public void populateComboBoxes() {
         ObservableList genders = FXCollections.observableArrayList(
@@ -194,13 +296,13 @@ public class StaffDashboardController implements Initializable {
                 "Christianity", "Islamism", "Others");
         selectReligion.setItems(religions);
         ObservableList nationality1 = FXCollections.observableArrayList(
-            "Nigerian","Ghanian","Cameroonian","Benin");
+                "Nigerian", "Ghanian", "Cameroonian", "Benin");
         nationality.setItems(nationality1);
     }
 
     @FXML
     private void addStudent(ActionEvent event) {
-         addStudentPane.setVisible(true);
+        addStudentPane.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(addStudentPane);
@@ -275,7 +377,7 @@ public class StaffDashboardController implements Initializable {
 
     @FXML
     private void openGuardbtn(ActionEvent event) {
-         //set title for filechooser
+        //set title for filechooser
         fileChooser.setTitle("Open Image");
 
         //set extension filter
@@ -304,7 +406,7 @@ public class StaffDashboardController implements Initializable {
 
     @FXML
     private void backFromAddStudent(ActionEvent event) {
-         FadeTransition fade = new FadeTransition();
+        FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
         fade.setNode(addStudentPane);
         fade.setFromValue(1);
@@ -325,7 +427,72 @@ public class StaffDashboardController implements Initializable {
     }
 
     @FXML
+    private void openDashboard(ActionEvent event) {
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+        
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
+        }
+
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+
+        if (dashboardBtn.getStyleClass().toString().contains("active") && dashIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            dashboardBtn.getStyleClass().add("active");
+            dashIcon.getStyleClass().add("iconActive");
+            dashboardPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(dashboardPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        classesPane.setVisible(false);
+        studentPane.setVisible(false);
+        parentsPane.setVisible(false);
+        settingsPane.setVisible(false);
+        gradesPane.setVisible(false);;
+    }
+
+    @FXML
     private void openStudent(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
 
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
@@ -338,6 +505,13 @@ public class StaffDashboardController implements Initializable {
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
+        }
+       
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
@@ -361,18 +535,34 @@ public class StaffDashboardController implements Initializable {
             fade.play();
         }
 
+        classesPane.setVisible(false);
+        dashboardPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
         parentsPane.setVisible(false);
     }
 
     @FXML
-    private void openParents(ActionEvent event) {
+    void openParents(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
 
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+        
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
@@ -403,18 +593,92 @@ public class StaffDashboardController implements Initializable {
             fade.play();
         }
 
+        classesPane.setVisible(false);
+        dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
     }
 
-    @FXML
-    private void openGrade(ActionEvent event) {
+     @FXML
+    private void openClasses(ActionEvent event) {
+         if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
 
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+        
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().toString().contains("active") && classIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            classBtn.getStyleClass().add("active");
+            classIcon.getStyleClass().add("iconActive");
+            classesPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(classesPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+        
+        parentsPane.setVisible(false);
+        gradesPane.setVisible(false);
+        dashboardPane.setVisible(false);
+        studentPane.setVisible(false);
+        settingsPane.setVisible(false);
+    }
+    
+    @FXML
+    void openGrade(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+       
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
@@ -445,13 +709,22 @@ public class StaffDashboardController implements Initializable {
             fade.play();
         }
 
+        classesPane.setVisible(false);
+        dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         settingsPane.setVisible(false);
         parentsPane.setVisible(false);
     }
 
     @FXML
-    private void openSettings(ActionEvent event) {
+    public void openSettings(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
 
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
@@ -462,6 +735,13 @@ public class StaffDashboardController implements Initializable {
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
 
         } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+       
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
             gradeBtn.getStyleClass().remove(2);
             gradeIcon.getStyleClass().remove(2);
         }
@@ -487,12 +767,13 @@ public class StaffDashboardController implements Initializable {
             fade.play();
         }
 
+        classesPane.setVisible(false);
+        dashboardPane.setVisible(false);
         studentPane.setVisible(false);
         gradesPane.setVisible(false);
         parentsPane.setVisible(false);
     }
 
-    @FXML
     private void studentPrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -505,7 +786,6 @@ public class StaffDashboardController implements Initializable {
         });
     }
 
-    @FXML
     private void studentSecondary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -517,13 +797,45 @@ public class StaffDashboardController implements Initializable {
             primary_SecPaneStudent.setVisible(false);
         });
     }
+
+    public void closeStage() {
+        ((Stage) mainDashPane.getScene().getWindow()).close();
+    }
     
-    @FXML
+   @FXML
     private void logOut(ActionEvent event) {
+        logoutPane.setVisible(true);
+        dashboardPane.setDisable(true);
+        studentPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(500));
+        fade.setNode(logoutPane);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
     }
 
     @FXML
     private void exitStudentEditModal(MouseEvent event) {
+    }
+
+    @FXML
+    private void addGrade(ActionEvent event) {
+    }
+
+    @FXML
+    private void selectGradesSchool(ActionEvent event) {
+    }
+
+    @FXML
+    private void gradesPrimary(ActionEvent event) {
+    }
+
+    @FXML
+    private void gradesSecondary(ActionEvent event) {
     }
 
 }
