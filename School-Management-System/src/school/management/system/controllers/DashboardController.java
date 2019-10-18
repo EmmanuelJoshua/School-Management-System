@@ -75,6 +75,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.stage.Screen;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
