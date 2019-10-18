@@ -33,10 +33,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import school.management.system.demoDatabase.Database;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 
 /**
  *
@@ -63,7 +65,7 @@ public class LoginController implements Initializable {
     private AnchorPane generatePassword;
           @FXML
     private Pane login_Stage;
-    
+
     Connection con2;
     String user, pass;
 
@@ -135,7 +137,7 @@ public class LoginController implements Initializable {
         stage = (Stage) ((OctIconView) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-//method to validate sign 
+//method to validate sign
 
     public void validateSignIn() {
         try {
@@ -149,16 +151,10 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (username.getText().isEmpty() && password.getText().isEmpty()) {
-//            Notifications notify = Notifications.create()
-//                    .graphic(new ImageView(errorImg))
-//                    .title("ERROR")
-//                    .text("Username and Password Empty")
-//                    .position(Pos.TOP_CENTER)
-//                    .hideAfter(Duration.seconds(3));
-//            notify.show();
-            closeStage();
-            next();
+        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+             TrayNotification sd = new TrayNotification("Error", "Input Empty", errorImg, Paint.valueOf("#6AC259"));
+                sd.setAnimationType(AnimationType.FADE);
+                sd.showAndDismiss(Duration.seconds(2));
 //        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
 //            Notifications notify = Notifications.create()
 //                    .graphic(new ImageView(errorImg))
@@ -287,7 +283,7 @@ public class LoginController implements Initializable {
 //                   next();
 //               }
 //           }
-//           
+//
 //       });
     }
 

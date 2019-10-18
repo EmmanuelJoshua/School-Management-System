@@ -38,7 +38,7 @@ and open the template in the editor.
 
 .table-view .column-header{
     -fx-border-width: 0 0 2 0;
-    -fx-border-color: #F3F3F3;
+    -fx-border-color: #E8E8E8;
     -fx-font-family: 'Montserrat';
     -fx-font-smoothing-type:'Gray' ;
     -fx-font-size: 15px;
