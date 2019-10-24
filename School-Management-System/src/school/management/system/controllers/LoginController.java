@@ -257,6 +257,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        password.textFormatterProperty().
+        
         //Enter Button Key event listener
         loginPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override

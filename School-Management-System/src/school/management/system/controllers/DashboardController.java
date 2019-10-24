@@ -1393,23 +1393,23 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         populateComboBoxes();
-//        refreshStudentTable();
-//        refreshStaffTable();
-//        try {
-//            loadTeacherTableData();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        try {
-//            studentTableData();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        refreshStudentTable();
+        refreshStaffTable();
+        try {
+            loadTeacherTableData();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            studentTableData();
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        validators();
 //        employeeValidators();
 
