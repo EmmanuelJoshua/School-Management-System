@@ -72,12 +72,14 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import java.util.Calendar;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.stage.Screen;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
@@ -891,11 +893,11 @@ public class DashboardController implements Initializable {
 
     }
 
-     @FXML
+    @FXML
     private void openClasses(ActionEvent event) {
-        
+
     }
-    
+
     @FXML
     public void editStudent() {
         editStudentModals.setVisible(true);
@@ -1285,7 +1287,7 @@ public class DashboardController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-    
+
     @FXML
     private void selectStaffSchool(ActionEvent event) {
         primary_SecPaneStaff.setVisible(true);
@@ -1373,14 +1375,14 @@ public class DashboardController implements Initializable {
         }
 
         for (int i = 0; i < 3; i++) {
-                Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Star_Filled_48px.png"));
-                Label lbl = new Label(names[i]);
-                ImageView imgView = new ImageView(img);
-                imgView.setFitHeight(25);
-                imgView.setFitWidth(25);
-                lbl.setGraphicTextGap(10);
-                lbl.setGraphic(imgView);
-                leaderList.getItems().add(lbl);
+            Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Star_Filled_48px.png"));
+            Label lbl = new Label(names[i]);
+            ImageView imgView = new ImageView(img);
+            imgView.setFitHeight(25);
+            imgView.setFitWidth(25);
+            lbl.setGraphicTextGap(10);
+            lbl.setGraphic(imgView);
+            leaderList.getItems().add(lbl);
         }
 
     }
@@ -1583,18 +1585,40 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     private void logOutAction() throws IOException {
         closeStage();
         Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
 
         Stage stage = new Stage(StageStyle.TRANSPARENT);
+        String path = "/school/management/system/images/CHMS_Icon.png";
 
+        Image img = new Image(path);
+
+        stage.getIcons().add(0, img);
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-
+        stage.setTitle("Login | CHMS");
         stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+
+        //dragable login stage
+        parent.setOnMousePressed((MouseEvent event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        parent.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });//end of draggable stage
     }
 
     // Save student button

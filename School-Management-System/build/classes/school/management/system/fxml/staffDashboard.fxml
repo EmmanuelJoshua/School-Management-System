@@ -19,6 +19,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -269,6 +270,111 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="adminPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="48.0" prefWidth="985.0" style="-fx-background-radius: 5; -fx-background-color: #bf9393;" styleClass="elevator" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <Text fill="WHITE" layoutX="43.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrators">
+                     <font>
+                        <Font name="Segoe UI" size="19.0" />
+                     </font>
+                  </Text>
+                  <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CIRCLE" layoutX="10.0" layoutY="35.0" size="30" />
+               </children>
+            </Pane>
+            <AnchorPane layoutX="14.0" layoutY="73.0" prefHeight="552.0" prefWidth="985.0" style="-fx-background-color: #fff; -fx-background-radius: 6;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="73.0">
+               <children>
+                  <AnchorPane layoutX="748.0" layoutY="51.0" prefHeight="30.0" prefWidth="226.0" style="-fx-background-color: #f8f8f8; -fx-background-radius: 9;" AnchorPane.bottomAnchor="464.0" AnchorPane.rightAnchor="11.0">
+                     <children>
+                        <TextField fx:id="classes_nameSearch1" onKeyPressed="#searchStudentDetails" prefHeight="37.0" prefWidth="189.0" promptText="Search name" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
+                           <font>
+                              <Font name="Montserrat ExtraLight" size="16.0" />
+                           </font>
+                        </TextField>
+                        <OctIconView fill="#9a8080" glyphName="SEARCH" layoutX="192.0" layoutY="24.0" size="20" />
+                        <JFXComboBox fx:id="classes_genderSearch1" focusColor="#f7f7f700" layoutX="10.0" prefHeight="37.0" prefWidth="179.0" promptText="Select" style="-fx-text-fill: #9a8080; -fx-prompt-text-fill: #9a8080;" unFocusColor="#f7f7f700" visible="false" />
+                        <JFXComboBox fx:id="classes_paymentSearch1" focusColor="#f7f7f700" layoutX="10.0" prefHeight="37.0" prefWidth="179.0" promptText="Select" style="-fx-text-fill: #9a8080; -fx-prompt-text-fill: #9a8080;" unFocusColor="#f7f7f700" visible="false" />
+                     </children>
+                  </AnchorPane>
+                  <Pane fx:id="classesSecondary1" prefHeight="51.0" prefWidth="985.0" style="-fx-background-color: #bf9393; -fx-background-radius: 6 6 0 0;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <JFXButton layoutX="14.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS1" textFill="#bf9393" />
+                        <JFXButton layoutX="96.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS2" textFill="#bf9393" />
+                        <JFXButton layoutX="178.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS3" textFill="#bf9393" />
+                        <JFXButton layoutX="343.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS2" textFill="#bf9393" />
+                        <JFXButton layoutX="260.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS1" textFill="#bf9393" />
+                        <JFXButton layoutX="425.0" layoutY="11.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS3" textFill="#bf9393" />
+                     </children>
+                  </Pane>
+                  <TableView fx:id="classesTable1" layoutX="12.0" layoutY="129.0" prefHeight="445.0" prefWidth="736.0" style="-fx-background-color: #fff;" stylesheets="@../css/Tables.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="237.0">
+                     <columns>
+                        <TableColumn fx:id="registrationNumber1" editable="false" maxWidth="4500.0" prefWidth="76.656982421875" text="Full Name" />
+                        <TableColumn fx:id="fullName1" editable="false" maxWidth="4500.0" prefWidth="127.72216796875" text="Position" />
+                        <TableColumn fx:id="gender1" editable="false" maxWidth="3000.0" prefWidth="44.6199951171875" text="Gender" />
+                        <TableColumn fx:id="residentialAddress1" editable="false" prefWidth="77.5018310546875" text="Email" />
+                        <TableColumn fx:id="residentialAddress11" editable="false" prefWidth="77.5018310546875" text="Address" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Pane layoutX="748.0" layoutY="129.0" prefHeight="445.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 20 5 0; -fx-border-color: #F3F3F3; -fx-border-width: 0 0 0 2;" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="11.0">
+                     <children>
+                        <Pane prefHeight="128.0" prefWidth="226.0" style="-fx-background-color: #343756; -fx-background-radius: 0 20 0 0;">
+                           <children>
+                              <GNAvatarView fx:id="stuImage1" layoutX="48.0" layoutY="64.0" prefHeight="128.0" prefWidth="127.0">
+                                 <image>
+                                    <Image url="@../images/user%20(2).png" />
+                                 </image>
+                              </GNAvatarView>
+                           </children>
+                        </Pane>
+                        <Text fx:id="studentName1" fill="#51cbce" layoutX="51.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="studentPaymentStatus1" fill="#b1a7aa" layoutX="25.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="179.37600708007812">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="19.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="22.0" layoutY="332.0" prefHeight="3.0" prefWidth="186.0" />
+                        <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="34.0" layoutY="377.0" onAction="#addAdministrator" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                           <graphic>
+                              <FontAwesomeIconView fill="#343756" glyphName="USER_PLUS" size="20" />
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Add" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="95.0" layoutY="377.0" onAction="#editAdministrator" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                           <graphic>
+                              <MaterialDesignIconView fill="#343756" glyphName="PENCIL" size="20" />
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Edit" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="156.0" layoutY="377.0" onAction="#deleteAdministrator" style="-fx-background-color: #fff; -fx-background-radius: 10;" text=" ">
+                           <graphic>
+                              <FontAwesomeIconView fill="#343756" glyphName="TRASH_ALT" size="20" />
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Delete" />
+                           </tooltip>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <AnchorPane layoutX="748.0" layoutY="11.0" prefHeight="26.0" prefWidth="226.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
+                     <children>
+                        <JFXComboBox fx:id="classesSearch1" focusColor="#9982823d" layoutX="90.0" layoutY="-1.0" onAction="#handleClassesSearch" prefHeight="30.0" prefWidth="127.0" promptText="Search by" style="-fx-font-family: Montserrat; -fx-prompt-text-fill: #9a8080; -fx-text-fill: #bf9393;" unFocusColor="#f8f8f8" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="classesPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: E9E9E9;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="48.0" prefWidth="985.0" style="-fx-background-radius: 5; -fx-background-color: #bf9393;" styleClass="elevator" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
@@ -476,12 +582,30 @@
                <children>
                   <AnchorPane prefHeight="51.0" prefWidth="985.0" style="-fx-background-color: #bf9393; -fx-background-radius: 6 6 0 0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton layoutX="14.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS1" textFill="#bf9393" />
-                        <JFXButton layoutX="96.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS2" textFill="#bf9393" />
-                        <JFXButton layoutX="178.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS3" textFill="#bf9393" />
-                        <JFXButton layoutX="343.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS2" textFill="#bf9393" />
-                        <JFXButton layoutX="260.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS1" textFill="#bf9393" />
-                        <JFXButton layoutX="425.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS3" textFill="#bf9393" />
+                        <JFXButton fx:id="grades_JSS1" layoutX="14.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" styleClass="classBtnActive" text="JSS1" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="grades_JSS2" layoutX="96.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS2" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="grades_JSS3" layoutX="178.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="JSS3" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="grades_SS2" layoutX="343.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS2" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="grades_SS1" layoutX="260.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS1" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="grades_SS3" layoutX="425.0" layoutY="10.0" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: FBFBFB;" text="SS3" textFill="#bf9393">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
                         <AnchorPane layoutX="745.0" layoutY="7.0" prefHeight="33.0" prefWidth="226.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.rightAnchor="14.0">
                            <children>
                               <TextField fx:id="grades_nameSearch" onKeyPressed="#searchStudentDetails" prefHeight="33.0" prefWidth="189.0" promptText="Search name" style="-fx-background-color: transparent; -fx-text-fill: #9a8080;">
@@ -493,7 +617,7 @@
                               <JFXComboBox fx:id="grades_genderSearch" focusColor="#f7f7f700" layoutX="10.0" prefHeight="33.0" prefWidth="179.0" promptText="Select" style="-fx-text-fill: #9a8080; -fx-prompt-text-fill: #9a8080;" unFocusColor="#f7f7f700" visible="false" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="603.0" layoutY="7.0" prefHeight="33.0" prefWidth="127.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.rightAnchor="254.0">
+                        <AnchorPane layoutX="603.0" layoutY="7.0" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.rightAnchor="254.0">
                            <children>
                               <JFXComboBox fx:id="gradesSearch" focusColor="#ffffff00" layoutY="1.0" onAction="#handleGradesSearch" prefHeight="30.0" prefWidth="127.0" promptText="Search by" style="-fx-font-family: Montserrat; -fx-prompt-text-fill: #9a8080; -fx-text-fill: #938383;" unFocusColor="#f8f8f8" AnchorPane.rightAnchor="1.0">
                                  <padding>
@@ -759,6 +883,62 @@
                   </TextField>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="chooseSettingsOpt" prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(0,0,0,0.8);" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Pane layoutX="593.0" layoutY="162.0" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.rightAnchor="116.0">
+                     <children>
+                        <JFXButton layoutX="62.0" layoutY="221.0" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Deleted Records" textFill="#362e2e">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="82.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_delete_male_user_100px_1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="166.0" layoutY="162.0" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: #fff; -fx-background-radius: 6px 6px 15px 15px;" AnchorPane.leftAnchor="172.0">
+                     <children>
+                        <JFXButton layoutX="62.0" layoutY="221.0" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 10px;" text="Change Password" textFill="#362e2e">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </JFXButton>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="82.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_lady_window_password_100px_1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <AnchorPane layoutX="63.0" layoutY="52.0" prefHeight="40.0" prefWidth="931.0" style="-fx-background-color: #fff; -fx-background-radius: 5;" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="18.0">
+                     <children>
+                        <Text fill="#042954" layoutX="86.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="27.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="12.0" layoutY="12.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" styleClass="elevator" AnchorPane.leftAnchor="12.0">
+                     <children>
+                        <ImageView fitHeight="99.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_Settings_100px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <VBox layoutY="48.0" prefHeight="639.0" prefWidth="188.0" spacing="5.0" stylesheets="@../css/drawer.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0">
@@ -987,6 +1167,112 @@
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </Text>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <StackPane fx:id="AddAdministrator" prefHeight="686.0" prefWidth="1200.0" style="-fx-background-color: rgba(1,1,1,0.6);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="400.0" maxWidth="721.0" prefHeight="400.0" prefWidth="721.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 20;">
+               <children>
+                  <Pane prefHeight="56.0" prefWidth="721.0" style="-fx-background-color: #bf9393; -fx-background-radius: 20 20 0 0;" styleClass="elevator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Administrator">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Text>
+                        <Pane layoutX="673.0" layoutY="7.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #f1f1f1; -fx-background-radius: 50;">
+                           <children>
+                              <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="5.0" layoutY="6.0" onMousePressed="#exitAddAdminModal" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../images/close5.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <GNAvatarView layoutX="14.0" layoutY="68.0" prefHeight="111.0" prefWidth="119.0" stroke="#bfaeae" strokeWidth="1.0" type="RECT">
+                     <image>
+                        <Image url="@../images/gigi-hadid-1920x1080-beauty-4k-17582.jpg" />
+                     </image>
+                  </GNAvatarView>
+                  <Separator layoutX="147.0" layoutY="120.0" prefHeight="3.0" prefWidth="173.0" />
+                  <Text fill="#a17575" layoutX="147.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator Image">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutX="147.0" layoutY="131.0" style="-fx-background-color: #bf9393;" text="Choose Image" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="641.0" layoutY="350.0" prefHeight="36.0" prefWidth="66.0" style="-fx-background-color: #bf9393; -fx-background-radius: 15;" styleClass="elevator" text="Add" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="567.0" layoutY="350.0" prefHeight="36.0" prefWidth="66.0" style="-fx-background-color: #bf9393; -fx-background-radius: 15;" styleClass="elevator" text="Clear" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <GridPane hgap="10.0" layoutX="18.0" layoutY="183.0" prefHeight="144.0" prefWidth="687.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="1" />
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.rowIndex="3" />
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Position" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Text fill="#575656" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationality" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField prefHeight="30.0" prefWidth="188.0" unFocusColor="#a8a5a5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <JFXComboBox prefHeight="30.0" prefWidth="230.0" unFocusColor="#a8a5a5" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>

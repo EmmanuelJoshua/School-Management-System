@@ -78,7 +78,12 @@
                   <Font name="Calibri Light" size="20.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton fx:id="loginBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="263.0" layoutY="339.0" onAction="#signIn" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 10;" text="Login" textFill="WHITE">
+            <JFXTextField fx:id="visiblePassword" focusColor="WHITE" labelFloat="true" layoutX="174.0" layoutY="238.0" prefHeight="42.0" prefWidth="351.0" promptText="Password" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" text="  " unFocusColor="#939cb2" visible="false">
+               <font>
+                  <Font name="Calibri Light" size="20.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="263.0" layoutY="339.0" onAction="#signIn" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2a468f; -fx-background-radius: 10;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semilight" size="17.0" />
                </font>
@@ -115,6 +120,14 @@
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </JFXButton>
+            <ImageView fx:id="togglePasswordVisibility" fitHeight="25.0" fitWidth="25.0" layoutX="497.0" layoutY="252.0" onMousePressed="#togglePass" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pass_visible.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
       </Pane>
       <Pane layoutX="620.0" layoutY="4.0" maxWidth="250.0" prefHeight="541.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 1.5em;">

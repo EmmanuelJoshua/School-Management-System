@@ -29,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -50,6 +51,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -169,6 +171,52 @@ public class StaffDashboardController implements Initializable {
     private JFXButton addNewsAction;
     @FXML
     private JFXButton CancelAddNews;
+    @FXML
+    private AnchorPane adminPane;
+    @FXML
+    private TextField classes_nameSearch1;
+    @FXML
+    private JFXComboBox<?> classes_genderSearch1;
+    @FXML
+    private JFXComboBox<?> classes_paymentSearch1;
+    @FXML
+    private Pane classesSecondary1;
+    @FXML
+    private TableView<?> classesTable1;
+    @FXML
+    private TableColumn<?, ?> registrationNumber1;
+    @FXML
+    private TableColumn<?, ?> fullName1;
+    @FXML
+    private TableColumn<?, ?> gender1;
+    @FXML
+    private TableColumn<?, ?> residentialAddress1;
+    @FXML
+    private TableColumn<?, ?> residentialAddress11;
+    @FXML
+    private GNAvatarView stuImage1;
+    @FXML
+    private Text studentName1;
+    @FXML
+    private Text studentPaymentStatus1;
+    @FXML
+    private JFXComboBox<?> classesSearch1;
+    @FXML
+    private AnchorPane chooseSettingsOpt;
+    @FXML
+    private StackPane AddAdministrator;
+    @FXML
+    private JFXButton grades_JSS1;
+    @FXML
+    private JFXButton grades_JSS2;
+    @FXML
+    private JFXButton grades_JSS3;
+    @FXML
+    private JFXButton grades_SS2;
+    @FXML
+    private JFXButton grades_SS1;
+    @FXML
+    private JFXButton grades_SS3;
 
     @FXML
     private void openAddNews(MouseEvent event) {
@@ -184,6 +232,22 @@ public class StaffDashboardController implements Initializable {
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.play();
+    }
+
+    @FXML
+    private void addAdministrator(ActionEvent event) {
+    }
+
+    @FXML
+    private void editAdministrator(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteAdministrator(ActionEvent event) {
+    }
+
+    @FXML
+    private void exitAddAdminModal(MouseEvent event) {
     }
 
     static class cell extends JFXListCell<String> {
@@ -231,6 +295,8 @@ public class StaffDashboardController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -266,7 +332,7 @@ public class StaffDashboardController implements Initializable {
         addNewsAction.setOnAction((ActionEvent event) -> {
 
         });
-        
+
         CancelAddNews.setOnAction((ActionEvent event) -> {
             FadeTransition fade = new FadeTransition();
             fade.setDuration(Duration.millis(300));
@@ -282,6 +348,29 @@ public class StaffDashboardController implements Initializable {
                 gradesPane.setDisable(false);
                 parentsPane.setDisable(false);
             });
+        });
+        grades_JSS1.setOnAction((event) -> {
+            changeActiveStatus(grades_JSS1, grades_JSS2, grades_JSS3, grades_SS1, grades_SS2, grades_SS3);
+        });
+        
+        grades_JSS2.setOnAction((event) -> {
+            changeActiveStatus(grades_JSS2, grades_JSS1, grades_JSS3, grades_SS1, grades_SS2, grades_SS3);
+        });
+        
+        grades_JSS3.setOnAction((event) -> {
+            changeActiveStatus(grades_JSS3, grades_JSS1, grades_JSS2, grades_SS1, grades_SS2, grades_SS3);
+        });
+        
+        grades_SS1.setOnAction((event) -> {
+            changeActiveStatus(grades_SS1, grades_JSS1, grades_JSS2, grades_JSS3, grades_SS2, grades_SS3);
+        });
+        
+        grades_SS2.setOnAction((event) -> {
+            changeActiveStatus(grades_SS2, grades_JSS1, grades_JSS2, grades_JSS3, grades_SS1, grades_SS3);
+        });
+       
+        grades_SS3.setOnAction((event) -> {
+            changeActiveStatus(grades_SS3, grades_JSS1, grades_JSS2, grades_JSS3, grades_SS1, grades_SS2);
         });
     }
 
@@ -368,18 +457,40 @@ public class StaffDashboardController implements Initializable {
         }
     }
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     private void logOutAction() throws IOException {
         closeStage();
         Parent parent = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Login.fxml"));
 
         Stage stage = new Stage(StageStyle.TRANSPARENT);
+        String path = "/school/management/system/images/CHMS_Icon.png";
 
+        Image img = new Image(path);
+
+        stage.getIcons().add(0, img);
         Scene scene = new Scene(parent);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-
+        stage.setTitle("Login | CHMS");
         stage.initOwner(((Stage) mainDashPane.getScene().getWindow()));
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+
+        //dragable login stage
+        parent.setOnMousePressed((MouseEvent event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        parent.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });//end of draggable stage
     }
 
     @FXML
@@ -686,6 +797,44 @@ public class StaffDashboardController implements Initializable {
 
     @FXML
     private void saveAction(ActionEvent event) {
+    }
+
+    public void changeActiveStatus(JFXButton active, JFXButton two, JFXButton three, JFXButton four, JFXButton five, JFXButton six) {
+        if (active.getStyleClass().toString().contains("classBtnActive")) {
+
+        } else {
+            active.getStyleClass().add("classBtnActive");
+        }
+        
+        if (two.getStyleClass().size() == 2) {
+
+        } else if (two.getStyleClass().size() == 3) {
+            two.getStyleClass().remove(2);
+        }
+
+        if (three.getStyleClass().size() == 2) {
+
+        } else if (three.getStyleClass().size() == 3) {
+            three.getStyleClass().remove(2);
+        }
+
+        if (four.getStyleClass().size() == 2) {
+
+        } else if (four.getStyleClass().size() == 3) {
+            four.getStyleClass().remove(2);
+        }
+
+        if (five.getStyleClass().size() == 2) {
+
+        } else if (five.getStyleClass().size() == 3) {
+            five.getStyleClass().remove(2);
+        }
+
+        if (six.getStyleClass().size() == 2) {
+
+        } else if (six.getStyleClass().size() == 3) {
+            six.getStyleClass().remove(2);
+        }
     }
 
 }
