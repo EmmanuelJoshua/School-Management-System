@@ -23,7 +23,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -48,6 +47,10 @@ import tray.notification.TrayNotification;
 public class LoginController implements Initializable {
 
     Image errorImg = new Image("/school/management/system/images/cross.png");
+
+    Image visibleImg = new Image("/school/management/system/images/pass_visible.png");
+
+    Image invisibleImg = new Image("/school/management/system/images/pass_masked.png");
     @FXML
     private JFXProgressBar progress;
     @FXML
@@ -60,15 +63,22 @@ public class LoginController implements Initializable {
     private Pane exitConfirmPane;
     @FXML
     private StackPane forgot_password;
-           @FXML
+    @FXML
     private AnchorPane adminPassword;
-      @FXML
+    @FXML
     private AnchorPane generatePassword;
-          @FXML
+    @FXML
     private Pane login_Stage;
 
     Connection con2;
     String user, pass;
+
+    @FXML
+    private JFXTextField visiblePassword;
+    @FXML
+    private ImageView togglePasswordVisibility;
+    @FXML
+    private AnchorPane forgotp_pane;
 
 //    private boolean userLogin(String username, String password) {
 //        return Validator.validate(username, password);
@@ -152,10 +162,10 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (username.getText().isEmpty() || password.getText().isEmpty()) {
-             TrayNotification sd = new TrayNotification("Error", "Input Empty", errorImg, Paint.valueOf("#6AC259"));
-                sd.setAnimationType(AnimationType.FADE);
-                sd.showAndDismiss(Duration.seconds(2));
+        if (username.getText().isEmpty() || getPass().isEmpty()) {
+            TrayNotification sd = new TrayNotification("Error", "Input Empty", errorImg, Paint.valueOf("#6AC259"));
+            sd.setAnimationType(AnimationType.FADE);
+            sd.showAndDismiss(Duration.seconds(2));
 //        } else if (!username.getText().equals(user) || !password.getText().equals(pass)) {
 //            Notifications notify = Notifications.create()
 //                    .graphic(new ImageView(errorImg))
@@ -164,8 +174,8 @@ public class LoginController implements Initializable {
 //                    .position(Pos.TOP_CENTER)
 //                    .hideAfter(Duration.seconds(3));
 //            notify.show();
-        } else if (username.getText().equals("staff") && password.getText().equals("staff")) {
-//            StaffDashboardController.teacherID = username.getText();
+        } else if (username.getText().equals("staff") && getPass().equals("staff")) {
+            StaffDashboardController.teacherID = username.getText();
 //            PauseTransition pause = new PauseTransition(Duration.seconds(5));
 //            loginBtn.setMouseTransparent(true);
 //            progress.setVisible(true);
@@ -197,19 +207,22 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
-      @FXML
+    @FXML
     void forgotPassword(ActionEvent event) {
-            forgot_password.setVisible(true);
+        forgot_password.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(500));
         fade.setNode(forgot_password);
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.play();
+        String pa = getPass();
+        System.out.println(pa);
     }
-        @FXML
+
+    @FXML
     void submit_btn(ActionEvent event) {
-         generatePassword.setVisible(true);
+        generatePassword.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(500));
         fade.setNode(generatePassword);
@@ -217,9 +230,10 @@ public class LoginController implements Initializable {
         fade.setToValue(1);
         fade.play();
     }
-        @FXML
+
+    @FXML
     void login_backBtn(ActionEvent event) {
-         login_Stage.setVisible(true);
+        login_Stage.setVisible(true);
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(500));
         fade.setNode(login_Stage);
@@ -228,9 +242,9 @@ public class LoginController implements Initializable {
         fade.play();
     }
 
-            @FXML
+    @FXML
     void exit_pass(ActionEvent event) {
-                FadeTransition fade3 = new FadeTransition();
+        FadeTransition fade3 = new FadeTransition();
         fade3.setDuration(Duration.millis(500));
         fade3.setNode(forgot_password);
         fade3.setFromValue(1);
@@ -240,6 +254,7 @@ public class LoginController implements Initializable {
             forgot_password.setVisible(false);
         });
     }
+
     @FXML
     private void exitNoAction(ActionEvent event) {
         FadeTransition fade3 = new FadeTransition();
@@ -255,6 +270,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        password.textFormatterProperty().
+
         //Enter Button Key event listener
         loginPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -275,17 +292,32 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //Enter Button Key event Listener
-//         username.setOnKeyPressed(new EventHandler<KeyEvent>(){
-//           @Override
-//           public void handle(KeyEvent event) {
-//               if(event.getCode()== KeyCode.ENTER){
-//                   closeStage();
-//                   next();
-//               }
-//           }
+
+//        togglePasswordVisibility.setOnMouseClicked((MouseEvent event) -> {
 //
-//       });
+//
+//        });
+    }
+    boolean flag = true;
+    @FXML
+    public void togglePass(MouseEvent event){
+          if (flag) {
+                password.setVisible(false);
+                visiblePassword.setText(password.getText());
+                visiblePassword.setVisible(true);
+                togglePasswordVisibility.setImage(invisibleImg);
+                flag = false;
+            } else if (!flag) {
+                password.setVisible(true);
+                password.setText(visiblePassword.getText());
+                visiblePassword.setVisible(false);
+                togglePasswordVisibility.setImage(visibleImg);
+                flag = true;
+            }
+    }
+
+    public String getPass(){
+        return visiblePassword.isVisible() ? visiblePassword.getText() : password.getText();
     }
 
 }
