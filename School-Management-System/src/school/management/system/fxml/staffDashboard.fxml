@@ -35,13 +35,8 @@
 
 <AnchorPane fx:id="mainDashPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="school.management.system.controllers.StaffDashboardController">
    <children>
-      <AnchorPane fx:id="dashboardPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <AnchorPane fx:id="dashboardPane" layoutX="188.0" layoutY="48.0" prefHeight="639.0" prefWidth="1012.0" styleClass="backgrounds" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
          <children>
-            <ImageView fitHeight="709.0" fitWidth="1366.0" layoutY="-1.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="-69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-354.0" AnchorPane.topAnchor="-1.0">
-               <image>
-                  <Image url="@../images/gades-photography-540984-unsplash.jpg" />
-               </image>
-            </ImageView>
             <Pane prefHeight="639.0" prefWidth="1012.0" style="-fx-background-color: rgba(265,219,56,0.2);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Text fill="WHITE" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
                <font>

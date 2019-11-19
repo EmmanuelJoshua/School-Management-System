@@ -11,6 +11,11 @@ and open the template in the editor.
      -fx-background-color: #fff;
      
 }
+/*src\school\management\system\images\stargazing-1600x900-moon-minimal-silhouette-dark-4k-8k-18286.png*/
+.backgrounds {
+    -fx-background-image: url("stargazing-1600x900-moon-minimal-silhouette-dark-4k-8k-18286.png");
+}
+
 .sidebar{
     -fx-background-color:#042954;
 
