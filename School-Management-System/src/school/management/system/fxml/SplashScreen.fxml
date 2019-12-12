@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXProgressBar?>
-<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -10,6 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <!--<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="splashscreen1.FXMLDocumentController">
     <children>
@@ -30,34 +30,55 @@
       </ImageView>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" prefWidth="550.0">
          <children>
-            <Label layoutX="57.0" layoutY="44.0" prefHeight="70.0" prefWidth="437.0" text="Captain of Host Model College" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI Black Italic" size="28.0" />
-               </font>
-            </Label>
-            <Label layoutX="362.0" layoutY="92.0" text="Version 1.0" textFill="WHITE">
+            <Label fx:id="yearLabel" layoutX="14.0" layoutY="318.0" prefHeight="19.0" prefWidth="62.0" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="yearLabel" layoutX="480.0" layoutY="318.0" prefHeight="19.0" prefWidth="62.0" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </Label>
-            <VBox fx:id="splashLayout" layoutY="266.0" prefHeight="56.0" prefWidth="550.0">
+            <VBox fx:id="splashLayout" layoutY="275.0" prefHeight="43.0" prefWidth="550.0">
                <children>
-                  <Label fx:id="textProgress" prefHeight="28.0" prefWidth="550.0" textFill="WHITE">
+                  <Text fx:id="textProgress" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
-                        <Font name="Segoe UI Bold" size="16.0" />
+                        <Font name="Samsung Sans Regular" size="16.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="2.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
+                  </Text>
                   <JFXProgressBar fx:id="jfxProgressBar" prefHeight="5.0" prefWidth="550.0" progress="0.4" stylesheets="@../css/jfx-bar.css" />
                </children>
             </VBox>
+            <Pane layoutX="14.0" layoutY="23.0" prefHeight="243.0" prefWidth="200.0" style="-fx-background-color: rgba(35, 84, 146, 0.6);">
+               <children>
+                  <Text fill="WHITE" layoutX="11.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Captain">
+                     <font>
+                        <Font name="Samsung Sans Regular" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="11.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Of">
+                     <font>
+                        <Font name="Samsung Sans Regular" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="11.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host">
+                     <font>
+                        <Font name="Samsung Sans Regular" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="12.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model">
+                     <font>
+                        <Font name="Samsung Sans Regular" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="12.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="College">
+                     <font>
+                        <Font name="Samsung Sans Regular" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Text fill="WHITE" layoutX="457.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version 1.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

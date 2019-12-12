@@ -10,6 +10,7 @@ import com.gn.GNAvatarView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
@@ -71,9 +72,13 @@ import java.util.Calendar;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -113,7 +118,6 @@ public class DashboardController implements Initializable {
     private TableColumn<AdminStudentsTable, String> dob;
     @FXML
     private TableColumn<AdminStudentsTable, String> gender;
-    @FXML
     private TableColumn<AdminStudentsTable, String> studentClass;
     @FXML
     private TableColumn<AdminStudentsTable, String> residentialAddress;
@@ -121,15 +125,12 @@ public class DashboardController implements Initializable {
     private TableColumn<AdminStudentsTable, String> paymentStatus;
     ObservableList<AdminStudentsTable> obs = FXCollections.observableArrayList();
     ObservableList<TeachersTable> obs1 = FXCollections.observableArrayList();
-    @FXML
     private TableView<AdminStudentsTable> adStudentTable;
     @FXML
     private AnchorPane dashboardPane;
-    @FXML
     private AnchorPane studentPane;
     @FXML
     private AnchorPane gradesPane;
-    @FXML
     private AnchorPane staffPane;
     @FXML
     private AnchorPane settingsPane;
@@ -161,112 +162,60 @@ public class DashboardController implements Initializable {
     private JFXButton logoutNo;
     @FXML
     private StackPane logoutPane;
-    @FXML
     private AnchorPane addStudentPane;
-    @FXML
     private AnchorPane addTeacherPane;
-    @FXML
     private JFXComboBox selectGender;
-    @FXML
     private JFXComboBox selectTeacherGender;
-    @FXML
     private JFXComboBox selectClass;
-    @FXML
     private JFXComboBox selectDepartment;
-    @FXML
     private JFXComboBox selectReligion;
-    @FXML
     private JFXComboBox selectMaritalStatus;
-    @FXML
     private JFXComboBox selectQualification;
-    @FXML
     private JFXComboBox selectDesignation;
-    @FXML
-    private JFXButton chooseStudBtn;
-    @FXML
     private GNAvatarView avatarStudView;
-    @FXML
-    private JFXButton chooseGuardbtn;
-    @FXML
     private GNAvatarView avatarGuardView;
     @FXML
     private GNAvatarView stuImage;
-    @FXML
     private JFXTextField studentFirstName;
-    @FXML
     private JFXTextField studentLastName;
-    @FXML
     private JFXTextField studentMiddleName;
-    @FXML
     private JFXTextField studentAdmissionNumber;
-    @FXML
     private JFXTextField guardianMail;
-    @FXML
     private JFXTextField guardianOccupation;
-    @FXML
     private JFXTextField residence;
-    @FXML
     private JFXTextField guardianPhone;
-    @FXML
     private JFXComboBox nationality;
     private Image image;
-    @FXML
     private JFXDatePicker studentDateOfBirth;
-    @FXML
     private JFXTextField guardianName;
 
     FileChooser fileChooser = new FileChooser();
     File selectedFile;
     File selectedFile1;
-    @FXML
     private TableView<TeachersTable> teachersTable;
-    @FXML
     private TableColumn<TeachersTable, String> teacherID;
-    @FXML
     private TableColumn<TeachersTable, String> teacherFullName;
-    @FXML
     private TableColumn<TeachersTable, String> teacherDob;
-    @FXML
     private TableColumn<TeachersTable, String> teacherGender;
-    @FXML
     private TableColumn<TeachersTable, String> teacherQualification;
-    @FXML
     private TableColumn<TeachersTable, String> teacherAddress;
-    @FXML
     private TableColumn<TeachersTable, String> teacherDesignation;
-    @FXML
-    private JFXButton chooseEmployeePhoto;
-    @FXML
     private GNAvatarView avatarEmployeeView;
-    @FXML
     private JFXTextField employeeID;
-    @FXML
     private JFXTextField employeeFirstName;
-    @FXML
     private JFXTextField employeeLastName;
-    @FXML
     private JFXTextField employeeMiddleName;
-    @FXML
     private JFXTextField employeePhoneNumber;
-    @FXML
     private JFXDatePicker employeDOB;
-    @FXML
     private JFXComboBox employeeReligion;
-    @FXML
     private JFXTextField employeeResidence;
-    @FXML
     private JFXTextField employeeEmail;
-    @FXML
     private JFXTextField employeeNationality;
-    @FXML
     private GNAvatarView teacherImage;
-    @FXML
-    private Hyperlink viewTeacher;
     @FXML
     private Text studentName;
     @FXML
     private Text studentPaymentStatus;
-    @FXML
     private Text teacherName;
     @FXML
     private TextField OldPasswordTxtF;
@@ -274,29 +223,18 @@ public class DashboardController implements Initializable {
     private TextField NewPasswordTxtF;
     @FXML
     private TextField ConfirmPasswordTxtF;
-    @FXML
     private Text stuMaleText;
-    @FXML
     private Text stuFemaleText;
-    @FXML
     private Text stuTotalText;
     String OldPassword, NewPassword, ConfirmedPassword, user1, pass1;
     Connection conn;
     @FXML
     private TextField coursesSearch;
-    @FXML
     private TextField studentSearch;
-    @FXML
     private TextField teacherSearch;
-    @FXML
     private Text staffMaleGenderCount;
-    @FXML
     private Text staffFemaleGenderCount;
-    @FXML
     private Text staffTotalGenderCount;
-    @FXML
-    private JFXButton staffResetBtn;
-    @FXML
     private AnchorPane parentsPane;
     @FXML
     private JFXButton parentBtn;
@@ -311,15 +249,13 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXListView<Label> view;
     @FXML
-    private JFXListView<Label> leaderList;
-    @FXML
-    private StackPane editStudentModals;
+    public StackPane editStudentModals;
     @FXML
     private StackPane editTeachersModals;
     @FXML
     private StackPane editParentsModals;
     @FXML
-    private StackPane deleteStudentPane;
+    public StackPane deleteStudentPane;
     @FXML
     private JFXButton deleteStudentYes;
     @FXML
@@ -338,13 +274,10 @@ public class DashboardController implements Initializable {
     private JFXButton deleteCourseYes;
     @FXML
     private JFXButton deleteCourseNo;
-    @FXML
     private AnchorPane primary_SecPaneStaff;
-    @FXML
     private AnchorPane primary_SecPaneParents;
     @FXML
     private AnchorPane primary_SecPaneGrades;
-    @FXML
     private AnchorPane primary_SecPaneStudent;
     @FXML
     private AnchorPane primary_SecPaneCourses;
@@ -362,73 +295,185 @@ public class DashboardController implements Initializable {
     private JFXButton classBtn;
     @FXML
     private MaterialDesignIconView classIcon;
+    @FXML
+    private AnchorPane holderPane;
+    @FXML
+    private StackPane addNews;
+    @FXML
+    private JFXButton addNewsAction;
+    @FXML
+    private JFXButton CancelAddNews;
+    @FXML
+    private JFXListView<String> newsList;
+    @FXML
+    private AnchorPane classesPane;
+    @FXML
+    private TextField classes_nameSearch;
+    @FXML
+    private JFXComboBox<?> classes_genderSearch;
+    @FXML
+    private JFXComboBox<?> classes_paymentSearch;
+    @FXML
+    private Pane classesPrimary;
+    @FXML
+    private Pane classesSecondary;
+    @FXML
+    private TableView<?> classesTable;
+    @FXML
+    private JFXComboBox<?> classesSearch;
+    @FXML
+    private AnchorPane primary_SecPaneClasses;
+    @FXML
+    private JFXDatePicker dateField;
+    @FXML
+    private JFXTextField newsTextField;
+
+    public void setV() {
+        editStudentModals.setVisible(true);
+    }
 
     public DashboardController() {
         try {
-            this.conn = Database.getConnect();
+            this.conn = Database.getConnection();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    Database database;
+    Connection connection;
+
     @FXML
-    private void openStudbtn(ActionEvent event) {
-        //set title for filechooser
-        fileChooser.setTitle("Open Image");
-
-        //set extension filter
-        try {
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        }
-
-        //show open file dialog
-        fileChooser.getInitialDirectory();
-        selectedFile = fileChooser.showOpenDialog(null);
-
-        try {
-            if (selectedFile != null) {
-                String path = selectedFile.getPath();
-                selectedFile = new File(path);
-                mainFile = selectedFile;
-                Image image = new Image(selectedFile.toURI().toString());
-                avatarStudView.setImage(image);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    private void openAddNews(MouseEvent event) {
+        addNews.setVisible(true);
+        dashboardPane.setDisable(true);
+        settingsPane.setDisable(true);
+        gradesPane.setDisable(true);
+        parentsPane.setDisable(true);
+        classesPane.setDisable(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addNews);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
     }
 
     @FXML
-    private void openGuardbtn(ActionEvent event) {
-        //set title for filechooser
-        fileChooser.setTitle("Open Image");
+    private void handleClassesSearch(ActionEvent event) {
+    }
 
-        //set extension filter
-        try {
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
+    static class cell extends JFXListCell<String> {
+
+        HBox hbox = new HBox();
+        JFXButton delete = new JFXButton();
+        JFXButton edit = new JFXButton();
+        Pane pane = new Pane();
+        Label label = new Label();
+        Image newsIcon = new Image("/school/management/system/images/icons8_Purchase_Order_48px.png");
+        Image trash = new Image("/school/management/system/images/trash.png");
+        Image editIcon = new Image("/school/management/system/images/edit.png");
+        ImageView imageView = new ImageView(newsIcon);
+        ImageView imageView2 = new ImageView(trash);
+        ImageView imageView3 = new ImageView(editIcon);
+
+        public cell() {
+            super();
+            hbox.getChildren().addAll(imageView, label, pane, edit, delete);
+            hbox.setHgrow(pane, Priority.ALWAYS);
+            delete.setGraphic(imageView2);
+            edit.setGraphic(imageView3);
+            imageView3.setFitHeight(16);
+            imageView3.setFitWidth(16);
+            imageView.setFitHeight(25);
+            imageView.setFitWidth(25);
+            Insets i = new Insets(0, 0, 0, 10);
+            label.setPadding(i);
+            hbox.setAlignment(Pos.CENTER);
+            hbox.setFillHeight(true);
+            delete.setOnAction((ActionEvent event) -> {
+
+                getListView().getSelectionModel().select(getItem());
+                String newsText = getListView().getSelectionModel().getSelectedItem();
+//                System.out.println(newsText);
+                DashboardController dashboardController = new DashboardController();
+                try {
+                    getListView().getItems().remove(getItem());
+                    dashboardController.deleteNewsRecord(newsText);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
         }
 
-        //show open file dialog
-        fileChooser.getInitialDirectory();
-        selectedFile = fileChooser.showOpenDialog(null);
+        public void updateItem(String name, boolean empty) {
+            super.updateItem(name, empty);
+            setText(null);
+            setGraphic(null);
 
-        try {
-            if (selectedFile != null) {
-                String path = selectedFile.getPath();
-                selectedFile = new File(path);
-                guardianFile = selectedFile;
-                Image image = new Image(selectedFile.toURI().toString());
-                avatarGuardView.setImage(image);
+            if (name != null && !empty) {
+                label.setText(name);
+                setGraphic(hbox);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 
+//    private void openStudbtn(ActionEvent event) {
+//        //set title for filechooser
+//        fileChooser.setTitle("Open Image");
+//
+//        //set extension filter
+//        try {
+//            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
+//        } catch (NullPointerException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        //show open file dialog
+//        fileChooser.getInitialDirectory();
+//        selectedFile = fileChooser.showOpenDialog(null);
+//
+//        try {
+//            if (selectedFile != null) {
+//                String path = selectedFile.getPath();
+//                selectedFile = new File(path);
+//                mainFile = selectedFile;
+//                Image image = new Image(selectedFile.toURI().toString());
+//                avatarStudView.setImage(image);
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//    private void openGuardbtn(ActionEvent event) {
+//        //set title for filechooser
+//        fileChooser.setTitle("Open Image");
+//
+//        //set extension filter
+//        try {
+//            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All images", "*.jpg", "*.jpeg", "*.png", "*.gif"));
+//        } catch (NullPointerException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        //show open file dialog
+//        fileChooser.getInitialDirectory();
+//        selectedFile = fileChooser.showOpenDialog(null);
+//
+//        try {
+//            if (selectedFile != null) {
+//                String path = selectedFile.getPath();
+//                selectedFile = new File(path);
+//                guardianFile = selectedFile;
+//                Image image = new Image(selectedFile.toURI().toString());
+//                avatarGuardView.setImage(image);
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
     @FXML
     private void openDashboard(ActionEvent event) {
         if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
@@ -450,6 +495,13 @@ public class DashboardController implements Initializable {
         } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
             settingBtn.getStyleClass().remove(2);
             settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
@@ -487,9 +539,8 @@ public class DashboardController implements Initializable {
             fade.play();
         }
 
-        studentPane.setVisible(false);
-        staffPane.setVisible(false);
-        parentsPane.setVisible(false);
+        holderPane.setVisible(false);
+        classesPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
         coursesPane.setVisible(false);
@@ -509,6 +560,13 @@ public class DashboardController implements Initializable {
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
@@ -544,20 +602,13 @@ public class DashboardController implements Initializable {
         } else {
             studentBtn.getStyleClass().add("active");
             stuIcon.getStyleClass().add("iconActive");
-            studentPane.setVisible(true);
-            FadeTransition fade = new FadeTransition();
-            fade.setDuration(Duration.millis(300));
-            fade.setNode(studentPane);
-            fade.setFromValue(0);
-            fade.setToValue(1);
-            fade.play();
+            setNode(studentPane);
         }
 
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
-        parentsPane.setVisible(false);
         coursesPane.setVisible(false);
     }
 
@@ -575,6 +626,13 @@ public class DashboardController implements Initializable {
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
@@ -610,20 +668,13 @@ public class DashboardController implements Initializable {
         } else {
             staffBtn.getStyleClass().add("active");
             staffIcon.getStyleClass().add("iconActive");
-            staffPane.setVisible(true);
-            FadeTransition fade = new FadeTransition();
-            fade.setDuration(Duration.millis(300));
-            fade.setNode(staffPane);
-            fade.setFromValue(0);
-            fade.setToValue(1);
-            fade.play();
+            setNode(staffPane);
         }
 
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        studentPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
-        parentsPane.setVisible(false);
         coursesPane.setVisible(false);
     }
 
@@ -641,6 +692,13 @@ public class DashboardController implements Initializable {
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
@@ -685,12 +743,83 @@ public class DashboardController implements Initializable {
             fade.play();
         }
 
+        holderPane.setVisible(false);
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        studentPane.setVisible(false);
-        staffPane.setVisible(false);
         gradesPane.setVisible(false);
-        parentsPane.setVisible(false);
         coursesPane.setVisible(false);
+    }
+
+    @FXML
+    private void openClasses(ActionEvent event) {
+        if (dashboardBtn.getStyleClass().size() == 2 && dashIcon.getStyleClass().size() == 2) {
+
+        } else if (dashboardBtn.getStyleClass().size() == 3 && dashIcon.getStyleClass().size() == 3) {
+            dashboardBtn.getStyleClass().remove(2);
+            dashIcon.getStyleClass().remove(2);
+        }
+
+        if (studentBtn.getStyleClass().size() == 2 && stuIcon.getStyleClass().size() == 2) {
+
+        } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
+            studentBtn.getStyleClass().remove(2);
+            stuIcon.getStyleClass().remove(2);
+        }
+
+        if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
+
+        } else if (settingBtn.getStyleClass().size() == 3 && settingsIcon.getStyleClass().size() == 3) {
+            settingBtn.getStyleClass().remove(2);
+            settingsIcon.getStyleClass().remove(2);
+        }
+
+        if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
+
+        } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
+            staffBtn.getStyleClass().remove(2);
+            staffIcon.getStyleClass().remove(2);
+        }
+
+        if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {
+
+        } else if (parentBtn.getStyleClass().size() == 3 && parentIcon.getStyleClass().size() == 3) {
+            parentBtn.getStyleClass().remove(2);
+            parentIcon.getStyleClass().remove(2);
+        }
+
+        if (courseBtn.getStyleClass().size() == 2 && courseIcon.getStyleClass().size() == 2) {
+
+        } else if (courseBtn.getStyleClass().size() == 3 && courseIcon.getStyleClass().size() == 3) {
+            courseBtn.getStyleClass().remove(2);
+            courseIcon.getStyleClass().remove(2);
+        }
+
+        if (gradeBtn.getStyleClass().size() == 2 && gradeIcon.getStyleClass().size() == 2) {
+
+        } else if (gradeBtn.getStyleClass().size() == 3 && gradeIcon.getStyleClass().size() == 3) {
+            gradeBtn.getStyleClass().remove(2);
+            gradeIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().toString().contains("active") && classIcon.getStyleClass().toString().contains("iconActive")) {
+
+        } else {
+            classBtn.getStyleClass().add("active");
+            classIcon.getStyleClass().add("iconActive");
+            classesPane.setVisible(true);
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(classesPane);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+        }
+
+        holderPane.setVisible(false);
+        coursesPane.setVisible(false);
+        gradesPane.setVisible(false);
+        dashboardPane.setVisible(false);
+        settingsPane.setVisible(false);
     }
 
     @FXML
@@ -707,6 +836,13 @@ public class DashboardController implements Initializable {
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
@@ -751,11 +887,10 @@ public class DashboardController implements Initializable {
             fade.play();
         }
 
+        holderPane.setVisible(false);
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        studentPane.setVisible(false);
-        staffPane.setVisible(false);
         settingsPane.setVisible(false);
-        parentsPane.setVisible(false);
         coursesPane.setVisible(false);
     }
 
@@ -773,6 +908,13 @@ public class DashboardController implements Initializable {
         } else if (studentBtn.getStyleClass().size() == 3 && stuIcon.getStyleClass().size() == 3) {
             studentBtn.getStyleClass().remove(2);
             stuIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (staffBtn.getStyleClass().size() == 2 && staffIcon.getStyleClass().size() == 2) {
@@ -808,18 +950,11 @@ public class DashboardController implements Initializable {
         } else {
             parentBtn.getStyleClass().add("active");
             parentIcon.getStyleClass().add("iconActive");
-            parentsPane.setVisible(true);
-            FadeTransition fade = new FadeTransition();
-            fade.setDuration(Duration.millis(300));
-            fade.setNode(parentsPane);
-            fade.setFromValue(0);
-            fade.setToValue(1);
-            fade.play();
+            setNode(parentsPane);
         }
 
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        studentPane.setVisible(false);
-        staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
         coursesPane.setVisible(false);
@@ -846,6 +981,13 @@ public class DashboardController implements Initializable {
         } else if (staffBtn.getStyleClass().size() == 3 && staffIcon.getStyleClass().size() == 3) {
             staffBtn.getStyleClass().remove(2);
             staffIcon.getStyleClass().remove(2);
+        }
+
+        if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
+
+        } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (settingBtn.getStyleClass().size() == 2 && settingsIcon.getStyleClass().size() == 2) {
@@ -883,57 +1025,14 @@ public class DashboardController implements Initializable {
             fade.play();
         }
 
+        holderPane.setVisible(false);
+        classesPane.setVisible(false);
         dashboardPane.setVisible(false);
-        studentPane.setVisible(false);
-        staffPane.setVisible(false);
         settingsPane.setVisible(false);
         gradesPane.setVisible(false);
-        parentsPane.setVisible(false);
 
     }
 
-    @FXML
-    private void openClasses(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void editStudent() {
-        editStudentModals.setVisible(true);
-        dashboardPane.setDisable(true);
-        studentPane.setDisable(true);
-        staffPane.setDisable(true);
-        settingsPane.setDisable(true);
-        gradesPane.setDisable(true);
-        parentsPane.setDisable(true);
-        coursesPane.setDisable(true);
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(editStudentModals);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.play();
-    }
-
-    @FXML
-    public void deleteStudent() {
-        deleteStudentPane.setVisible(true);
-        dashboardPane.setDisable(true);
-        studentPane.setDisable(true);
-        staffPane.setDisable(true);
-        settingsPane.setDisable(true);
-        gradesPane.setDisable(true);
-        parentsPane.setDisable(true);
-        coursesPane.setDisable(true);
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(deleteStudentPane);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.play();
-    }
-
-    @FXML
     public void editTeacher() {
         editTeachersModals.setVisible(true);
         dashboardPane.setDisable(true);
@@ -951,7 +1050,6 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
-    @FXML
     public void deleteTeacher() {
         deleteStaffPane.setVisible(true);
         dashboardPane.setDisable(true);
@@ -969,7 +1067,6 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
-    @FXML
     public void editParents() {
         editParentsModals.setVisible(true);
         dashboardPane.setDisable(true);
@@ -1107,6 +1204,36 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    private void classesPrimary(ActionEvent event) {
+        classesSecondary.setVisible(false);
+        classesPrimary.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneClasses);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneClasses.setVisible(false);
+        });
+    }
+
+    @FXML
+    private void classesSecondary(ActionEvent event) {
+        classesPrimary.setVisible(false);
+        classesSecondary.setVisible(true);
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(primary_SecPaneClasses);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((event2) -> {
+            primary_SecPaneClasses.setVisible(false);
+        });
+    }
+
+    @FXML
     private void gradesPrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1132,33 +1259,6 @@ public class DashboardController implements Initializable {
         });
     }
 
-    @FXML
-    private void studentPrimary(ActionEvent event) {
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(primary_SecPaneStudent);
-        fade.setFromValue(1);
-        fade.setToValue(0);
-        fade.play();
-        fade.setOnFinished((event2) -> {
-            primary_SecPaneStudent.setVisible(false);
-        });
-    }
-
-    @FXML
-    private void studentSecondary(ActionEvent event) {
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(primary_SecPaneStudent);
-        fade.setFromValue(1);
-        fade.setToValue(0);
-        fade.play();
-        fade.setOnFinished((event2) -> {
-            primary_SecPaneStudent.setVisible(false);
-        });
-    }
-
-    @FXML
     private void staffPrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1171,7 +1271,6 @@ public class DashboardController implements Initializable {
         });
     }
 
-    @FXML
     private void staffSecondary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1184,7 +1283,6 @@ public class DashboardController implements Initializable {
         });
     }
 
-    @FXML
     private void parentsPrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1197,7 +1295,6 @@ public class DashboardController implements Initializable {
         });
     }
 
-    @FXML
     private void parentsSecondary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1276,7 +1373,6 @@ public class DashboardController implements Initializable {
         });
     }
 
-    @FXML
     private void selectStudentSchool(ActionEvent event) {
         primary_SecPaneStudent.setVisible(true);
         FadeTransition fade = new FadeTransition();
@@ -1287,7 +1383,6 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
-    @FXML
     private void selectStaffSchool(ActionEvent event) {
         primary_SecPaneStaff.setVisible(true);
         FadeTransition fade = new FadeTransition();
@@ -1298,7 +1393,6 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
-    @FXML
     private void selectParentSchool(ActionEvent event) {
         primary_SecPaneParents.setVisible(true);
         FadeTransition fade = new FadeTransition();
@@ -1373,44 +1467,218 @@ public class DashboardController implements Initializable {
             view.getItems().add(lbl);
         }
 
-        for (int i = 0; i < 3; i++) {
-            Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Star_Filled_48px.png"));
-            Label lbl = new Label(names[i]);
-            ImageView imgView = new ImageView(img);
-            imgView.setFitHeight(25);
-            imgView.setFitWidth(25);
-            lbl.setGraphicTextGap(10);
-            lbl.setGraphic(imgView);
-            leaderList.getItems().add(lbl);
+        ObservableList<String> news = FXCollections.observableArrayList();
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new cell());
+
+    }
+
+    public void disposePane() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addNews);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event1) -> {
+            addNews.setVisible(false);
+            dashboardPane.setDisable(false);
+            classesPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+        });
+    }
+
+    public boolean validateNewsMethod() {
+//        if ("".equals(dateField.getValue().toString())) {
+//            return false;
+//        } else
+        if ("".equals(newsTextField.getText())) {
+            return false;
+        }
+        return true;
+    }
+
+    //        ObservableList<String> news = FXCollections.observableArrayList("PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019");
+    ObservableList<String> news = FXCollections.observableArrayList();
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new cell());
+
+    public void loadTableData() throws ClassNotFoundException, SQLException {
+        newsList.getItems().clear();
+        news.removeAll(news);
+        populateNewsList();
+    }
+
+    public void populateNewsList() throws ClassNotFoundException, SQLException {
+        try {
+            database.dbConnect();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        Connection connection2 = database.getConnection();
+        ResultSet resultSet = connection2.createStatement().executeQuery("SELECT NewsInfoDetails, NewsDate FROM News.NewsDetails");
+        while (resultSet.next()) {
+            String news1 = resultSet.getString("NewsInfoDetails");
+            String news2 = resultSet.getString("NewsDate");
+            String concat = news1 + " - " + news2;
+            news.add(concat);
+        }
+        newsList.setItems(news);
+        newsList.setCellFactory(param -> new cell());
+        resultSet.close();
+    }
+
+    public void deleteNewsRecord(String newsText) throws ClassNotFoundException, SQLException {
+        try {
+            database.dbConnect();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Connection connection = database.getConnection();
+
+        System.out.println(newsText);
+        int leng = newsText.length();
+        PreparedStatement preparedStatement = connection.prepareStatement("Delete From News.NewsDetails Where NewsInfoDetails like '%" + newsText.substring(0, 4) + "%'");
+        int execute = preparedStatement.executeUpdate();
+
+        if (execute != 0) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(successImg))
+                    .hideAfter(Duration.seconds(8))
+                    .title("Success")
+                    .text("Deleted Succesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+            System.out.println("sucessful");
+        } else {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Failed")
+                    .text("Unsuccesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+            System.out.println("unsucessful");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            populateNewsList();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.connection = Database.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             birthdays();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        populateComboBoxes();
-        refreshStudentTable();
-        refreshStaffTable();
         try {
-            loadTeacherTableData();
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            studentPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Students.fxml"));
+            staffPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Staffs.fxml"));
+            parentsPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Parents.fxml"));
+        } catch (IOException ex) {
         }
 
-        try {
-            studentTableData();
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        addNewsAction.setOnAction((ActionEvent event) -> {
+            if (validateNewsMethod()) {
+                try {
+                    PreparedStatement preparedStatement = connection.prepareStatement("insert into News.NewsDetails(NewsInfoDetails, NewsDate)VALUES(?,?)");
+
+                    preparedStatement.setString(1, newsTextField.getText());
+                    preparedStatement.setString(2, dateField.getValue().toString());
+
+                    int save = preparedStatement.executeUpdate();
+
+                    if (save != 0) {
+                        Notifications notify = Notifications.create()
+                                .graphic(new ImageView(successImg))
+                                .hideAfter(Duration.seconds(8))
+                                .title("Success")
+                                .text("Uploaded Succesfully")
+                                .position(Pos.TOP_CENTER);
+                        notify.show();
+                        System.out.println("sucessful");
+                        newsTextField.setText("");
+                        dateField.setValue(null);
+                        disposePane();
+                    } else {
+                        Notifications notify = Notifications.create()
+                                .graphic(new ImageView(errorImg))
+                                .hideAfter(Duration.seconds(5))
+                                .title("Failed")
+                                .text("Uploaded Unsuccesfully")
+                                .position(Pos.TOP_CENTER);
+                        notify.show();
+                        System.out.println("unsucessful");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    loadTableData();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Failed")
+                        .text("Insert Something")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+                System.out.println("unsucessful");
+            }
+        });
+
+        CancelAddNews.setOnAction((ActionEvent event) -> {
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(300));
+            fade.setNode(addNews);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.play();
+            fade.setOnFinished((ActionEvent event1) -> {
+                addNews.setVisible(false);
+                dashboardPane.setDisable(false);
+                classesPane.setDisable(false);
+                settingsPane.setDisable(false);
+                gradesPane.setDisable(false);
+                parentsPane.setDisable(false);
+            });
+        });
+//        populateComboBoxes();
+//        refreshStudentTable();
+//        refreshStaffTable();
+//        try {
+//            loadTeacherTableData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        try {
+//            studentTableData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 //        validators();
 //        employeeValidators();
 
@@ -1513,36 +1781,22 @@ public class DashboardController implements Initializable {
 
     }
 
+    private void setNode(Node node) {
+        holderPane.setVisible(true);
+        holderPane.getChildren().clear();
+        holderPane.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(300));
+        ft.setNode(node);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.play();
+    }
+
     public void closeStage() {
         ((Stage) mainDashPane.getScene().getWindow()).close();
     }
 
-    @FXML
-    private void addStudent(ActionEvent event) {
-        addStudentPane.setVisible(true);
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(addStudentPane);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.play();
-    }
-
-    @FXML
-    private void backFromAddStudent() {
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(addStudentPane);
-        fade.setFromValue(1);
-        fade.setToValue(0);
-        fade.play();
-        fade.setOnFinished((ActionEvent event) -> {
-            addStudentPane.setVisible(false);
-        });
-
-    }
-
-    @FXML
     private void addTeacher(ActionEvent event) {
         addTeacherPane.setVisible(true);
         FadeTransition fade = new FadeTransition();
@@ -1553,7 +1807,6 @@ public class DashboardController implements Initializable {
         fade.play();
     }
 
-    @FXML
     private void backFromAddTeacher() {
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(300));
@@ -1621,8 +1874,7 @@ public class DashboardController implements Initializable {
     }
 
     // Save student button
-    @FXML
-    private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException {
+    private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException, ClassNotFoundException {
 
         if (selectGender.getValue() == "Male") {
             genderSelect = "Male";
@@ -1706,7 +1958,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void populateStudentTable() {
+    private void populateStudentTable() throws ClassNotFoundException {
         try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
@@ -1755,13 +2007,14 @@ public class DashboardController implements Initializable {
 
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         });
     }
 
-    @FXML
-    private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
+    private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException, ClassNotFoundException {
 
         if (selectTeacherGender.getValue() == "Male") {
             genderSelect = "Male";
@@ -1842,7 +2095,6 @@ public class DashboardController implements Initializable {
         }
     }
 
-    @FXML
     private void chooseEmployeeImage(ActionEvent event) {
         fileChooser.setTitle("Open Image");
 
@@ -1870,7 +2122,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void populateStaffTable() {
+    private void populateStaffTable() throws ClassNotFoundException {
         try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
@@ -1923,17 +2175,23 @@ public class DashboardController implements Initializable {
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
 
     private void refreshStaffTable() {
-        teachersTable.getItems().clear();
-        obs1.removeAll(obs1);
-        populateStaffTable();
+        try {
+            teachersTable.getItems().clear();
+            obs1.removeAll(obs1);
+            populateStaffTable();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void refreshStudentTable() {
+    private void refreshStudentTable() throws ClassNotFoundException {
         adStudentTable.getItems().clear();
         obs.removeAll(obs);
         populateStudentTable();
@@ -2049,8 +2307,6 @@ public class DashboardController implements Initializable {
         }
     }
 
-    @FXML
-    // Reset button for student
     private void studentResetBtn(ActionEvent event) {
         // Set all fields to empty or null on click
         studentFirstName.setText("");
@@ -2660,7 +2916,6 @@ public class DashboardController implements Initializable {
         adStudentTable.setItems(sortedData);
     }
 
-    @FXML
     private void searchTeacherDetails(KeyEvent event) {
         FilteredList<TeachersTable> filteredData = new FilteredList<>(obs1, e -> true);
         teacherSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -2685,7 +2940,6 @@ public class DashboardController implements Initializable {
     }
 
     // Reset button for Staff
-    @FXML
     private void staffResetBtn(ActionEvent event) {
         // Set all fields to empty or null on click
         employeeID.setText("");

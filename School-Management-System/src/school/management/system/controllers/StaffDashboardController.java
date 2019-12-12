@@ -17,6 +17,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +58,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import school.management.system.demoDatabase.Database;
 
 /**
  * FXML Controller class
@@ -103,8 +107,6 @@ public class StaffDashboardController implements Initializable {
     private AnchorPane primary_SecPaneStudent;
     @FXML
     private AnchorPane dashboardPane;
-    @FXML
-    private JFXListView<String> newsList;
     @FXML
     private JFXListView<Label> view;
     @FXML
@@ -166,12 +168,6 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private JFXComboBox<?> gradesSearch;
     @FXML
-    private StackPane addNews;
-    @FXML
-    private JFXButton addNewsAction;
-    @FXML
-    private JFXButton CancelAddNews;
-    @FXML
     private AnchorPane adminPane;
     @FXML
     private TextField classes_nameSearch1;
@@ -217,23 +213,10 @@ public class StaffDashboardController implements Initializable {
     private JFXButton grades_SS1;
     @FXML
     private JFXButton grades_SS3;
-
     @FXML
-    private void openAddNews(MouseEvent event) {
-        addNews.setVisible(true);
-        dashboardPane.setDisable(true);
-        settingsPane.setDisable(true);
-        gradesPane.setDisable(true);
-        parentsPane.setDisable(true);
-        classesPane.setDisable(true);
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(300));
-        fade.setNode(addNews);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.play();
-    }
+    private JFXListView<String> newsList;
 
+    Database database;
     @FXML
     private void addAdministrator(ActionEvent event) {
     }
@@ -249,49 +232,26 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private void exitAddAdminModal(MouseEvent event) {
     }
-
-    static class cell extends JFXListCell<String> {
-
-        HBox hbox = new HBox();
-        JFXButton delete = new JFXButton();
-        JFXButton edit = new JFXButton();
-        Pane pane = new Pane();
-        Label label = new Label();
-        Image newsIcon = new Image("/school/management/system/images/icons8_Purchase_Order_48px.png");
-        Image trash = new Image("/school/management/system/images/trash.png");
-        Image editIcon = new Image("/school/management/system/images/edit.png");
-        ImageView imageView = new ImageView(newsIcon);
-        ImageView imageView2 = new ImageView(trash);
-        ImageView imageView3 = new ImageView(editIcon);
-
-        public cell() {
-            super();
-            hbox.getChildren().addAll(imageView, label, pane, edit, delete);
-            hbox.setHgrow(pane, Priority.ALWAYS);
-            delete.setGraphic(imageView2);
-            edit.setGraphic(imageView3);
-            imageView3.setFitHeight(16);
-            imageView3.setFitWidth(16);
-            imageView.setFitHeight(25);
-            imageView.setFitWidth(25);
-            Insets i = new Insets(0, 0, 0, 10);
-            label.setPadding(i);
-            hbox.setAlignment(Pos.CENTER);
-            hbox.setFillHeight(true);
-            delete.setOnAction(e -> getListView().getItems().remove(getItem()));
-        }
-
-        public void updateItem(String name, boolean empty) {
-            super.updateItem(name, empty);
-            setText(null);
-            setGraphic(null);
-
-            if (name != null && !empty) {
-                label.setText(name);
-                setGraphic(hbox);
-            }
-        }
-    }
+//    ObservableList<String> news = FXCollections.observableArrayList();
+//     public void populateNewsList() throws ClassNotFoundException, SQLException {
+//        try {
+//            database.dbConnect();
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        Connection connection2 = database.getConnection();
+//        ResultSet resultSet = connection2.createStatement().executeQuery("SELECT NewsInfoDetails, NewsDate FROM News.NewsDetails");
+//        while (resultSet.next()) {
+//            String news1 = resultSet.getString("NewsInfoDetails");
+//            String news2 = resultSet.getString("NewsDate");
+//            String concat = news1 + " - " + news2;
+//            news.add(concat);
+//        }
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new StaffDashboardController.cell());
+//        resultSet.close();
+//    }
 
     /**
      * Initializes the controller class.
@@ -300,6 +260,14 @@ public class StaffDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        DashboardController dashboardController = new DashboardController();
+        try {
+            dashboardController.populateNewsList();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             birthdays();
         } catch (FileNotFoundException ex) {
@@ -328,27 +296,7 @@ public class StaffDashboardController implements Initializable {
                 logoutPane.setVisible(false);
             });
         });
-
-        addNewsAction.setOnAction((ActionEvent event) -> {
-
-        });
-
-        CancelAddNews.setOnAction((ActionEvent event) -> {
-            FadeTransition fade = new FadeTransition();
-            fade.setDuration(Duration.millis(300));
-            fade.setNode(addNews);
-            fade.setFromValue(1);
-            fade.setToValue(0);
-            fade.play();
-            fade.setOnFinished((ActionEvent event1) -> {
-                addNews.setVisible(false);
-                dashboardPane.setDisable(false);
-                classesPane.setDisable(false);
-                settingsPane.setDisable(false);
-                gradesPane.setDisable(false);
-                parentsPane.setDisable(false);
-            });
-        });
+        
         grades_JSS1.setOnAction((event) -> {
             changeActiveStatus(grades_JSS1, grades_JSS2, grades_JSS3, grades_SS1, grades_SS2, grades_SS3);
         });
@@ -386,10 +334,18 @@ public class StaffDashboardController implements Initializable {
             lbl.setGraphic(imgView);
             view.getItems().add(lbl);
         }
-
-        ObservableList<String> news = FXCollections.observableArrayList("PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019");
-        newsList.setItems(news);
-        newsList.setCellFactory(param -> new cell());
+        
+//        String[] news = {"PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019"};
+//        for (String name : news) {
+//            Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Purchase_Order_48px.png"));
+//            Label lbl = new Label(name);
+//            ImageView imgView = new ImageView(img);
+//            imgView.setFitHeight(25);
+//            imgView.setFitWidth(25);
+//            lbl.setGraphicTextGap(10);
+//            lbl.setGraphic(imgView);
+//            newsList.getItems().add(lbl);
+//        }
 
     }
 
@@ -713,8 +669,8 @@ public class StaffDashboardController implements Initializable {
         if (classBtn.getStyleClass().size() == 2 && classIcon.getStyleClass().size() == 2) {
 
         } else if (classBtn.getStyleClass().size() == 3 && classIcon.getStyleClass().size() == 3) {
-            gradeBtn.getStyleClass().remove(2);
-            gradeIcon.getStyleClass().remove(2);
+            classBtn.getStyleClass().remove(2);
+            classIcon.getStyleClass().remove(2);
         }
 
         if (parentBtn.getStyleClass().size() == 2 && parentIcon.getStyleClass().size() == 2) {

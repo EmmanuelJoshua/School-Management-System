@@ -29,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,7 +42,7 @@ import javafx.util.Duration;
 public class SplashScreenController implements Initializable {
 
     @FXML
-    private Label textProgress;
+    private Text textProgress;
     @FXML
     private VBox splashLayout;
     @FXML
@@ -116,43 +117,40 @@ public class SplashScreenController implements Initializable {
         };
 
         textProgress.textProperty().bind(task.messageProperty());
-        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent e) {
-                textProgress.textProperty().unbind();
-                ((Stage) splashPane.getScene().getWindow()).close();
-                try {
-                    String path = "/school/management/system/images/CHMS_Icon.png";
-
-                    Image img = new Image(path);
-
-                    Stage stage = new Stage();
-                    stage.getIcons().add(0, img);
-                    Parent root = FXMLLoader.load(SplashScreenController.this.getClass().getResource("/school/management/system/fxml/Login.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.initStyle(StageStyle.TRANSPARENT);
-                    scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
-                    stage.setTitle("Login | CHMS");
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
-                    stage.show();
-                    Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-                    stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-                    stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
-
-                    //dragable login stage
-                    root.setOnMousePressed((MouseEvent event) -> {
-                        xOffset = event.getSceneX();
-                        yOffset = event.getSceneY();
-                    });
-
-                    root.setOnMouseDragged((MouseEvent event) -> {
-                        stage.setX(event.getScreenX() - xOffset);
-                        stage.setY(event.getScreenY() - yOffset);
-                    });//end of draggable stage
-                } catch (IOException ex) {
-                    Logger.getLogger(SplashScreenController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        task.setOnSucceeded((WorkerStateEvent e) -> {
+            textProgress.textProperty().unbind();
+            ((Stage) splashPane.getScene().getWindow()).close();
+            try {
+                String path = "/school/management/system/images/CHMS_Icon.png";
+                
+                Image img = new Image(path);
+                
+                Stage stage = new Stage();
+                stage.getIcons().add(0, img);
+                Parent root = FXMLLoader.load(SplashScreenController.this.getClass().getResource("/school/management/system/fxml/Login.fxml"));
+                Scene scene = new Scene(root);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                stage.setTitle("Login | CHMS");
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+                Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+                stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+                stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+                
+                //dragable login stage
+                root.setOnMousePressed((MouseEvent event) -> {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                });
+                
+                root.setOnMouseDragged((MouseEvent event) -> {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                });//end of draggable stage
+            } catch (IOException ex) {
+                Logger.getLogger(SplashScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 

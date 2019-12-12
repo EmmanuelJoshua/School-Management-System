@@ -307,13 +307,13 @@ public class LoginController implements Initializable {
                 password.setVisible(false);
                 visiblePassword.setText(password.getText());
                 visiblePassword.setVisible(true);
-                togglePasswordVisibility.setImage(invisibleImg);
+                togglePasswordVisibility.setImage(visibleImg);
                 flag = false;
             } else if (!flag) {
                 password.setVisible(true);
                 password.setText(visiblePassword.getText());
                 visiblePassword.setVisible(false);
-                togglePasswordVisibility.setImage(visibleImg);
+                togglePasswordVisibility.setImage(invisibleImg);
                 flag = true;
             }
     }
