@@ -122,7 +122,7 @@
             </JFXButton>
             <ImageView fx:id="togglePasswordVisibility" fitHeight="25.0" fitWidth="25.0" layoutX="497.0" layoutY="252.0" onMousePressed="#togglePass" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/pass_visible.png" />
+                  <Image url="@../images/pass_masked.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -130,7 +130,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="620.0" layoutY="4.0" maxWidth="250.0" prefHeight="541.0" prefWidth="222.0" style="-fx-background-color: #2a468f; -fx-background-radius: 1.5em;">
+      <Pane layoutX="620.0" layoutY="4.0" maxWidth="250.0" prefHeight="541.0" prefWidth="232.0" style="-fx-background-color: #2a468f; -fx-background-radius: 1.5em;">
          <children>
             <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="62.0" layoutY="428.0" style="-fx-background-color: #2a468f; -fx-background-radius: 15;" text="About us" textFill="WHITE">
                <graphic>
@@ -140,24 +140,24 @@
                   <Font name="Calibri Light" size="17.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="126.0" fitWidth="118.0" layoutX="58.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="126.0" fitWidth="118.0" layoutX="58.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/CHMS_Icon.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="55.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="117.99999442975968">
+            <Text fill="WHITE" layoutX="51.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C H M S" wrappingWidth="131.00000095367432">
                <font>
-                  <Font name="Berlin Sans FB" size="35.0" />
+                  <Font name="Samsung Sans Regular" size="35.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="7.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" textAlignment="CENTER" wrappingWidth="207.0000069886446">
+            <Text fill="WHITE" layoutX="13.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management" textAlignment="CENTER" wrappingWidth="207.0000069886446">
                <font>
-                  <Font name="Berlin Sans FB" size="36.0" />
+                  <Font name="Samsung Sans Regular" size="35.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="62.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="108.59400540590286">
+            <Text fill="WHITE" layoutX="54.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System" wrappingWidth="125.00000095367432">
                <font>
-                  <Font name="Berlin Sans FB" size="36.0" />
+                  <Font name="Samsung Sans Regular" size="35.0" />
                </font>
             </Text>
          </children>
