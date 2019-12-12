@@ -17,6 +17,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +58,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import school.management.system.demoDatabase.Database;
 
 /**
  * FXML Controller class
@@ -210,9 +214,9 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private JFXButton grades_SS3;
     @FXML
-    private JFXListView<Label> newsList;
+    private JFXListView<String> newsList;
 
-    
+    Database database;
     @FXML
     private void addAdministrator(ActionEvent event) {
     }
@@ -228,6 +232,26 @@ public class StaffDashboardController implements Initializable {
     @FXML
     private void exitAddAdminModal(MouseEvent event) {
     }
+//    ObservableList<String> news = FXCollections.observableArrayList();
+//     public void populateNewsList() throws ClassNotFoundException, SQLException {
+//        try {
+//            database.dbConnect();
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        Connection connection2 = database.getConnection();
+//        ResultSet resultSet = connection2.createStatement().executeQuery("SELECT NewsInfoDetails, NewsDate FROM News.NewsDetails");
+//        while (resultSet.next()) {
+//            String news1 = resultSet.getString("NewsInfoDetails");
+//            String news2 = resultSet.getString("NewsDate");
+//            String concat = news1 + " - " + news2;
+//            news.add(concat);
+//        }
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new StaffDashboardController.cell());
+//        resultSet.close();
+//    }
 
     /**
      * Initializes the controller class.
@@ -236,6 +260,14 @@ public class StaffDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        DashboardController dashboardController = new DashboardController();
+        try {
+            dashboardController.populateNewsList();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             birthdays();
         } catch (FileNotFoundException ex) {
@@ -303,17 +335,17 @@ public class StaffDashboardController implements Initializable {
             view.getItems().add(lbl);
         }
         
-        String[] news = {"PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019"};
-        for (String name : news) {
-            Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Purchase_Order_48px.png"));
-            Label lbl = new Label(name);
-            ImageView imgView = new ImageView(img);
-            imgView.setFitHeight(25);
-            imgView.setFitWidth(25);
-            lbl.setGraphicTextGap(10);
-            lbl.setGraphic(imgView);
-            newsList.getItems().add(lbl);
-        }
+//        String[] news = {"PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019"};
+//        for (String name : news) {
+//            Image img = new Image(new FileInputStream("src/school/management/system/images/icons8_Purchase_Order_48px.png"));
+//            Label lbl = new Label(name);
+//            ImageView imgView = new ImageView(img);
+//            imgView.setFitHeight(25);
+//            imgView.setFitWidth(25);
+//            lbl.setGraphicTextGap(10);
+//            lbl.setGraphic(imgView);
+//            newsList.getItems().add(lbl);
+//        }
 
     }
 

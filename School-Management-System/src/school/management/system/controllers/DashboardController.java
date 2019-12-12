@@ -250,7 +250,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXListView<Label> view;
     @FXML
-   public StackPane editStudentModals;
+    public StackPane editStudentModals;
     @FXML
     private StackPane editTeachersModals;
     @FXML
@@ -324,18 +324,25 @@ public class DashboardController implements Initializable {
     private JFXComboBox<?> classesSearch;
     @FXML
     private AnchorPane primary_SecPaneClasses;
+    @FXML
+    private JFXDatePicker dateField;
+    @FXML
+    private JFXTextField newsTextField;
 
-    public void setV(){
+    public void setV() {
         editStudentModals.setVisible(true);
     }
-    
+
     public DashboardController() {
         try {
-            this.conn = Database.getConnect();
+            this.conn = Database.getConnection();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    Database database;
+    Connection connection;
 
     @FXML
     private void openAddNews(MouseEvent event) {
@@ -385,7 +392,21 @@ public class DashboardController implements Initializable {
             label.setPadding(i);
             hbox.setAlignment(Pos.CENTER);
             hbox.setFillHeight(true);
-            delete.setOnAction(e -> getListView().getItems().remove(getItem()));
+            delete.setOnAction((ActionEvent event) -> {
+
+                getListView().getSelectionModel().select(getItem());
+                String newsText = getListView().getSelectionModel().getSelectedItem();
+//                System.out.println(newsText);
+                DashboardController dashboardController = new DashboardController();
+                try {
+                    getListView().getItems().remove(getItem());
+                    dashboardController.deleteNewsRecord(newsText);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
         }
 
         public void updateItem(String name, boolean empty) {
@@ -1212,7 +1233,7 @@ public class DashboardController implements Initializable {
             primary_SecPaneClasses.setVisible(false);
         });
     }
-    
+
     @FXML
     private void gradesPrimary(ActionEvent event) {
         FadeTransition fade = new FadeTransition();
@@ -1447,27 +1468,182 @@ public class DashboardController implements Initializable {
             view.getItems().add(lbl);
         }
 
-        ObservableList<String> news = FXCollections.observableArrayList("PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019");
+        ObservableList<String> news = FXCollections.observableArrayList();
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new cell());
+
+    }
+
+    public void disposePane() {
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(300));
+        fade.setNode(addNews);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.play();
+        fade.setOnFinished((ActionEvent event1) -> {
+            addNews.setVisible(false);
+            dashboardPane.setDisable(false);
+            classesPane.setDisable(false);
+            settingsPane.setDisable(false);
+            gradesPane.setDisable(false);
+            parentsPane.setDisable(false);
+        });
+    }
+
+    public boolean validateNewsMethod() {
+//        if ("".equals(dateField.getValue().toString())) {
+//            return false;
+//        } else
+        if ("".equals(newsTextField.getText())) {
+            return false;
+        }
+        return true;
+    }
+
+    //        ObservableList<String> news = FXCollections.observableArrayList("PTA Meeting - 19/11/2019", "Interhouse Sport - 30/24/2019");
+    ObservableList<String> news = FXCollections.observableArrayList();
+//        newsList.setItems(news);
+//        newsList.setCellFactory(param -> new cell());
+
+    public void loadTableData() throws ClassNotFoundException, SQLException {
+        newsList.getItems().clear();
+        news.removeAll(news);
+        populateNewsList();
+    }
+
+    public void populateNewsList() throws ClassNotFoundException, SQLException {
+        try {
+            database.dbConnect();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Connection connection2 = database.getConnection();
+        ResultSet resultSet = connection2.createStatement().executeQuery("SELECT NewsInfoDetails, NewsDate FROM News.NewsDetails");
+        while (resultSet.next()) {
+            String news1 = resultSet.getString("NewsInfoDetails");
+            String news2 = resultSet.getString("NewsDate");
+            String concat = news1 + " - " + news2;
+            news.add(concat);
+        }
         newsList.setItems(news);
         newsList.setCellFactory(param -> new cell());
+        resultSet.close();
+    }
 
+    public void deleteNewsRecord(String newsText) throws ClassNotFoundException, SQLException {
+        try {
+            database.dbConnect();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Connection connection = database.getConnection();
+
+        System.out.println(newsText);
+        int leng = newsText.length();
+        PreparedStatement preparedStatement = connection.prepareStatement("Delete From News.NewsDetails Where NewsInfoDetails like '%" + newsText.substring(0, 4) + "%'");
+        int execute = preparedStatement.executeUpdate();
+
+        if (execute != 0) {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(successImg))
+                    .hideAfter(Duration.seconds(8))
+                    .title("Success")
+                    .text("Deleted Succesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+            System.out.println("sucessful");
+        } else {
+            Notifications notify = Notifications.create()
+                    .graphic(new ImageView(errorImg))
+                    .hideAfter(Duration.seconds(5))
+                    .title("Failed")
+                    .text("Unsuccesfully")
+                    .position(Pos.TOP_CENTER);
+            notify.show();
+            System.out.println("unsucessful");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            populateNewsList();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.connection = Database.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             birthdays();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-          try {
+        try {
             studentPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Students.fxml"));
             staffPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Staffs.fxml"));
             parentsPane = FXMLLoader.load(getClass().getResource("/school/management/system/fxml/Parents.fxml"));
         } catch (IOException ex) {
         }
-        addNewsAction.setOnAction((ActionEvent event) -> {
 
+        addNewsAction.setOnAction((ActionEvent event) -> {
+            if (validateNewsMethod()) {
+                try {
+                    PreparedStatement preparedStatement = connection.prepareStatement("insert into News.NewsDetails(NewsInfoDetails, NewsDate)VALUES(?,?)");
+
+                    preparedStatement.setString(1, newsTextField.getText());
+                    preparedStatement.setString(2, dateField.getValue().toString());
+
+                    int save = preparedStatement.executeUpdate();
+
+                    if (save != 0) {
+                        Notifications notify = Notifications.create()
+                                .graphic(new ImageView(successImg))
+                                .hideAfter(Duration.seconds(8))
+                                .title("Success")
+                                .text("Uploaded Succesfully")
+                                .position(Pos.TOP_CENTER);
+                        notify.show();
+                        System.out.println("sucessful");
+                        newsTextField.setText("");
+                        dateField.setValue(null);
+                        disposePane();
+                    } else {
+                        Notifications notify = Notifications.create()
+                                .graphic(new ImageView(errorImg))
+                                .hideAfter(Duration.seconds(5))
+                                .title("Failed")
+                                .text("Uploaded Unsuccesfully")
+                                .position(Pos.TOP_CENTER);
+                        notify.show();
+                        System.out.println("unsucessful");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    loadTableData();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(StaffDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Notifications notify = Notifications.create()
+                        .graphic(new ImageView(errorImg))
+                        .hideAfter(Duration.seconds(5))
+                        .title("Failed")
+                        .text("Insert Something")
+                        .position(Pos.TOP_CENTER);
+                notify.show();
+                System.out.println("unsucessful");
+            }
         });
 
         CancelAddNews.setOnAction((ActionEvent event) -> {
@@ -1699,7 +1875,7 @@ public class DashboardController implements Initializable {
     }
 
     // Save student button
-    private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException {
+    private void saveStudentDetails(ActionEvent event) throws SQLException, FileNotFoundException, ClassNotFoundException {
 
         if (selectGender.getValue() == "Male") {
             genderSelect = "Male";
@@ -1783,7 +1959,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void populateStudentTable() {
+    private void populateStudentTable() throws ClassNotFoundException {
         try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
@@ -1832,12 +2008,14 @@ public class DashboardController implements Initializable {
 
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         });
     }
 
-    private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException {
+    private void saveEmployeeDetails(ActionEvent event) throws SQLException, FileNotFoundException, ClassNotFoundException {
 
         if (selectTeacherGender.getValue() == "Male") {
             genderSelect = "Male";
@@ -1945,7 +2123,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void populateStaffTable() {
+    private void populateStaffTable() throws ClassNotFoundException {
         try {
             da.dbConnect();
         } catch (ClassNotFoundException ex) {
@@ -1998,17 +2176,23 @@ public class DashboardController implements Initializable {
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
 
     private void refreshStaffTable() {
-        teachersTable.getItems().clear();
-        obs1.removeAll(obs1);
-        populateStaffTable();
+        try {
+            teachersTable.getItems().clear();
+            obs1.removeAll(obs1);
+            populateStaffTable();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void refreshStudentTable() {
+    private void refreshStudentTable() throws ClassNotFoundException {
         adStudentTable.getItems().clear();
         obs.removeAll(obs);
         populateStudentTable();

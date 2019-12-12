@@ -1051,7 +1051,7 @@
             </Pane>
             <Pane prefHeight="44.0" prefWidth="100.0" styleClass="_tophbar" HBox.hgrow="ALWAYS">
                <children>
-                  <Text fill="#626262" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CHMC School Management System">
+                  <Text fill="WHITE" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to CHMC School Management System">
                      <font>
                         <Font size="23.0" />
                      </font>

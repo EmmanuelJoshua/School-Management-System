@@ -45,7 +45,8 @@ public class Database {
         return rs;
     }
     
-    public Connection getConnection(){
+    public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        dbConnect();
         return con;
     }
     //Get Connection for SQLite database
